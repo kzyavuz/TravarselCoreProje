@@ -1,0 +1,37 @@
+﻿@model TravarselCoreProje.Areas.Member.Models.UserEditModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>Profil Düzenleme Sayfası</h1>
+<form method="post" enctype="multipart/form-data">
+
+    @Html.Label("Adınız")
+    <input type="text" asp-for="name" class="form-control" />
+    <br />
+    @Html.Label("Soy Adınız")
+    <input type="text" asp-for="surname" class="form-control" />
+    <br />
+    @*@Html.Label("Profil Resminiz")
+    <input type="text" asp-for="imageurl" class="form-control" />
+    <br />*@
+    @Html.Label("E-mail adresiniz")
+    <input type="text" asp-for="mail" class="form-control" />
+    <br />
+    @Html.Label("Telefon numaranız")
+    <input type="text" asp-for="phonenumber" class="form-control" />
+    <br />
+    @Html.Label("Sifreniz")
+    <input type="password" asp-for="password" class="form-control" />
+    <br />
+    @Html.Label("Sifre Tekrarı")
+    <input type="password" asp-for="confirmpassword" class="form-control" />
+    <br />
+    <div class="form-group">
+        <label>Resim Seçiniz</label>
+        <input type="file" asp-for="imageurl"/>
+    </div>
+    <button class="btn btn-primary">Bilgileri Güncelle</button>
+</form>
+

@@ -1,0 +1,35 @@
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TravarselCoreProje.Controllers
+{
+    public class DestinationController1 : Controller
+    {
+        DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
+        public IActionResult Index()
+        {
+            var values = destinationManager.TGetList();
+            return View(values);
+        }
+
+        [HttpGet]
+        public IActionResult DestinationDetails(int id)
+        {
+            ViewBag.i = id;
+            var values = destinationManager.TGetByID(id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public IActionResult DestinationDetails(Destination d)
+        {
+            return View();
+        }
+    }
+}
