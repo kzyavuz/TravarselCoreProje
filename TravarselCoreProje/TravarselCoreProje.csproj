@@ -45,7 +45,12 @@
 
   <ItemGroup>
     <Folder Include="Areas\Member\Data\" />
-    <Folder Include="wwwroot\UserImages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\AdminPanel\.github\workflows\handle-new-issue-comment.yml" />
+    <None Include="wwwroot\AdminPanel\.github\workflows\handle-new-issue.yml" />
+    <None Include="wwwroot\AdminPanel\.github\workflows\issue-staler.yml" />
   </ItemGroup>
 
 </Project>

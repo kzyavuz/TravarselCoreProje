@@ -1,4 +1,4 @@
-﻿@model  TravarselCoreProje.Models.UserRegisterViewModel
+﻿@model TravarselCoreProje.Models.UserRegisterViewModel
 @{
     Layout = null;
 }
@@ -7,229 +7,118 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <title>YeşilAyak | Kayıt Sayfası</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="~/Login/images/icons/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="~/Login/vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="~/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="~/Login/vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="~/Login/vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="~/Login/vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="~/Login/css/main.css">
-    </head>
-    <body>
-
-        <div class="limiter">
-            <div class="container-login100">
-                <div class="wrap-login100" style="padding:50px">
-                    <span class="login100-form-title" style="z-index: 4; color:#57b846;">
-                        Kayıt Olma Sayfası
-                    </span>
-                    <div class="login100-pic js-tilt" data-tilt>
-                        <img src="~/Login/images/img-02.jpg" alt="IMG">
-                    </div>
-
-                    <form class="login100-form validate-form" method="post">
-
-
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" asp-for="Name" placeholder="Ad">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="Name"></span>
-
-                        </div>
-                            
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" asp-for="Surname" placeholder="Soyad">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="Surname"></span>
-
-                        </div>
-
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" asp-for="UserName" placeholder="Kullanıcı Adı">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="UserName"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="email" asp-for="Mail" placeholder="Mail Adresi">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-mail-forward" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="Mail"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="password" asp-for="Password" placeholder="Sifre">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="Password"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="password" asp-for="ConfirmPassword" placeholder="Sifre Tekrarı">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
-                        </div>
-
-                        <div class="text-danger" asp-validation-summary="ModelOnly">
-
-                        </div>
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn">
-                                Kayıt Ol
-                            </button>
-                        </div>
-
-                        <div class="text-center p-t-136">
-                            <a class="txt2" href="/LoginController1/SignUn/">
-                                Giris Yap
-                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
-        <script src="~/Login/vendor/bootstrap/js/popper.js"></script>
-        <script src="~/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="~/Login/vendor/select2/select2.min.js"></script>
-        <script src="~/Login/vendor/tilt/tilt.jquery.min.js"></script>
-        <script>
-            $('.js-tilt').tilt({
-                scale: 1.1
-            })
-        </script>
-
-    </body>
-    </html>
-
-<!--<html lang="tr">
-
 <head>
-    <title>YeşilAyak | Kayıt Sayfası </title>-->
-    <!-- Meta tag Keywords -->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8" />
-    <meta name="keywords"
-          content="Invent Signup Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+    <title>YeşilAyak | Kayıt Sayfası</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/Login/images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="~/Login/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Login/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Login/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Login/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Login/css/main.css">
+</head>
+<body>
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>-->
-    <!-- //Meta tag Keywords -->
-    <!--/Style-CSS -->
-    <!--<link rel="stylesheet" href="~/Web/css/style.css" type="text/css" media="all" />-->
-    <!--//Style-CSS -->
-<!--</head>
-
-<body>-->
-    <!-- /login-section -->
-    <!--<section class="w3l-login-6">
-        <div class="login-hny">
-            <div class="form-content">
-                <div class="form-right">
-                    <div class="overlay">
-                        <div class="grid-info-form">
-                            <h5>Say hello</h5>
-                            <h3>CREATE ACCOUNT </h3>
-                            <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est natus facere aperiam!
-                                Tenetur maiores dolore a quod pariatur ut voluptates quae saepe ea quasi laudantium,
-                                iste molestias inventore fuga assumenda.
-                            </p>
-                            <a href="index.html" class="read-more-1 btn">Get Started</a>
-                        </div>
-
-                    </div>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100" style="padding:50px">
+                <span class="login100-form-title" style="z-index: 4; color:#57b846;">
+                    Kayıt Olma Sayfası
+                </span>
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="~/Login/images/img-02.jpg" alt="IMG">
                 </div>
-                <div class="form-left">
-                    <div class="middle">
-                        <h4>Bize Katılın</h4>
-                        <p>Ücretsiz heasap olusturun.</p>
+
+                <form class="login100-form validate-form" method="post">
+
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" asp-for="Name" placeholder="Ad">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+
                     </div>
-                    <form method="post" class="signin-form">
-                        <div class="form-input">
-                            <label>Adınız</label>
-                            <input type="text" asp-for="Name" />
-                            <span asp-validation-for="Name" style="color:red;">
-                            </span>
-                        </div>
 
-                        <div class="form-input">
-                            <label>Soyadınız</label>
-                            <input type="text" asp-for="Surname" />
-                            <span asp-validation-for="Surname" style="color:red;"></span>
-                        </div>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" asp-for="Surname" placeholder="Soyad">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="Surname"></span>
 
-                        <div class="form-input">
-                            <label>Kullanıcı Adınız</label>
-                            <input type="text" asp-for="UserName" />
-                            <span asp-validation-for="UserName" style="color:red;"></span>
-
-                        </div>
-                        <div class="form-input">
-                            <label>Email</label>
-                            <input type="email" asp-for="Mail" />
-                            <span asp-validation-for="Mail" style="color:red;"></span>
-
-                        </div>
-                        <div class="form-input">
-                            <label>Sifre</label>
-                            <input type="password" asp-for="Password" />
-                            <span asp-validation-for="Password" style="color:red;"></span>
-
-                        </div>
-                        <div class="form-input">
-                            <label>Sifre Tekrarı</label>
-                            <input type="password" asp-for="ConfirmPassword" />
-                            <span asp-validation-for="ConfirmPassword" style="color:red;"></span>
-
-                        </div>
-
-                        <label class="container">
-                            Sartları Okudum <a href="#">kabul ediyorum</a> 
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <button class="btn">Kayıt Ol</button>
-                    </form>
-                    <div class="copy-right text-center">
-                        <p>
-                            © @DateTime.Now.Year Tüm hakları saklıdır | Design by 
-                            <a href="http://w3layouts.com/" target="_blank">Kozlow</a>
-                        </p>
                     </div>
-                </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" asp-for="UserName" placeholder="Kullanıcı Adı">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="UserName"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="email" asp-for="Mail" placeholder="Mail Adresi">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-mail-forward" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="Mail"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" asp-for="Password" placeholder="Sifre">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" asp-for="ConfirmPassword" placeholder="Sifre Tekrarı">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly">
+
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Kayıt Ol
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="/LoginController1/SignUn/">
+                            Giris Yap
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </form>
             </div>
-
         </div>
-    </section>-->
-    <!-- //login-section -->
-<!--</body>
+    </div>
+    <script src="~/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Login/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Login/vendor/select2/select2.min.js"></script>
+    <script src="~/Login/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
 
-</html>-->
+</body>
+</html>
