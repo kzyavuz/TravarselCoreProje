@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240505085258_mig_destination_Add-DestinationName-Area")]
+    partial class mig_destination_AddDestinationNameArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,24 +183,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
-                {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CatagoryImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CatagoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryID");
-
-                    b.ToTable("Catagories");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
                 {
                     b.Property<int>("CommentID")
@@ -271,12 +255,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CatagoryCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -335,8 +313,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("DestinationID");
-
-                    b.HasIndex("CatagoryCategoryID");
 
                     b.ToTable("Destinations");
                 });
@@ -622,15 +598,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Destination");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Catagory", "Catagory")
-                        .WithMany("Destinations")
-                        .HasForeignKey("CatagoryCategoryID");
-
-                    b.Navigation("Catagory");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Rezarvation", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUSer")
@@ -704,11 +671,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.Navigation("Rezarvations");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
-                {
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>

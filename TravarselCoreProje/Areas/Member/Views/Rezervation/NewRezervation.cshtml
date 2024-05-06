@@ -24,6 +24,10 @@
     <div class="form-group">
         @Html.Label("Eklemek istediğiniz")
         <input type="text" asp-for="Sescription" class="form-control" />
+    </div> 
+    <div class="form-group">
+        @Html.Label("Etkinlik ID")
+        <input type="text" asp-for="DestinationID" class="form-control" />
     </div>
     <button class="btn btn-outline-success"  onclick="alert('Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır.Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın');">Rezervasyon Yap</button>
 </form>

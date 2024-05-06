@@ -1,4 +1,5 @@
-﻿
+﻿@model EntityLayer.Concrete.Destination
+
 <div class="leave-comment-form mt-5" id="reply">
     <h4 class="side-title mb-2">Yorum Bırkaın</h4>
     <p class="mb-4">
@@ -17,7 +18,10 @@
                        required="">
             </div>
             <div class="form-group col-lg-6">
-                <input type="text" name="DestinationID" class="form-control" placeholder="Destination ID*" required="">
+                <input type="hidden" value="@Model.DestinationID" name="DestinationID" class="form-control" required="">
+            </div>
+            <div class="form-group col-lg-6">
+                <input type="hidden" value="@Model." name="DestinationID" class="form-control" required="">
             </div>
         </div>
 

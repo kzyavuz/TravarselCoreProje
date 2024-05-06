@@ -1,15 +1,17 @@
 ﻿<header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
-            <h1>
-                <a class="navbar-brand mr-lg-5" href="index.html">
-                    TeşilAyak
+            <div class="d-flex justify-content-center">
+                <a class="navbar-brand" href="/Default/Index/">
+                    <img src="~/Traversal-Starter/assets/images/yesilAyak_icon.png" alt="YeşilAyak logo" title="Your logo" style="height:35px;" />
                 </a>
-            </h1>
-            <!-- if logo is image enable this
-            <a class="navbar-brand" href="#index.html">
-                <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-            </a> -->
+                <h2>
+                    <a class="navbar-brand mr-lg-5" href="/Default/Index/" style="color: #57b846;">
+                        YeşilAyak
+                    </a>
+                </h2>
+            </div>
+
             <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -20,25 +22,22 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Default/Index/">Ana Sayfa <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">Hakkımızda</a>
+                        <a class="nav-link" href="#">Hakkımızda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/DestinationController1/Index/">Rotalar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pricing.html">Rehberlerimiz</a>
+                        <a class="nav-link" href="#">Rehberlerimiz</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">İletişim</a>
+                        <a class="nav-link" href="#">İletişim</a>
                     </li>
 
                 </ul>
             </div>
             <div class="d-lg-block d-none">
-                <a href="contact.html" class="btn btn-style btn-secondary">Rezervasyon Yap</a>
+                <a href="~/Member/Rezervation/NewRezervation" class="btn btn-style btn-secondary">Rezervasyon Yap</a>
             </div>
             <div class="mobile-position">
                 <nav class="navigation">
@@ -53,6 +52,15 @@
                     </div>
                 </nav>
             </div>
+            <div class="d-flex justify-content-end ">
+                <a href="~/Member/Dashboard/Index" class="btn btn-outline-info" style="float: left;">
+                    <span class="symbol-input100">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </span>
+                    Profilim
+                </a>
+            </div>
+
         </nav>
     </div>
 </header>

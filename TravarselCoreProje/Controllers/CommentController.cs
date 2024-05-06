@@ -25,7 +25,7 @@ namespace TravarselCoreProje.Controllers
             c.DateTime = Convert.ToDateTime(DateTime.Now);
             c.State = true;
             commentManager.TAdd(c);
-            return RedirectToAction("Index", "DestinationController1");
+            return RedirectToAction("DestinationDetails", "DestinationController1", new { id = c.DestinationID });
         }
     }
 }
