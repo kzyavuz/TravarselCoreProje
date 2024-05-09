@@ -11,11 +11,12 @@ using System.Threading.Tasks;
 namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [AllowAnonymous]
+    [Area("Admin")]
+
     public class DestinationController : Controller
     {
         DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
 
-        [Area("Admin")]
 
         public IActionResult Index()
         {
@@ -33,14 +34,14 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         public IActionResult AddDestinations(Destination destination)
         {
             destinationManager.TAdd(destination);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Destination", new { area = "Admin" });
         }
 
         public IActionResult DeleteDestinations(int id)
         {
             var values = destinationManager.TGetByID(id);
             destinationManager.TDelete(values);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Destination", new { area = "Admin" });
         }
 
         [HttpGet]
@@ -54,8 +55,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         public IActionResult UpdateDestinations(Destination destination)
         {
             destinationManager.TUpdate(destination);
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin","Destination","Index");
         }
-
     }
 }

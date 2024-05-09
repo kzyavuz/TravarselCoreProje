@@ -21,5 +21,21 @@ namespace TravarselCoreProje.Controllers
         {
             return PartialView();
         }
+
+        public PartialViewResult Navbar()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult Footer()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult Script()
+        {
+            return PartialView();
+        }
+
     }
 }

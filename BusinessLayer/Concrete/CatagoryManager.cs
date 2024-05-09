@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Catagory t)
         {
-            throw new NotImplementedException();
+            _catagoryDal.Update(t);
         }
     }
 }
