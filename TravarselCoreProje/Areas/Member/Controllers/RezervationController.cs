@@ -64,7 +64,7 @@ namespace TravarselCoreProje.Areas.Member.Controllers
             p.AppUSerID = 6;
             p.Status = "Onay Bekliyor";
             rezervationManager.TAdd(p);
-            return RedirectToAction("MyActiveRezervation");
+            return RedirectToAction("/Member/Rezervation/MyActiveRezervation");
         }
     }
 }

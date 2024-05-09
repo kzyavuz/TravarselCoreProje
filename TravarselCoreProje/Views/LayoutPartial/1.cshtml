@@ -1,4 +1,5 @@
-﻿<header id="site-header" class="fixed-top">
+﻿
+<header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
             <div class="d-flex justify-content-center">
@@ -22,10 +23,25 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hakkımızda</a>
+                        <a class="nav-link" href="/Default/Index/">Ana Sayfa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/DestinationController1/Index/">Rotalar</a>
+                        <a class="nav-link" href="/About/Index/">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/DestinationController1/Index/" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Etkinlikler<span class="fa fa-angle-down"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" href="/DestinationController1/Index/">Tüm Etkinlikler</a>
+                            <a class="dropdown-item" href="">Doğa Yürüyüsü</a>
+                            <a class="dropdown-item" href="">Kamp</a>
+                            <a class="dropdown-item" href="">Sinema Geceleri</a>
+                            <a class="dropdown-item" href="">Müze Gezileri</a>
+                            <a class="dropdown-item" href="">Sosyal Etkinlikleri</a>
+
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Rehberlerimiz</a>

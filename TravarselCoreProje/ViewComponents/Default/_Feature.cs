@@ -10,10 +10,10 @@ namespace TravarselCoreProje.ViewComponents.Default
 {
     public class _Feature:ViewComponent
     {
-        FeatureManager featureManager = new FeatureManager(new EFFeatureDal());
+        CatagoryManager catagoryManager = new CatagoryManager(new EFCatagoryDal());
         public IViewComponentResult Invoke()
         {
-            var values = featureManager.TGetList();
+            var values = catagoryManager.TGetList();
             return View(values);
         }
     }

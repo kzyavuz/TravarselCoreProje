@@ -73,7 +73,7 @@ namespace TravarselCoreProje.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("SignIn", "Login");
+                    return RedirectToAction("SignUn", "Login");
                 }
             }
             return View();
