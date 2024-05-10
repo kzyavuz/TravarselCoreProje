@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +14,8 @@ namespace TravarselCoreProje.Controllers
 
     public class AboutController : Controller
     {
+        Context c = new Context();
+
         public IActionResult Index()
         {
             return View();
