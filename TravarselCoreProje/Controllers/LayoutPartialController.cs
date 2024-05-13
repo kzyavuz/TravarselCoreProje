@@ -12,23 +12,9 @@ namespace TravarselCoreProje.Controllers
     [AllowAnonymous]
     public class LayoutPartialController : Controller
     {
-        CatagoryManager _catagoryManager = new CatagoryManager(new EFCatagoryDal());
-
-        public LayoutPartialController(CatagoryManager catagoryManager)
+        public IActionResult Index()
         {
-            _catagoryManager = catagoryManager;
-        }
-
-        public PartialViewResult Navbar()
-        {
-            var values = _catagoryManager.TGetList();
-            return PartialView(values);
-        }
-
-        public PartialViewResult Footer()
-        {
-            var values = _catagoryManager.TGetList();
-            return PartialView(values);
+            return View();
         }
     }
 }

@@ -9,14 +9,14 @@
 <html lang="tr">
 
 <body>
-    <h1>Test alanı</h1>
     <section class="w3l-about-breadcrumb text-left">
         <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
             <div class="container">
                 <h2 class="title">Etkinlik Detayları</h2>
                 <ul class="breadcrumbs-custom-path mt-2">
-                    <li><a href="/Default/Index/">Ana Sayfa</a></li>
-                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Rehberin Yorumları </li>
+                    <li><a href="/Default/Index">Ana Sayfa</a></li>
+                    <li><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/DestinationController1/Index">Etkinlikler</a></li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @Model.DestinationName </li>
                 </ul>
             </div>
         </div>
@@ -24,26 +24,8 @@
     <div class="py-5 w3l-homeblock1 text-center">
         <div class="container mt-md-3">
             <h3 class="blog-desc-big text-center mb-4" style="text-transform:capitalize">
-                <span>Bizimle</span>  @Model.DestinationName <span>Katılmaya Hazırmısınız</span>
+                <span>Bizimle</span>  @Model.DestinationName <span>Etkinliğine Katılmaya Hazırmısınız</span>
             </h3>
-            <div class="blog-post-align">
-                <div class="blog-post-img">
-                    <a href="#"><img src="~/Traversal-Starter/assets/images/c1.jpg" alt="" class="rounded-circle img-fluid" /></a>
-                </div>
-                <div class="blog-post-info">
-                    <div class="author align-items-center mb-1">
-                        <a href="#">Yavuz Koz</a> in <a href="/Default/Index">YeşilAyak</a>
-                    </div>
-                    <ul class="blog-meta">
-                        <li class="meta-item blog-lesson">
-                            <span class="meta-value"> @Model.DestinationName </span>
-                        </li>s
-                        <li class="meta-item blog-students">
-                            <span class="meta-value"> 6min read</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
     <section class="blog-post-main w3l-homeblock1">
@@ -57,8 +39,8 @@
                 </div>
                 <div class="hizala">
                     <div class="single-post-content">
-                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle1</h3>
-                        <p class="mb-4">@Model.Date</p>
+                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">Etkinlik Detayları</h3>
+                        <p class="mb-4">Etkinil Tarihi: @Model.Date.ToShortDateString()</p>
                         <p class="mb-4">Etkinil İsmi: @Model.DestinationName</p>
 
                         @if (ViewBag.des1 != null)
@@ -73,13 +55,13 @@
                         <br />
                         <blockquote class="blockquote my-5">
                             <div class="icon-quote"><span class="fa fa-quote-left" aria-hidden="true"></span></div>
-                            Bu sayfadaki talimatlara uyulduğu taktirde etkinliklerimizden maximum keyfi alabilecksini
+                            UNUTMAYIN DOĞADAN SADECE FOTOĞRAF ALIYOR, SADECE AYAK İZİ BIRAKIYORUZ. KEYİFLİ YÜRÜYÜŞLER.
                             <footer class="blockquote-footer mt-3">
                                 Yavuz Koz (Admin)
                             </footer>
                         </blockquote>
                         <br />
-                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle2</h3>
+                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">Kurallar</h3>
 
                         @if (ViewBag.des2 != null)
                         {
@@ -91,7 +73,7 @@
                         }
 
                         <br />
-                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle3</h3>
+                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">Öneriler</h3>
 
                         @if (ViewBag.des3 != null)
                         {
@@ -112,7 +94,7 @@
                             </div>
                         </div>
 
-                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle4</h3>
+                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle1</h3>
 
                         @if (ViewBag.des4 != null)
                         {
@@ -122,19 +104,6 @@
 
                             }
                         }
-
-                        <br />
-                        <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">@Model.DetailsTitle5</h3>
-
-                        @if (ViewBag.des5 != null)
-                        {
-                            foreach (var item in ViewBag.des5)
-                            {
-                                <p class="mb-4">@item</p>
-
-                            }
-                        }
-                        <div class="d-grid left-right mt-5 pb-md-5">
                             @*<div class="buttons-singles tags">
                 <h4>Tags :</h4>
                 <a href="#blog-tag">YeşilAyak</a>
@@ -151,61 +120,6 @@
                         </div>
 
                         <!--//author-card-->
-                        <div class="author-card mt-5">
-                            <div class="row align-items-center">
-                                <div class="col-sm-3 col-6">
-                                    <div>
-                                        <img src="~/Traversal-Starter/assets/images/c3.jpg" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 mt-sm-0 mt-3">
-                                    <h3 class="mb-3 title">Alexander Ronald</h3>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, sed et excepturi.
-                                        Distinctio fugit odit? Fugit ipsam. Lorem ipsum dolor sit.
-                                    </p>
-                                    <ul class="author-icons mt-4">
-                                        <li>
-                                            <a class="facebook" href="#url">
-                                                <span class="fa fa-facebook"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="twitter" href="#url">
-                                                <span class="fa fa-twitter"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="google" href="#url">
-                                                <span class="fa fa-google-plus"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="linkedin" href="#url">
-                                                <span class="fa fa-linkedin"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="github" href="#url">
-                                                <span class="fa fa-github"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dribbble" href="#url">
-                                                <span class="fa fa-dribbble"
-                                                      aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
 
                         @await Component.InvokeAsync("_CommentList", new { id = ViewBag.i })
 

@@ -19,10 +19,10 @@ namespace TravarselCoreProje.Controllers
 
         DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var values = destinationManager.TGetList();
-            return View(values);
+            var data = destinationManager.TGetList()/*.Where(e => e.Catagory.CatagoryID == id && e.Catagory.CatagoryID != 0)*/;
+            return View(data);
         }
 
         public Array DestinationsSplit(string data)
@@ -30,8 +30,12 @@ namespace TravarselCoreProje.Controllers
             if (!string.IsNullOrEmpty(data))
             {
                 this.lines = data.Split("*");
+                return lines;
             }
-            return lines;
+            else
+            {
+                return null;
+            }
         }
 
         [HttpGet]
@@ -51,9 +55,6 @@ namespace TravarselCoreProje.Controllers
 
             data = destinationManager.TGetList().Where(e => e.DestinationID == id).Select(e => e.Details4).FirstOrDefault();
             ViewBag.des4 = DestinationsSplit(data);
-
-            data = destinationManager.TGetList().Where(e => e.DestinationID == id).Select(e => e.Details5).FirstOrDefault();
-            ViewBag.des5 = DestinationsSplit(data);
 
             return View(values);
         }

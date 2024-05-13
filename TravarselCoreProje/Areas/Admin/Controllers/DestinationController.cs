@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +17,6 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
     public class DestinationController : Controller
     {
         DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
-
 
         public IActionResult Index()
         {

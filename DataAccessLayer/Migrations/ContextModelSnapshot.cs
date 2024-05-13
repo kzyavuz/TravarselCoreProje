@@ -183,7 +183,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
                 {
-                    b.Property<int>("CategoryID")
+                    b.Property<int>("CatagoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -194,7 +194,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CatagoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryID");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CatagoryID");
 
                     b.ToTable("Catagories");
                 });
@@ -271,10 +274,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CatagoryCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryID")
+                    b.Property<int?>("CatagoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -304,25 +304,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Details4")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details5")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DetailsTitle1")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DetailsTitle2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle5")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image1")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image2")
@@ -336,7 +324,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("DestinationID");
 
-                    b.HasIndex("CatagoryCategoryID");
+                    b.HasIndex("CatagoryID");
 
                     b.ToTable("Destinations");
                 });
@@ -625,8 +613,8 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Catagory", "Catagory")
-                        .WithMany("Destinations")
-                        .HasForeignKey("CatagoryCategoryID");
+                        .WithMany()
+                        .HasForeignKey("CatagoryID");
 
                     b.Navigation("Catagory");
                 });
@@ -704,11 +692,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.Navigation("Rezarvations");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
-                {
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>

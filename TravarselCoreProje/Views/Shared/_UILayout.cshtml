@@ -9,12 +9,13 @@
 
 <body>
 
-    @*@await Html.PartialAsync("/Views/LayoutPartial/Navbar.cshtml")*@
-    @await Html.PartialAsync("/Views/LayoutPartial/1.cshtml")
+    @*@await Html.PartialAsync("/Views/LayoutPartial/1.cshtml")*@
+    @await Component.InvokeAsync("_Navbar")
 
     @RenderBody()
 
-    @await Html.PartialAsync("/Views/LayoutPartial/_Footer.cshtml")
+    @await Component.InvokeAsync("_Footer")
+
 
     @await Html.PartialAsync("/Views/LayoutPartial/_Scripts.cshtml")
 

@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class mig_create_Catagory : Migration
+    public partial class mig_createCategory : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,14 +10,15 @@ namespace DataAccessLayer.Migrations
                 name: "Catagories",
                 columns: table => new
                 {
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                    CatagoryID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CatagoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CatagoryImage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CatagoryImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Catagories", x => x.CategoryID);
+                    table.PrimaryKey("PK_Catagories", x => x.CatagoryID);
                 });
         }
 

@@ -1,4 +1,4 @@
-﻿@model List<EntityLayer.Concrete.Catagory>
+﻿@model IEnumerable<Catagory>
 <header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
@@ -35,21 +35,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                             <a class="dropdown-item" href="/DestinationController1/Index/">Tüm Etkinlikler</a>
-                            @if (Model != null && Model.Any())
+
+                            @foreach (var item in Model)
                             {
-                                foreach (var item in Model)
-                                {
-                                    <a class="dropdown-item" href="#">@item.CatagoryName</a>
-                                    @*<a class="dropdown-item" href="">Kamp</a>
-                                        <a class="dropdown-item" href="">Sinema Geceleri</a>
-                                        <a class="dropdown-item" href="">Müze Gezileri</a>
-                                        <a class="dropdown-item" href="">Sosyal Etkinlikleri</a>*@
-                                }
-                            }
-                            else
-                            {
-                                <p>Veri bulunamadı.</p>
-                            }
+                                <a class="dropdown-item" href="/DestinationController1/Index/">@item.CatagoryName</a>
 
                             }
 

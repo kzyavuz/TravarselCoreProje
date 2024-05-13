@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace TravarselCoreProje.ViewComponents.Default
 {
-    public class _Feature : ViewComponent
+    public class _Navbar : ViewComponent
     {
-        CatagoryManager catagoryManager = new CatagoryManager(new EFCatagoryDal());
+        CatagoryManager _catagoryManager = new CatagoryManager(new EFCatagoryDal());
 
         public IViewComponentResult Invoke()
         {
-            var values = catagoryManager.TGetList();
-            return View(values);
+            var data = _catagoryManager.TGetList();
+            return View(data);
         }
     }
 }

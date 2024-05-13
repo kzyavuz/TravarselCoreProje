@@ -15,7 +15,7 @@ namespace TravarselCoreProje.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-
+        IdentityValidator IdentityValidator = new IdentityValidator();
         public LoginController1(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
@@ -29,7 +29,7 @@ namespace TravarselCoreProje.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(UserRegisterViewModel p)
+        public async Task<IActionResult> SignUp(UserRegisterViewModel p, string password)
         {
             AppUser appUser = new AppUser()
             {
@@ -38,18 +38,24 @@ namespace TravarselCoreProje.Controllers
                 Email = p.Mail,
                 UserName = p.UserName
             };
-            if(p.Password == p.ConfirmPassword)
+            if (string.IsNullOrEmpty(password))
             {
-                var result = await _userManager.CreateAsync(appUser, p.Password);
-                if (result.Succeeded)
+            }
+            else
+            {
+                if (p.Password == p.ConfirmPassword)
                 {
-                    return RedirectToAction("SignUn");
-                }
-                else
-                {
-                    foreach(var item in result.Errors)
+                    var result = await _userManager.CreateAsync(appUser, p.Password);
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", item.Description);
+                        return RedirectToAction("SignUn");
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
                     }
                 }
             }

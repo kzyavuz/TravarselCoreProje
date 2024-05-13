@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravarselCoreProje.Models
 {
-    public class IdentityValidator:IdentityErrorDescriber
+    public class IdentityValidator : IdentityErrorDescriber
     {
         public override IdentityError PasswordTooShort(int length)
         {
@@ -43,5 +43,6 @@ namespace TravarselCoreProje.Models
                 Description = $"Parolada en az 1 Özel karekter olmalıdır."
             };
         }
+
     }
 }

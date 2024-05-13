@@ -16,10 +16,12 @@
         <th>Sil</th>
         <th>GÜncelle</th>
     </tr>
+
+    @{ var i = 1; }
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.DestinationID</td>
+            <td>@i</td>
             <td>@item.City</td>
             <td>@item.Price</td>
             <td>@item.Capacity</td>
@@ -27,6 +29,7 @@
             <td><a href="/Admin/Destination/DeleteDestinations/@item.DestinationID" class="btn btn-outline-danger">Sil</a></td>
             <td><a href="/Admin/Destination/UpdateDestinations/@item.DestinationID" class="btn btn-outline-warning">Güncelle</a></td>
         </tr>
+        i++;
     }
 </table>
 <a href="/Admin/Destination/AddDestinations/" class="btn btn-outline-warning">Etkinlik Ekle</a>

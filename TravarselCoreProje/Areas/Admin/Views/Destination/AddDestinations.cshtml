@@ -8,7 +8,7 @@
 <h1>Etkinlik Ekleme Sayfası</h1>
 
 <form method="post">
-    <input type="hidden" asp-for="DestinationID"/>
+    <input type="hidden" asp-for="DestinationID" />
     <div class="form-group">
         @Html.Label("Şehir Bilgisi")
         <input type="text" asp-for="City" class="form-control" />
@@ -27,7 +27,7 @@
     <br />
 
     <div class="form-group">
-        @Html.Label("Ana Görsel")
+        @Html.Label("Kart Görseli")
         <input type="text" asp-for="Image" class="form-control" />
     </div>
     <br />
@@ -45,22 +45,37 @@
     <br />
 
     <div class="form-group">
-        @Html.Label("Görsel 2")
-        <input type="text" asp-for="Image2" class="form-control" />
+        @Html.Label("Etkinlik Detayları")
+        <input type="text" asp-for="Details1" class="form-control" />
     </div>
     <br />
 
     <div class="form-group">
-        @Html.Label("Detay 1")
-        <textarea cols="30" rows="5" asp-for="Details1" class="form-control"></textarea>
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Detay 2")
+        @Html.Label("Kurallar")
         <textarea cols="30" rows="5" asp-for="Details2" class="form-control"></textarea>
     </div>
     <br />
 
-    <button class="btn btn-outline-warning" onclick="alert('Etkinlik oluturuldu');">Olustur</button>
+    <div class="form-group">
+        @Html.Label("Öneriler")
+        <textarea cols="30" rows="5" asp-for="Details3" class="form-control"></textarea>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.Label("Eklemek istediniz Baslık (Varsa)")
+        <input type="text" asp-for="DetailsTitle1" class="form-control">
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.Label("Eklemek istediniz Baslığın İçeriği (Varsa)")
+        <textarea cols="30" rows="5" asp-for="Details4" class="form-control"></textarea>
+    </div>
+    <br />
+    <br />
+
+    <button class="btn btn-outline-warning mt-2 mb-5" onclick="alert('Etkinlik oluturuldu');">Etkinlik Olustur</button>
+    <br />
+
 </form>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240506103513_mig_Catagory_Join_Destination")]
-    partial class mig_Catagory_Join_Destination
+    [Migration("20240512075538_mig_createCategory")]
+    partial class mig_createCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,7 +185,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
                 {
-                    b.Property<int>("CategoryID")
+                    b.Property<int>("CatagoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -196,7 +196,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CatagoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryID");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CatagoryID");
 
                     b.ToTable("Catagories");
                 });
@@ -273,12 +276,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CatagoryCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -306,25 +303,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Details4")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details5")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DetailsTitle1")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DetailsTitle2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle5")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image1")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image2")
@@ -337,8 +322,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("DestinationID");
-
-                    b.HasIndex("CatagoryCategoryID");
 
                     b.ToTable("Destinations");
                 });
@@ -624,15 +607,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Destination");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Catagory", "Catagory")
-                        .WithMany("Destinations")
-                        .HasForeignKey("CatagoryCategoryID");
-
-                    b.Navigation("Catagory");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Rezarvation", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUSer")
@@ -706,11 +680,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.Navigation("Rezarvations");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
-                {
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
