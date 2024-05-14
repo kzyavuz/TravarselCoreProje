@@ -11,13 +11,20 @@
 <body>
     <section class="w3l-about-breadcrumb text-left">
         <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-            <div class="container">
-                <h2 class="title">Etkinlik Detayları</h2>
-                <ul class="breadcrumbs-custom-path mt-2">
-                    <li><a href="/Default/Index">Ana Sayfa</a></li>
-                    <li><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/DestinationController1/Index">Etkinlikler</a></li>
-                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @Model.DestinationName </li>
-                </ul>
+            <div class="container d-flex justify-content-between">
+                <div class="col-6">
+                    <h2 class="title">Etkinlik Detayları</h2>
+                    <ul class="breadcrumbs-custom-path mt-2">
+                        <li><a href="/Default/Index">Ana Sayfa</a></li>
+                        <li><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/DestinationController1/Index">Etkinlikler</a></li>
+                        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @Model.DestinationName </li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <div class="d-lg-block d-none">
+                        <a href="~/Member/Rezervation/NewRezervation" class="btn btn-style btn-secondary">Rezervasyon Yap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -40,8 +47,8 @@
                 <div class="hizala">
                     <div class="single-post-content">
                         <h3 class="blog-desc-big m-0 mb-4 text-center" style="text-transform:capitalize">Etkinlik Detayları</h3>
-                        <p class="mb-4">Etkinil Tarihi: @Model.Date.ToShortDateString()</p>
-                        <p class="mb-4">Etkinil İsmi: @Model.DestinationName</p>
+                        <p class="mb-4">Etkinlik Tarihi: @Model.Date.ToShortDateString()</p>
+                        <p class="mb-4">Etkinlik İsmi: @Model.DestinationName</p>
 
                         @if (ViewBag.des1 != null)
                         {
@@ -104,31 +111,18 @@
 
                             }
                         }
-                            @*<div class="buttons-singles tags">
-                <h4>Tags :</h4>
-                <a href="#blog-tag">YeşilAyak</a>
-                <a href="#blog-tag">Etkinlikler</a>
-                <a href="#blog-tag">Hotel</a>
-            </div>
-            <div class="buttons-singles">
-                <h4>Share :</h4>
-                <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                <a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                <a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                <a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden=" true"></span></a>
-            </div>*@
-                        </div>
-
-                        <!--//author-card-->
-
-                        @await Component.InvokeAsync("_CommentList", new { id = ViewBag.i })
-
-                        @await Html.PartialAsync("~/Views/Comment/AddComment.cshtml")
-
-
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="~/Member/Rezervation/NewRezervation" class="btn btn-style btn-secondary">Rezervasyon Yap</a>
+                    </div>
+                    @await Component.InvokeAsync("_CommentList", new { id = ViewBag.i })
+
+                    @await Html.PartialAsync("~/Views/Comment/AddComment.cshtml")
+
+
                 </div>
             </div>
+        </div>
         </div>
     </section>
 </body>

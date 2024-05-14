@@ -1,36 +1,40 @@
-﻿<div class="best-rooms py-5">
+﻿@model IEnumerable<Catagory>
+<div class="best-rooms py-5">
     <div class="container py-md-5">
         <h6 class="sub-title">Etkinlik Türleri</h6>
         <h3 class="hny-title">Öne Çıkan Etkinlik Türleri</h3>
         <br />
         <div class="ban-content-inf row">
+            @{ string ilkDeger ="";}
+            @foreach (var item in Model) {
             <div class="maghny-gd-1 col-lg-6">
                 <div class="maghny-grid">
                     <figure class="effect-lily border-radius  m-0">
-                        <img class="img-fluid" src="~/CatagoryImage/DogaYuruyus.jpg" alt="" />
+                        <img class="img-fluid" src="/CatagoryImage/@item.CatagoryImage" alt="" />
                         <figcaption>
                             <div>
-                                <h4>3Days, 4 Nights</h4>
-                                <p>From 1720$ </p>
+                                @{ilkDeger = @item.CatagoryName;}
+                                <p>@item.CatagoryName</p>
                             </div>
-
                         </figcaption>
                     </figure>
                 </div>
             </div>
+                break;
+            }
             <div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
                 <div class="row">
                     @foreach (var item in Model)
                     {
-                        if (item.CatagoryName != "Doğa Yürüyüsü")
+                        if (item.CatagoryName != ilkDeger)
                         {
                             <div class="maghny-gd-1 col-6 mb-4">
                                 <div class="maghny-grid">
-                                    <figure class="effect-lily border-radius">
-                                        <img class="img-fluid" src="~/CatagoryImage/@item.CatagoryImage" />
+                                    <figure class="effect-lily etkinlikSize border-radius d-flex justify-content-center align-center">
+                                        <img class="img-fluid" src="/CatagoryImage/@item.CatagoryImage" style="height:165px;"/>
                                         <figcaption>
                                             <div>
-                                                <h4>@item.CatagoryName</h4>
+                                                <p>@item.CatagoryName</p>
                                             </div>
                                         </figcaption>
                                     </figure>

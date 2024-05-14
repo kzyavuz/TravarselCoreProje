@@ -59,12 +59,17 @@ namespace TravarselCoreProje.Areas.Member.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewRezervation(Rezarvation p)
+        public async Task<IActionResult> NewRezervation(Rezarvation p)
         {
-            p.AppUSerID = 6;
-            p.Status = "Onay Bekliyor";
-            rezervationManager.TAdd(p);
-            return RedirectToAction("/Member/Rezervation/MyActiveRezervation");
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser != null)
+            {
+                p.AppUSerID = currentUser.Id;
+                p.Status = "Onay Bekliyor";
+                rezervationManager.TAdd(p);
+                return RedirectToAction("/Member/Rezervation/MyActiveRezervation");
+            }
+            return View();
         }
     }
 }
