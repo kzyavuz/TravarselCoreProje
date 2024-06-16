@@ -20,11 +20,13 @@ namespace TravarselCoreProje.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Index Sayfası Çağrıldı");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("Privacy Sayfası Çağrıldı");
             return View();
         }
 

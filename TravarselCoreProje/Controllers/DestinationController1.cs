@@ -19,7 +19,7 @@ namespace TravarselCoreProje.Controllers
 
         DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
 
-        public IActionResult Index(int id)
+        public IActionResult Index(/*int id*/)
         {
             var data = destinationManager.TGetList()/*.Where(e => e.Catagory.CatagoryID == id && e.Catagory.CatagoryID != 0)*/;
             return View(data);
@@ -29,7 +29,7 @@ namespace TravarselCoreProje.Controllers
         {
             if (!string.IsNullOrEmpty(data))
             {
-                this.lines = data.Split("*");
+                lines = data.Split("*");
                 return lines;
             }
             else

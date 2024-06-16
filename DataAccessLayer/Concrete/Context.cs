@@ -14,12 +14,14 @@ namespace DataAccessLayer.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=KOZLOW\\SQLEXPRESS;database=GeziDB; integrated security=true;");
+            //optionsBuilder.UseSqlServer("server=KOZLOW\\MSSQLSERVER01;database=GeziDB; integrated security=true;");
 
         }
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<About2> About2s { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ContactInfo> ContactInfos { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<Feature2> Feature2s { get; set; }
@@ -30,5 +32,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Rezarvation> Rezarvations { get; set; }
         public DbSet<Catagory> Catagories { get; set; }
+        public DbSet<Annonuncement> Annonuncements { get; set; }
     }
 }

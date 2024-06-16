@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{8BC40A5A-9172-459E-98C6-134689A161C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{EC821FEF-D54E-4C4E-8D46-B1B5B485C18A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8BC40A5A-9172-459E-98C6-134689A161C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BC40A5A-9172-459E-98C6-134689A161C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BC40A5A-9172-459E-98C6-134689A161C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC821FEF-D54E-4C4E-8D46-B1B5B485C18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC821FEF-D54E-4C4E-8D46-B1B5B485C18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC821FEF-D54E-4C4E-8D46-B1B5B485C18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC821FEF-D54E-4C4E-8D46-B1B5B485C18A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

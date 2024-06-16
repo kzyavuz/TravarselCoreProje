@@ -1,0 +1,37 @@
+﻿@model List<ContactInfo>
+@{
+    ViewData["Title"] = "Gelen Mesajlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sayac = 1;
+}
+
+<h1>Gelen Mesajlar</h1>
+
+<table class=" table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Gönderen</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@sayac</td>
+            <td>@item.ContactInfoMail</td>
+            <td>@item.MessageBody</td>
+            <td>@item.MessageDate.ToString("dd.MMM.yyyy")</td>
+            <td>
+                <form asp-controller="ContactInfo" asp-action="#" asp-route-id="@item.ContactInfoID" onsubmit="return confirm('Mesajı silmek iştediğinize eminmisiniz')">
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </form>
+            </td>
+            <td>
+                <a class="btn btn-primary" href="#">Git</a>
+            </td>
+        </tr>
+        sayac++;
+    }
+</table>

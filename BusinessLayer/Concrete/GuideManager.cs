@@ -11,7 +11,7 @@ namespace BusinessLayer.Concrete
 {
     public class GuideManager : IGuideService
     {
-        IGuideDal _guideDal;
+        private readonly IGuideDal _guideDal;
 
         public GuideManager(IGuideDal guideDal)
         {
@@ -20,17 +20,27 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Insert(t);
+        }
+
+        public void TConvertFalseByGuid(int id)
+        {
+            _guideDal.ConvertTrueByGuid(id);
+        }
+
+        public void TConvertTrueByGuid(int id)
+        {
+            _guideDal.ConvertFalseByGuid(id);
         }
 
         public void TDelete(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Delete(t);
         }
 
         public Guide TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _guideDal.GetByID(id);
         }
 
         public List<Guide> TGetList()
@@ -40,7 +50,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Update(t);
         }
     }
 }

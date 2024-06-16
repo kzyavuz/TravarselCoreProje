@@ -25,12 +25,13 @@ namespace TravarselCoreProje.Controllers
         {
             var about = _context.Abouts.FirstOrDefault();
 
-            // ViewBag'e veriyi ekleme
-            ViewBag.aTitle1 = about.Title;
-            ViewBag.aTitle2 = about.Title2;
-            ViewBag.Des1 = about.Description;
-            ViewBag.Des2 = about.Description2;
-
+            if (about != null)
+            {
+                ViewBag.aTitle1 = about.Title;
+                ViewBag.aTitle2 = about.Title2;
+                ViewBag.Des1 = about.Description;
+                ViewBag.Des2 = about.Description2;
+            }
             return View();
         }
     }

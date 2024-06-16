@@ -8,5 +8,8 @@ namespace BusinessLayer.Abstract
 {
     public interface IGuideService : IGenericService<Guide> 
     {
+        void TConvertTrueByGuid(int id);
+
+        void TConvertFalseByGuid(int id);
     }
 }

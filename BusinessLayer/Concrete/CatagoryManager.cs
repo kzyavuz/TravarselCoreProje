@@ -11,7 +11,7 @@ namespace BusinessLayer.Concrete
 {
     public class CatagoryManager : ICatagoryService
     {
-        ICatagoryDal _catagoryDal;
+         private readonly ICatagoryDal _catagoryDal;
 
         public CatagoryManager(ICatagoryDal catagoryDal)
         {
