@@ -1,0 +1,65 @@
+﻿@model CatagoryViewModel
+
+@{
+    ViewData["Title"] = "UpdateCatagory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-1" asp-action="Index" asp-controller="Catagory">Geri</a>
+    <div class="card">
+        <div class="card-header bg-warning">
+            <h2 class="card-title text-white font-weight-bold">Kategori Güncelleme Sayfası</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="UpdateCatagory" asp-controller="Catagory" asp-area="Admin" enctype="multipart/form-data">
+                <input type="hidden" asp-for="CatagoryID" />
+                <div class="row mb-2 pt-3">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Başlık</label>
+                            <input type="text" asp-for="CatagoryName" class="form-control" />
+                            <span asp-validation-for="CatagoryName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="border border-warning rounded p-2 mb-3">
+                            <h6>Kapak Resmi</h6>
+                            <div class="mb-2">
+                                @{
+                                    var imagePath = string.IsNullOrEmpty(Model.ExistingImagePath) ? Url.Content("~/ImageDestination/default_image.png") : Url.Content($"~/CatagoryImage/{Model.ExistingImagePath}");
+                                }
+                                <img src="@imagePath" class="img-fluid rounded" id="thumbnailCover" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Resim Seçin</label>
+                                <input type="file" asp-for="newCatagoryImage" class="form-control custom-file-input" />
+                                <span asp-validation-for="newCatagoryImage" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-warning w-100">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('thumbnail').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
+

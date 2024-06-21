@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,11 +11,16 @@ namespace TravarselCoreProje.ViewComponents.Default
 {
     public class _Navbar : ViewComponent
     {
-        CatagoryManager _catagoryManager = new CatagoryManager(new EFCatagoryDal());
+        private readonly ICatagoryService _catagoryService;
+
+        public _Navbar(ICatagoryService catagoryService)
+        {
+            _catagoryService = catagoryService;
+        }
 
         public IViewComponentResult Invoke()
         {
-            var data = _catagoryManager.TGetList();
+            var data = _catagoryService.TGetList();
             return View(data);
         }
     }

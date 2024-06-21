@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<Catagory>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sayac = 1;
+}
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+</style>
+
+<td><a href="/Admin/Catagory/AddCatagory/" class="btn btn-outline-success mb-3">Kategori Ekle</a></td>
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Kategori Adı</th>
+        <th>Resim</th>
+        <th>Durumu</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@sayac</td>
+            <td>@item.CatagoryName</td>
+            <td><img src="~/CatagoryImage/@item.CatagoryImage" /></td>
+            @if (item.Status == true)
+            {
+                <td><a class="btn btn-success">Aktif</a></td>
+
+            }
+            else
+            {
+                <td><a class="btn btn-danger">Pasif</a></td>
+            }
+
+            <td>
+                <a href="/Admin/Catagory/DeleteCatagory/@item.CatagoryID" class="btn btn-outline-danger">Sil</a>
+            </td>
+
+            <td><a href="/Admin/Catagory/UpdateCatagory/@item.CatagoryID" class="btn btn-outline-warning">Güncelle</a></td>
+        </tr>
+        sayac++;
+    }
+</table>
+

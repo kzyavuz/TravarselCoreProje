@@ -2,36 +2,35 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace TravarselCoreProje.Areas.Member.Controllers
 {
     [Area("Member")]
+    [Route("Member/Dashboard")]
     public class DashboardController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public DashboardController(UserManager<AppUser> userManager)
+        public DashboardController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public async Task<IActionResult> Index()
+        [Route("MemberDashboard")]
+        public IActionResult MemberDashboard()
         {
-            var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.userName = values.Name + " " + values.NamSurname;
-            ViewBag.userImage = values.Image;
             return View();
         }
 
+        [Route("Logout")]
         [HttpPost]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync();
-            return RedirectToAction("Index", "Default");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Default", new { area = "" }); // varsayılan alanına yönlendirme
         }
     }
 }

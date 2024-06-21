@@ -25,6 +25,8 @@ namespace TravarselCoreProje.ViewComponents.MemberDashboard
             ViewBag.userName = values.Name + " " + values.NamSurname;
             ViewBag.phoneNumber = values.PhoneNumber;
             ViewBag.email = values.Email;
+            ViewBag.gender = values.Gender;
+            ViewBag.user = values.UserName;
             return View();
         }
     }

@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Hakkımızda</h1>
+
+@if (Model.Count() < 1)
+{
+    <a href="/Admin/About/AddAbout/" class="btn btn-outline-success mb-3">Ekle</a>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>Başlık</th>
+        <th>İçerik</th>
+        <th>Sitede Gör</th>
+        <th>Düzenle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            @if (item.Description.Length > 100)
+            {
+                <td>
+                    @Html.Raw(item.Description.Substring(0, 100)) ...
+                </td>
+            }
+            else
+            {
+                @item.Description
+            }
+            <td><a href="/About/Index/" class="btn btn-outline-primary">Git</a></td>
+            <td><a href="/Admin/About/UpdateAbout/@item.AboutID" class="btn btn-outline-warning">Güncelle</a></td>
+            <td><a href="/Admin/About/DeleteAbout/@item.AboutID" class="btn btn-outline-danger">Sil</a></td>
+        </tr>
+    }
+</table>

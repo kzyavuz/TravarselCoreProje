@@ -11,7 +11,7 @@ namespace BusinessLayer.Concrete
 {
     public class CommentManager : ICommnetService
     {
-         private readonly ICommentDal _commentDal;
+        private readonly ICommentDal _commentDal;
 
         public CommentManager(ICommentDal commentDal)
         {
@@ -51,6 +51,11 @@ namespace BusinessLayer.Concrete
         public List<Comment> GetListCommentDestination()
         {
             return _commentDal.GetListCommentDestination();
+        }
+
+        public List<Comment> TGetListCommentDestinationAdUser(int id)
+        {
+            return _commentDal.GetListCommentDestinationAndUser(id);
         }
     }
 }

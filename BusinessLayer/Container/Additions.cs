@@ -16,10 +16,28 @@ namespace BusinessLayer.Container
 {
     public static class Additions
     {
-        public static void ContainerDependencies( this IServiceCollection services)
+        public static void ContainerDependencies(this IServiceCollection services)
         {
+            services.AddScoped<IAboutService, AboutManager>();
+            services.AddScoped<IAboutDal, EFAboutDal>();
+
+            services.AddScoped<IAbout2Service, About2Manager>();
+            services.AddScoped<IAboutDal2, EFAbout2Dal>();
+
+            services.AddScoped<IFeatureService, FeatureManager>();
+            services.AddScoped<IFeatureDal, EFFeatureDal>();
+
+            services.AddScoped<IFeature2Service, Feature2Manager>();
+            services.AddScoped<IFeatureDal2, EFFeatureDal2>();
+
             services.AddScoped<ICommnetService, CommentManager>();
             services.AddScoped<ICommentDal, EFCommentDal>();
+
+            services.AddScoped<ITestimonialService, TestimonialManager>();
+            services.AddScoped<ITestimonialDal, EFTestimonialDal>();
+            
+            services.AddScoped<ISubAboutService, SubAboutManager>();
+            services.AddScoped<ISubAboutDal, EFSubAboutDal>();
 
             services.AddScoped<IDestinationService, DestinationManager>();
             services.AddScoped<IDestinationDal, EFDestinationDal>();
@@ -42,6 +60,9 @@ namespace BusinessLayer.Container
 
             services.AddScoped<IContactInfoService, ContactInfoManager>();
             services.AddScoped<IContactInfoDal, EFContactInfoDal>();
+
+            services.AddScoped<IContactService, ContactManager>();
+            services.AddScoped<IContactDal, EFContactDal>();
 
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IAnnouncementDal, EFAnnouncementDal>();

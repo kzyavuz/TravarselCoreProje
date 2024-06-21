@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+@await Html.PartialAsync("/Views/MemberPartial/_Header.cshtml")
+<body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+
+    @await Component.InvokeAsync("_MemberNavbar")
+
+
+    @await Html.PartialAsync("/Views/MemberPartial/_Navbar2.cshtml")
+
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-wrapper-before"></div>
+            @await Html.PartialAsync("/Views/MemberPartial/_RightBar.cshtml")
+
+            <div class="content-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("/Views/MemberPartial/_Footer.cshtml")
+    @await Html.PartialAsync("/Views/MemberPartial/_Script.cshtml")
+
+</body>
+</html>

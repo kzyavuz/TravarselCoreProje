@@ -5,8 +5,10 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TravarselCoreProje.Areas.Admin.Models;
 
 namespace TravarselCoreProje.Areas.Admin.Controllers
 {
@@ -37,18 +39,44 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 
         [Route("AddGuide")]
         [HttpPost]
-        public IActionResult AddGuide(Guide guide)
+        public IActionResult AddGuide(GuideViewModel p, Guide s)
         {
             GuideValidator validationRules = new GuideValidator();
-            ValidationResult result = validationRules.Validate(guide);
+            ValidationResult result = validationRules.Validate(s);
             if (result.IsValid)
             {
-                _guideService.TAdd(guide);
-                return RedirectToAction("Index");
+                if (p.Image != null)
+                {
+                    var extension = Path.GetExtension(p.Image.FileName);
+                    var newimagename = Guid.NewGuid() + extension;
+                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageGuide/", newimagename);
+                    using (var stream = new FileStream(location, FileMode.Create))
+                    {
+                        p.Image.CopyTo(stream);
+                    }
+                    s.Image = newimagename;
+                }
+                s.Name = p.name;
+                s.InstagramUrl = p.InstagramUrl;
+                s.TwitterUrl = p.TwitterUrl;
+                s.Description = p.Description;
+                s.Status = true;
+
+                try
+                {
+                    _guideService.TAdd(s);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Rehber eklenirken bir hata oluştu.");
+                }
+                return View(p);
             }
+
             else
             {
-                foreach(var item in result.Errors)
+                foreach (var item in result.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
@@ -56,19 +84,100 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             }
         }
 
-        [Route("EditGuide/{id}")]
+        [Route("UpdateGuide/{id}")]
         [HttpGet]
-        public IActionResult EditGuide(int id)
+        public IActionResult UpdateGuide(int id)
         {
-            var values = _guideService.TGetByID(id);
-            return View(values);
+            var service = _guideService.TGetByID(id);
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            var model = new GuideViewModel
+            {
+                GuideID = service.GuideID,
+                name = service.Name,
+                InstagramUrl = service.InstagramUrl,
+                TwitterUrl = service.TwitterUrl,
+                Description = service.Description,
+                ExistingImagePath = service.Image // Mevcut resim dosyası yolunu sakla
+            };
+            return View(model);
         }
 
-        [Route("EditGuide/{id}")]
+        [Route("UpdateGuide/{id}")]
         [HttpPost]
-        public IActionResult EditGuide(Guide guide)
+        public IActionResult UpdateGuide(GuideViewModel model)
         {
-            _guideService.TUpdate(guide);
+            if (ModelState.IsValid)
+            {
+                var service = _guideService.TGetByID(model.GuideID);
+                if (service == null)
+                {
+                    return NotFound();
+                }
+
+                service.Name = model.name;
+                service.Description = model.Description;
+                service.TwitterUrl = model.TwitterUrl;
+                service.InstagramUrl = model.InstagramUrl;
+
+                if (model.newImage != null)
+                {
+                    // Eski resim dosyasını sil
+                    if (!string.IsNullOrEmpty(service.Image))
+                    {
+                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageGuide/", service.Image);
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    // Yeni resim dosyasını yükle
+                    var extension = Path.GetExtension(model.newImage.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    var newImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageGuide/", newImageName);
+                    using (var stream = new FileStream(newImagePath, FileMode.Create))
+                    {
+                        model.newImage.CopyTo(stream);
+                    }
+
+                    // Yeni resim dosyası bilgisi güncellenir
+                    service.Image = newImageName;
+                }
+
+                _guideService.TUpdate(service);
+
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("DeleteGuide/{id}")]
+        public IActionResult DeleteGuide(int id)
+        {
+            var service = _guideService.TGetByID(id);
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            // Resim dosyası silinir
+            if (!string.IsNullOrEmpty(service.Image))
+            {
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageGuide/", service.Image);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+
+            // Servis silinir
+            _guideService.TDelete(service);
+
             return RedirectToAction("Index");
         }
 

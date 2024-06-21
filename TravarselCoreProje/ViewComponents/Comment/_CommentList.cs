@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,10 +11,16 @@ namespace TravarselCoreProje.ViewComponents.Comment
 {
     public class _CommentList: ViewComponent
     {
-        CommentManager commentManager = new CommentManager(new EFCommentDal());
+        private readonly ICommnetService _commnetService;
+
+        public _CommentList(ICommnetService commnetService)
+        {
+            _commnetService = commnetService;
+        }
+
         public IViewComponentResult Invoke(int id)
         {
-            var values = commentManager.TGetDestionID(id);
+            var values = _commnetService.TGetListCommentDestinationAdUser(id);
             return View(values);
         }
     }

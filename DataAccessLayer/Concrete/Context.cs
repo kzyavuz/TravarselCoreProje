@@ -13,8 +13,8 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=KOZLOW\\SQLEXPRESS;database=GeziDB; integrated security=true;");
-            //optionsBuilder.UseSqlServer("server=KOZLOW\\MSSQLSERVER01;database=GeziDB; integrated security=true;");
+            //optionsBuilder.UseSqlServer("server=KOZLOW\\SQLEXPRESS;database=GeziDB3; integrated security=true;");
+            optionsBuilder.UseSqlServer("server=KOZLOW\\MSSQLSERVER01;database=GeziDB3; integrated security=true;");
 
         }
 

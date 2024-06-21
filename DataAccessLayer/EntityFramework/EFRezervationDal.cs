@@ -18,7 +18,7 @@ namespace DataAccessLayer.EntityFramework
             using (var context = new Context())
             {
                 return context.Rezarvations.Include(x => x.Destination).Where
-                    (x => x.Status == "Onaylandı" && x.AppUSerID == id).ToList();
+                    (x => x.Status == "Onaylandı" && x.AppUserID == id).ToList();
             }
         }
 
@@ -27,7 +27,7 @@ namespace DataAccessLayer.EntityFramework
             using (var context = new Context())
             {
                 return context.Rezarvations.Include(x => x.Destination).Where
-                    (x => x.Status == "Geçmis Rezervasyon" && x.AppUSerID == id).ToList();
+                    (x => x.Status == "Geçmis Rezervasyon" && x.AppUserID == id).ToList();
             }
         }
 
@@ -36,7 +36,7 @@ namespace DataAccessLayer.EntityFramework
             using (var context = new Context())
             {
                 return context.Rezarvations.Include(x => x.Destination).Where
-                    (x => x.Status == "Onay Bekliyor" && x.AppUSerID == id).ToList();
+                    (x => x.Status == "Onay Bekliyor" && x.AppUserID == id).ToList();
             }
         }
     }

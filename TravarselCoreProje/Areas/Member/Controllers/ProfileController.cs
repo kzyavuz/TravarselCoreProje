@@ -54,7 +54,7 @@ namespace TravarselCoreProje.Areas.Member.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                return RedirectToAction("SignUn", "LoginController1");
+                return RedirectToAction("MemberDashboard", "Dashboard", new { area = "Member" });
             }
             return View();
         }

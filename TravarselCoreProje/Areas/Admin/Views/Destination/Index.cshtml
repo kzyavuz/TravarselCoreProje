@@ -1,35 +1,43 @@
-﻿@using EntityLayer.Concrete
-@model List<Destination>
+﻿@model IEnumerable<Destination>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sayac = 1;
 }
-
+<style>
+    img{
+        width:50px;
+        height:50px;
+        object-fit:cover;
+    }
+</style>
+    
 <h1>Etkinlikler</h1>
-<table class="table table-bordered">
+<a href="/Admin/Destination/AddDestinations/" class="btn btn-outline-success mb-3">Etkinlik Ekle</a>
+<table class="table table-striped">
     <tr>
         <th>#</th>
-        <th>Sehir</th>
-        <th>Fiyat</th>
+        <th>Etkinlik Adı</th>
+        <th>Etkinlik Resimi</th>
         <th>Kapasite</th>
+        <th>Fiyat</th>
         <th>Sitede Gör</th>
         <th>Sil</th>
         <th>GÜncelle</th>
     </tr>
 
-    @{ var i = 1; }
     @foreach (var item in Model)
     {
         <tr>
-            <td>@i</td>
-            <td>@item.City</td>
-            <td>@item.Price</td>
+            <td>@sayac</td>
+            <td>@item.DestinationName</td>
+            <td><img src="~/ImageDestination/@item.Image" /></td>
             <td>@item.Capacity</td>
-            <td><a href="/DestinationController1/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
+            <td>@item.Price</td>
+            <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
             <td><a href="/Admin/Destination/DeleteDestinations/@item.DestinationID" class="btn btn-outline-danger">Sil</a></td>
             <td><a href="/Admin/Destination/UpdateDestinations/@item.DestinationID" class="btn btn-outline-warning">Güncelle</a></td>
         </tr>
-        i++;
+        sayac++;
     }
 </table>
-<a href="/Admin/Destination/AddDestinations/" class="btn btn-outline-warning">Etkinlik Ekle</a>

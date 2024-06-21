@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,17 +9,23 @@ using System.Threading.Tasks;
 
 namespace TravarselCoreProje.ViewComponents.Default
 {
-    public class _PopularDestinations: ViewComponent
+    public class _PopularDestinations : ViewComponent
     {
-        DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
+        private readonly IDestinationService _destinationService;
+
+        public _PopularDestinations(IDestinationService destinationService)
+        {
+            _destinationService = destinationService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var values = destinationManager.TGetList()
-            .Where(e => e.Status == true)
+            var values = _destinationService.TGetList()
+                .Where(e => e.Status == true)
                 .OrderBy(e => e.Date)
                 .Take(6)
                 .ToList();
-            return View(values);    
+            return View(values);
         }
     }
 }

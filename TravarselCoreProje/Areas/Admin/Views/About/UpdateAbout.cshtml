@@ -1,0 +1,40 @@
+﻿
+@model About
+
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-3" asp-action="Index" asp-controller="About">Geri</a>
+    <div class="card">
+        <div class="card-header bg-warning mb-3">
+            <h2 class="card-title text-white font-weight-bold">Hakkımızda Sayfasını Güncelle</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="UpdateAbout" asp-controller="About" asp-area="Admin" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="AboutID" />
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Kapasite</label>
+                            <input type="text" asp-for="Title" class="form-control" required />
+                        </div>
+                        <div class="mb-2">
+                            <label>Detaylı İçerik</label>
+                            <textarea id="richEditor" asp-for="Description" class="form-control" rows="8"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-warning w-100">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

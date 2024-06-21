@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
@@ -14,25 +15,17 @@ namespace TravarselCoreProje.Controllers
 
     public class AboutController : Controller
     {
-        private readonly Context _context;
+        private readonly IAboutService _aboutService;
 
-        public AboutController(Context context)
+        public AboutController(IAboutService aboutService)
         {
-            _context = context;
+            _aboutService = aboutService;
         }
 
         public IActionResult Index()
         {
-            var about = _context.Abouts.FirstOrDefault();
-
-            if (about != null)
-            {
-                ViewBag.aTitle1 = about.Title;
-                ViewBag.aTitle2 = about.Title2;
-                ViewBag.Des1 = about.Description;
-                ViewBag.Des2 = about.Description2;
-            }
-            return View();
+            var values = _aboutService.TGetList();
+            return View(values);
         }
     }
 }

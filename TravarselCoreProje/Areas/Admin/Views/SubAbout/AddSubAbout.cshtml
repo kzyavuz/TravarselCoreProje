@@ -1,0 +1,35 @@
+﻿@model SubAbout
+@{
+    ViewData["Title"] = "AddSubAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-3" asp-action="Index" asp-controller="SubAbout">Geri</a>
+    <div class="card">
+        <div class="card-header bg-success mb-3">
+            <h2 class="card-title text-white font-weight-bold">Hakkımızda Ekle (Ana Sayfa)</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddSubAbout" asp-controller="SubAbout" asp-area="Admin">
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Etkinlik Adı</label>
+                            <input type="text" asp-for="Title" class="form-control" required />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Etkinlik Adı</label>
+                            <input type="text" asp-for="Description" class="form-control" required />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-success w-100">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

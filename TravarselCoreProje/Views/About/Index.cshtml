@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model List<About>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -7,199 +9,41 @@
 <html lang="tr">
 
 <body>
-    <section class="w3l-about-breadcrumb text-left">
-        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-            <div class="container py-2">
-                <h2 class="title">Hakkımızda</h2>
-                <ul class="breadcrumbs-custom-path mt-2">
-                    <li><a href="/Default/Index/">Ana Sayfa</a></li>
-                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Hakımızda </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <section class="w3l-cta4 py-5">
-        <div class="container py-lg-5">
-            <div class="ab-section">
-                <h3 class="hny-title mb-5">@ViewBag.aTitle1</h3>
-                <h6 class="sub-title mb-1">Hakkımızda</h6>
-                <p class="py-3">
-                    Türkiye nin dört bir yanında, doğa tutkunlarını bir araya getiren ve doğa sporlarının keyfini herkes için ulaşılabilir kılmayı
-                    amaçlayan YeşilAyak sayfamız, 2017 yılında bir Doğa Gönüllüleri Derneği olarak yola çıkarak, 7405 Sayılı Spor Kulüpleri ve Spor
-                    Federasyonları Kanunu’na uygun olarak, 09.01.2023 tarihinde Spor Kulübü olarak yeniden tescillenmiştir.
-                </p>
-                <p class="py-3">
-                    Bizler, Doğa Sporları Spor Kulübü olarak, sadece spor yapmanın ötesinde, bireylerin doğayla iç içe, sağlıklı ve bilinçli
-                    bir yaşam sürmelerini teşvik eden bir topluluk oluşturmayı hedefliyoruz. “Gelecek nesillere daha yaşanabilir bir dünya bırakmak”
-                    misyonuyla hareket ediyor, doğa sporlarının her yaştan ve her kesimden insan için erişilebilir olmasını amaçlıyoruz.
-                </p>
-                <p class="py-3">
-                    Doğaya olan sevgimizi ve saygımızı, ancak doğanın içinde aktif olarak yer alarak gösterebileceğimize inanıyoruz. “Gözden uzak olan,
-                    gönülden de uzak olur” düsturunu benimseyerek, insanları doğanın kucağına davet ediyoruz. Bu yolla, hem doğanın korunmasına katkıda bulunuyor,
-                    hem de insanlarımızın metropol hayatının stresinden uzaklaşmalarını sağlıyoruz.
-                </p>
-                <p class="py-3">
-                    Ülkenin her yerinde düzenlediğimiz doğa yürüyüşleri, dağcılık faaliyetleri,  kamp etkinlikleri ve çeşitli doğa sporları faaliyetleriyle,
-                    üyelerimize doğayla bütünleşme fırsatı sunuyoruz. Aynı zamanda, bu etkinlikler aracılığıyla doğa koruma bilincini aşılamayı ve sürdürülebilir
-                    yaşam pratiğine katkı sağlamayı hedefliyoruz.
-                </p>
-            </div>
-            @*<div class="row mt-5">
-                <div class="col-md-9 mx-auto">
-                    <img src="~/CatagoryImage/yesilayak.jpg" class="img-fluid" alt="">
+
+    @foreach (var item in Model)
+    {
+        <section class="w3l-about-breadcrumb text-left">
+            <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+                <div class="container py-2">
+                    <h2 class="title">@item.Title</h2>
+                    <ul class="breadcrumbs-custom-path mt-2">
+                        <li><a href="/Default/Index/">Ana Sayfa</a></li>
+                        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Hakımızda </li>
+                    </ul>
                 </div>
-            </div>*@
-        </div>
-    </section>
+            </div>
+        </section>
+        <section class="w3l-cta4 py-5">
+            <div class="container py-lg-5">
+                <div class="ab-section">
+                    @Html.Raw(item.Description)
+                </div>
+                @*<div class="row mt-5">
+                        <div class="col-md-9 mx-auto">
+                            <img src="~/CatagoryImage/yesilayak.jpg" class="img-fluid" alt="">
+                        </div>
+                    </div>*@
+            </div>
+        </section>
+    }
     <!-- //about-6-->
-    <section class="w3l-grids1">
-        <div class="hny-three-grids py-5">
-            <h4 style="text-align:center;" >Neden Biz</h4>
-            <div class="container py-lg-5">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 mt-0 grids5-info">
-                        @*<a href="#url"><img src="~/CatagoryImage/DogaYuruyus.jpg" class="img-fluid" alt=""></a>*@
-                        <a href="#url">
-                            <h5>Etkinlikler</h5>
-                        </a>
-                        <h4>
-                            Yenilikçi ve Güncel Etkinlikler
-                        </h4>
-                        <p>Aktif olarak yeni etkinlik ve etkinlik çeitleri olusmakta. </p>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mt-sm-0 mt-5 grids5-info">
-                        @*<a href="#url"><img src="~/CatagoryImage/rehber.jpg" class="img-fluid" alt="" style="height:225px; width:100%;"></a>*@
-                        <h5>Rehberler</h5>
-                        <h4>
-                            <a href="#url">
-                                Deneyimli Rehberlerimiz
-                            </a>
-                        </h4>
-                        <p>Deneyimli rehberlerimiz sizin için yeni totalar kesfetmekte ve güvenliğini sağlamaktadır.</p>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mt-md-0 mt-5 grids5-info">
-                        @*<a href="#url"><img src="~/CatagoryImage/rehber.jpg" class="img-fluid" alt="" style="height:225px; width:100%;"></a>*@
-                        <h5>Ziyaretçilerimiz</h5>
-                        <h4>Mutlu Ziyaretçilerimiz</h4>
-                        <p>dolor sit amet consectetur adipisicing elit. Veniam esse? dolores impedit doloremque.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- /content-6-->
-    <section class="w3l-content-6 py-5">
-        <div class="container py-lg-5">
-            <div class="row">
-                <div class="col-lg-6 content-6-left pr-lg-5">
-                    <h3 class="hny-title">@ViewBag.aTitle2</h3>
-                </div>
-                <div class="col-lg-6 content-6-right mt-lg-0 mt-4">
-                    <p class="mb-3">
-                        @ViewBag.Des2
-                    </p>
-                    <a href="/DestinationController1/Index/" class="btn btn-style btn-primary mt-4">Göz At</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Component.InvokeAsync("_WhyUS")
+
     <!-- team -->
-    <section class="w3l-team" id="team">
-        <div class="team-block py-5">
-            <div class="container py-lg-5">
-                <div class="title-content text-center mb-lg-3 mb-4">
-                    <h6 class="sub-title">Our team</h6>
-                    <h3 class="hny-title">Meet our Guides</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-6 mt-lg-5 mt-4">
-                        <div class="box16">
-                            <a href="#url"><img src="assets/images/team1.jpg" alt="" class="img-fluid" /></a>
-                            <div class="box-content">
-                                <h3 class="title"><a href="#url">Alexander</a></h3>
-                                <span class="post">Description</span>
-                                <ul class="social">
-                                    <li>
-                                        <a href="#" class="facebook">
-                                            <span class="fa fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="twitter">
-                                            <span class="fa fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 mt-lg-5 mt-4">
-                        <div class="box16">
-                            <a href="#url"><img src="assets/images/team2.jpg" alt="" class="img-fluid" /></a>
-                            <div class="box-content">
-                                <h3 class="title"><a href="#url">Victoria</a></h3>
-                                <span class="post">Description</span>
-                                <ul class="social">
-                                    <li>
-                                        <a href="#" class="facebook">
-                                            <span class="fa fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="twitter">
-                                            <span class="fa fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 mt-lg-5 mt-4">
-                        <div class="box16">
-                            <a href="#url"><img src="assets/images/team3.jpg" alt="" class="img-fluid" /></a>
-                            <div class="box-content">
-                                <h3 class="title"><a href="#url">Smith roy</a></h3>
-                                <span class="post">Description</a></span>
-                                <ul class="social">
-                                    <li>
-                                        <a href="#" class="facebook">
-                                            <span class="fa fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="twitter">
-                                            <span class="fa fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 mt-lg-5 mt-4">
-                        <div class="box16">
-                            <a href="#url"><img src="assets/images/team4.jpg" alt="" class="img-fluid" /></a>
-                            <div class="box-content">
-                                <h3 class="title"><a href="#url">Johnson</a></h3>
-                                <span class="post">Description</a></span>
-                                <ul class="social">
-                                    <li>
-                                        <a href="#" class="facebook">
-                                            <span class="fa fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="twitter">
-                                            <span class="fa fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Component.InvokeAsync("_AboutDestination")
+
+    @await Component.InvokeAsync("_Guide")
+
 
 </body>
 

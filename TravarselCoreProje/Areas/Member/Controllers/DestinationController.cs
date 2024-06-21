@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,18 @@ namespace TravarselCoreProje.Areas.Member.Controllers
 {
     public class DestinationController : Controller
     {
+        private readonly IDestinationService _destinationService;
+
+        public DestinationController(IDestinationService destinationService)
+        {
+            _destinationService = destinationService;
+        }
+
         [AllowAnonymous]
         [Area("Member")]
         public IActionResult Index()
         {
-            DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
-            var values = destinationManager.TGetList();
+            var values = _destinationService.TGetList();
             return View(values);
         }
     }

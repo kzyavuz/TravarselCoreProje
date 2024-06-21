@@ -1,41 +1,31 @@
-﻿<div class="col-12 col-xl-4">
-    <div class="card h-100">
-        <div class="card-header pb-0 p-3">
-            <div class="row">
-                <div class="col-md-8 d-flex align-items-center">
-                    <h6 class="mb-0">Profil Bilgisi</h6>
-                </div>
-                <div class="col-md-4 text-end">
-                    <a href="~/Member/Profile/Index">
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
-                    </a>
-                </div>
-            </div>
+﻿
+<div class="col-xl-4 col-lg-12">
+    <div class="card">
+        <div class="card-header" style="height:100px;">
+            <h4 class="card-title position-sticky" style="top:50%" id="heading-multiple-thumbnails">Profil Bilgilerim</h4>
+            <a class="heading-elements-toggle">
+                <i class="la la-ellipsis-v font-medium-3"></i>
+            </a>
         </div>
-        <div class="card-body p-3">
-            @*burdan profil bilgisi alcan*@
-            <p class="text-sm">
-                
-            </p>
-            <hr class="horizontal gray-light my-4">
-            <ul class="list-group">
-                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Ad Soyad:</strong><span style="text-transform:capitalize"> &nbsp; @ViewBag.userName</span></li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefon Numarası:</strong> &nbsp; @ViewBag.phoneNumber</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mail:</strong> &nbsp; @ViewBag.email</li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Konum:</strong> &nbsp; USA</li>
-                <li class="list-group-item border-0 ps-0 pb-0">
-                    <strong class="text-dark text-sm">Sosyal Medya:</strong> &nbsp;
-                    <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                        <i class="fab fa-facebook fa-lg"></i>
-                    </a>
-                    <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                        <i class="fab fa-twitter fa-lg"></i>
-                    </a>
-                    <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                        <i class="fab fa-instagram fa-lg"></i>
-                    </a>
-                </li>
-            </ul>
+        <div class="card-content">
+            <div class="card-body">
+                <p class="card-text">
+                    Ad Soyad: <span class="font-weight-bold">@ViewBag.userName</span>
+                </p>
+                <p class="card-text">
+                    Kullanıcı Adı: <span class="font-weight-bold">@ViewBag.user</span>
+                </p>
+                <p class="card-text">
+                    Mail Adresi: <span class="font-weight-bold">@ViewBag.email</span>
+                </p>
+                <p class="card-text">
+                    Telefon Numarası: <span class="font-weight-bold">@ViewBag.phoneNumber</span>
+                </p>
+                <h4 class="card-title mt-5">Hakkımda</h4>
+                <p class="card-text">
+                    @ViewBag.gender
+                </p>
+            </div>
         </div>
     </div>
 </div>

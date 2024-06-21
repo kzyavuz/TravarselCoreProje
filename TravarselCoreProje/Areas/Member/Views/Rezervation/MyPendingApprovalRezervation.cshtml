@@ -2,39 +2,63 @@
 @model List<Rezarvation>
 @{
     ViewData["Title"] = "MyPendingApprovalRezervation";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
 
-<h1>Onay Bekleyen Rezervasyonlar</h1>
-
-@if (!Model.Any())
-{
-    <div class="container mt-5">
-        <h4 style="color:crimson">Onay bekleyen rezervasyonunuz bulunmamaktadır..</h4>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Onay Bekleyen Rezervasyonlar</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <p class="card-text">Onay Bekleyen rezarvasyonlarınızın listesini görebilirsiniz.</p>
+                    <div class="table-responsive">
+                        @if (!Model.Any())
+                        {
+                            <div class="container mt-5">
+                                <h4 style="color:crimson">Onay bekleyen rezervasyonunuz bulunmamaktadır..</h4>
+                            </div>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Lokasyon</th>
+                                        <th>Kişi Satısı</th>
+                                        <th>Rezervasyon Tarihi</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.RezervasyonID</td>
+                                            <td>@item.Destination.City</td>
+                                            <td>@item.MemontCount</td>
+                                            <td>@item.RezarvationDate</td>
+                                            <td>@item.Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-}
-else
-{
-    <table class="table table-bordered">
-        <tr>
-            <th>#</th>
-            <th>Lokasyon</th>
-            <th>Kişi Satısı</th>
-            <th>Rezervasyon Tarihi</th>
-            <th>Durum</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.RezervasyonID</td>
-                <td>@item.Destination.City</td>
-                <td>@item.MemontCount</td>
-                <td>@item.RezarvationDate</td>
-                <td>@item.Status</td>
-            </tr>
-        }
-    </table>
-
-}
+</div>
 
 

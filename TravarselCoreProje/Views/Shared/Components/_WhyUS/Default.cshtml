@@ -1,0 +1,24 @@
+﻿
+@model List<About2>
+<section class="w3l-grids1">
+    <div class="hny-three-grids py-5">
+        <h4 style="text-align:center; font-weight:bold">NEDEN BİZ</h4>
+        <div class="container py-lg-5">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6 mt-sm-0 mt-5 grids5-info">
+                        <a href="#url"><img src="~/ImageWhyUs/@item.Image" class="img-fluid" alt=""></a>
+                        <a href="#url">
+                            <h5>@item.Title1</h5>
+                        </a>
+                        <h4>
+                            @item.Title2
+                        </h4>
+                        <p>@item.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,81 +1,129 @@
-﻿@model EntityLayer.Concrete.Destination
+﻿@model DestinationViewModel
 
 @{
     ViewData["Title"] = "AddDestinations";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Etkinlik Ekleme Sayfası</h1>
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-3" asp-action="Index" asp-controller="Destination">Geri</a>
+    <div class="card">
+        <div class="card-header bg-success mb-3">
+            <h2 class="card-title text-white font-weight-bold">Etkinlik Ekle</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddDestinations" asp-controller="Destination" asp-area="Admin" enctype="multipart/form-data">
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Etkinlik Adı</label>
+                            <input type="text" asp-for="DestinationName" class="form-control" required />
+                            <span asp-validation-for="DestinationName" class="text-danger"></span>
+                        </div>
 
-<form method="post">
-    <input type="hidden" asp-for="DestinationID" />
-    <div class="form-group">
-        @Html.Label("Şehir Bilgisi")
-        <input type="text" asp-for="City" class="form-control" />
+                        <div class="mb-2">
+                            <label>İl</label>
+                            <input type="text" asp-for="City" class="form-control" required />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>İlçe</label>
+                            <input type="text" asp-for="District" class="form-control" required />
+                            <span asp-validation-for="District" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Gündüz Gece Sayısı</label>
+                            <input type="text" asp-for="DayNight" class="form-control" />
+                            <span asp-validation-for="DayNight" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Fiyat</label>
+                            <input type="text" asp-for="Price" class="form-control" required />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Kapasite</label>
+                            <input type="text" asp-for="Capacity" class="form-control" required />
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Kısa İçerik</label>
+                            <input type="text" asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Detaylı İçerik</label>
+                            <textarea id="richEditor" asp-for="Content" class="form-control" rows="8" required></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <!-- Cover Image -->
+                        <div class="border border-success rounded p-2 mb-3">
+                            <h6>Kapak Resmi</h6>
+                            <div class="mb-2">
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnailCover" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Resim Seçin</label>
+                                <input type="file" asp-for="Image" class="form-control custom-file-input" data-preview="thumbnailCover" required />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Content Image 1 -->
+                        <div class="border border-success rounded p-2 mb-3">
+                            <h6>İçerik Resmi 1</h6>
+                            <div class="mb-2">
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnail1" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Resim Seçin</label>
+                                <input type="file" asp-for="Image1" class="form-control custom-file-input" data-preview="thumbnail1" required />
+                                <span asp-validation-for="Image1" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Content Image 2 -->
+                        <div class="border border-success rounded p-2 mb-3">
+                            <h6>İçerik Resmi 2</h6>
+                            <div class="mb-2">
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnail2" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Resim Seçin</label>
+                                <input type="file" asp-for="Image2" class="form-control custom-file-input" data-preview="thumbnail2" required />
+                                <span asp-validation-for="Image2" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-success w-100">Kaydet</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <br />
-    <div class="form-group">
-        @Html.Label("Gün Gece Bilgisi")
-        <input type="text" asp-for="DayNight" class="form-control" />
-    </div>
-    <br />
+</div>
 
-    <div class="form-group">
-        @Html.Label("Fiyat")
-        <input type="text" asp-for="Price" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Kart Görseli")
-        <input type="text" asp-for="Image" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Kapasite")
-        <input type="text" asp-for="Capacity" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Kapak Görseli")
-        <input type="text" asp-for="BackGroundImage" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Etkinlik Detayları")
-        <input type="text" asp-for="Details1" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Kurallar")
-        <textarea cols="30" rows="5" asp-for="Details2" class="form-control"></textarea>
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Öneriler")
-        <textarea cols="30" rows="5" asp-for="Details3" class="form-control"></textarea>
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Eklemek istediniz Baslık (Varsa)")
-        <input type="text" asp-for="DetailsTitle1" class="form-control">
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Eklemek istediniz Baslığın İçeriği (Varsa)")
-        <textarea cols="30" rows="5" asp-for="Details4" class="form-control"></textarea>
-    </div>
-    <br />
-    <br />
-
-    <button class="btn btn-outline-warning mt-2 mb-5" onclick="alert('Etkinlik oluturuldu');">Etkinlik Olustur</button>
-    <br />
-
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelectorAll('.custom-file-input').forEach(input => {
+            input.addEventListener('change', function (e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var previewId = input.getAttribute('data-preview');
+                        document.getElementById(previewId).src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+}

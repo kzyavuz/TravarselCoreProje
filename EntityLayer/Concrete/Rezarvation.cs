@@ -11,14 +11,16 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int RezervasyonID { get; set; }
-        public int AppUSerID { get; set; }
-        public AppUser AppUSer { get; set; }
         public string MemontCount { get; set; }
         public DateTime RezarvationDate { get; set; }
         public string Sescription { get; set; }
         public string Status { get; set; }
+
         public int DestinationID { get; set; }
         public Destination Destination { get; set; }
+
+        public int AppUserID { get; set; }
+        public AppUser AppUSer { get; set; }
 
 
     }

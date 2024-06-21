@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<SubAbout>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Hakkımızda (Ana Sayfa)</h1>
+@if (Model.Count() < 1)
+{
+    <td><a class="btn btn-outline-success" href="/Admin/SubAbout/AddSubAbout">Kısa Hakkımda Ekle</a></td>
+
+}
+<table class="table table-striped">
+    <tr>
+        <th>Başlık</th>
+        <th>İçerik</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td><a class="btn btn-outline-warning" href="/Admin/SubAbout/UpdateSubAbout/@item.SubAboutID">Güncelle</a></td>
+            <td><a class="btn btn-outline-danger" href="/Admin/SubAbout/DeleteSubAbout/@item.SubAboutID">Sil</a></td>
+        </tr>
+    }
+</table>

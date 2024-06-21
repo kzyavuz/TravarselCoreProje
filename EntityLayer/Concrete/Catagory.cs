@@ -13,6 +13,8 @@ namespace EntityLayer.Concrete
         public int CatagoryID { get; set; }
         public string CatagoryName { get; set; }
         public string CatagoryImage { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
+
+        public List<Destination> Destinations { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿
+@model List<Contact>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>İletişim Bilgileri</h1>
+
+@if (Model.Count() < 1)
+{
+    <a href="/Admin/Contact/AddContact/" class="btn btn-outline-success mb-3">Ekle</a>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>Açıklama</th>
+        <th>Mail Adresi</th>
+        <th>Adres</th>
+        <th>Telefon</th>
+        <th>Google Harita Link</th>
+        <th>Düzenle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.Description.Length > 50)
+            {
+                <td>
+                    @Html.Raw(item.Description.Substring(0, 50)) ...
+                </td>
+            }
+            else
+            {
+                <td>
+                    @item.Description
+                </td>
+            }
+            <td>@item.Mail</td>
+            <td>@item.Adres</td>
+            <td>@item.Phone</td>
+            @if (item.MapLocation != null && item.MapLocation.Length > 50)
+            {
+                <td>
+                    @item.MapLocation.Substring(0, 50) ...
+                </td>
+            }
+            else
+            {
+                <td>
+                    @item.MapLocation
+                </td>
+            }
+            <td><a href="/Admin/Contact/UpdateContact/@item.ContactID" class="btn btn-outline-warning">Güncelle</a></td>
+            <td><a href="/Admin/Contact/DeleteContact/@item.ContactID" class="btn btn-outline-danger">Sil</a></td>
+        </tr>
+    }
+</table>

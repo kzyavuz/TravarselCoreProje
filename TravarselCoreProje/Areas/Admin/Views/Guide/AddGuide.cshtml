@@ -1,51 +1,72 @@
-﻿@model EntityLayer.Concrete.Guide
+﻿@model GuideViewModel
 
 @{
     ViewData["Title"] = "AddGuide";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Rehber Ekleme Alanı</h1>
-
-<form method="post">
-    <input type="hidden" asp-for="GuideID" />
-    <div class="form-group">
-        @Html.Label("Reber Ad Soyad")
-        <input type="text" asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-1" asp-action="Index" asp-controller="Guide">Geri</a>
+    <div class="card">
+        <div class="card-header bg-success">
+            <h4 class="card-title text-white">Rehber Ekleme Sayfası</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddGuide" asp-controller="Guide" asp-area="Admin" enctype="multipart/form-data">
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Rehberin Adı Soyadı</label>
+                            <input type="text" asp-for="name" class="form-control" />
+                            <span asp-validation-for="name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Rehber Hakkında Kısaca</label>
+                            <input type="text" asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>İnstagram Kullanıcı Adı</label>
+                            <input type="text" asp-for="InstagramUrl" class="form-control" />
+                            <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Twitter Kullanıcı Adı</label>
+                            <input type="text" asp-for="TwitterUrl" class="form-control" />
+                            <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-2">
+                            <img src="~/ImageDestination/default_image.png" class="img-fluid" id="thumbnail" />
+                        </div>
+                        <div class="mb-2">
+                            <label>Rehberin Fotoğrafı</label>
+                            <input type="file" asp-for="Image" class="form-control custom-file-input" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-success w-100">Ekle</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <br />
-    <div class="form-group">
-        @Html.Label("Açıklama")
-        <input type="text" asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
+</div>
 
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("İnsatgram Adı")
-        <input type="text" asp-for="InstagramUrl" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Twitter Adı")
-        <input type="text" asp-for="TwitterUrl" class="form-control" />
-    </div>
-    <br />
-
-    <div class="form-group">
-        @Html.Label("Rehber Fotoğrafı")
-        <input type="text" asp-for="Image" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-
-    </div>
-    <br />
-    <br />
-    <br />
-
-    <button class="btn btn-outline-warning mt-2 mb-5">Rehber Ekle</button>
-    <br />
-
-</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('thumbnail').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

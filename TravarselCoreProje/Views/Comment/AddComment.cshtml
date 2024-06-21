@@ -1,34 +1,28 @@
 ﻿@model EntityLayer.Concrete.Destination
-
-<div class="leave-comment-form mt-5" id="reply">
-    <h4 class="side-title mb-2">Yorum Bırkaın</h4>
-    <p class="mb-4">
-        İşaretli alanları doldurmanız gerekmektedir
-    </p>
-    <form method="post" asp-action="AddComment" asp-controller="Comment">
-
-        <div class="form-group">
-            <textarea name="Content" class="form-control" placeholder="Yorumunuz*" required=""
-                      spellcheck="false"></textarea>
-        </div>
-        <div class="input-grids row">
-
-            <div class="form-group col-lg-6">
-                <input type="text" name="CommentUser" class="form-control" placeholder="Adınız Soyadınız*"
-                       required="">
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="leave-comment-form mt-5" id="reply">
+        <h4 class="side-title mb-2">Yorum Bırkaın</h4>
+        <p class="mb-4">
+            İşaretli alanları doldurmanız gerekmektedir
+        </p>
+        <form method="post" asp-action="AddComment" asp-controller="Comment">
+            <input type="hidden" value="@Model.DestinationID" name="DestinationID">
+            <input type="hidden" value="@ViewBag.userID" name="AppUserID">
+            <div class="form-group">
+                <textarea name="Content" class="form-control" placeholder="Yorumunuz*" required=""
+                          spellcheck="false"></textarea>
             </div>
-            <div class="form-group col-lg-6">
-                <input type="hidden" value="@Model.DestinationID" name="DestinationID" class="form-control" required="">
-            </div>
-            <div class="form-group col-lg-6">
-                <input type="hidden" value="@Model." name="DestinationID" class="form-control" required="">
-            </div>
-        </div>
 
-        <div class="submit text-right">
-            <button class="btn btn-style btn-primary">Yorum Yap</button>
-        </div>
-    </form>
-</div>
 
+            <div class="submit text-right">
+                <button class="btn btn-style btn-primary">Yorum Yap</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <h2>Yorum yapabilmek için giriş yapınız</h2>
+}
 <script src="https://code.jquery.com/jquery-3.5.1min.js" type="text/javascript"></script>

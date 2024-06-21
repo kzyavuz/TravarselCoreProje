@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -14,41 +15,42 @@ namespace TravarselCoreProje.Areas.Member.Controllers
     [Area("Member")]
     public class RezervationController : Controller
     {
-        DestinationManager destinationManager = new DestinationManager(new EFDestinationDal());
-        RezervationManager rezervationManager = new RezervationManager(new EFRezervationDal());
-
+        private IDestinationService _destinationService;
+        private IRezervationService _rezervationService;
         private readonly UserManager<AppUser> _userManager;
 
-        public RezervationController(UserManager<AppUser> userManager)
+        public RezervationController(IDestinationService destinationService, IRezervationService rezervationService, UserManager<AppUser> userManager)
         {
+            _destinationService = destinationService;
+            _rezervationService = rezervationService;
             _userManager = userManager;
         }
 
         public async Task<IActionResult> MyActiveRezervation()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            var List_value = rezervationManager.GetListRzervationByAcceptted(values.Id);
+            var List_value = _rezervationService.GetListRzervationByAcceptted(values.Id);
             return View(List_value);
         }
 
         public async Task<IActionResult> MyPastRezervation()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            var List_value = rezervationManager.GetListRzervationByPast(values.Id);
+            var List_value = _rezervationService.GetListRzervationByPast(values.Id);
             return View(List_value);
         }
 
         public async Task<IActionResult> MyPendingApprovalRezervation()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            var List_value = rezervationManager.GetListRzervationByPendingReservations(values.Id);
+            var List_value = _rezervationService.GetListRzervationByPendingReservations(values.Id);
             return View(List_value);
         }
 
         [HttpGet]
         public IActionResult NewRezervation()
         {
-            List<SelectListItem> values = (from item in destinationManager.TGetList()
+            List<SelectListItem> values = (from item in _destinationService.TGetList()
                                           select new SelectListItem
                                           {
                                               Text = item.City,
@@ -64,9 +66,9 @@ namespace TravarselCoreProje.Areas.Member.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser != null)
             {
-                p.AppUSerID = currentUser.Id;
+                p.AppUserID = currentUser.Id;
                 p.Status = "Onay Bekliyor";
-                rezervationManager.TAdd(p);
+                _rezervationService.TAdd(p);
                 return RedirectToAction("/Member/Rezervation/MyActiveRezervation");
             }
             return View();

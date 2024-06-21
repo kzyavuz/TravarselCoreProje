@@ -1,6 +1,8 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,12 @@ namespace TravarselCoreProje.Controllers
 {
     public class CommentController : Controller
     {
-        CommentManager commentManager = new CommentManager(new EFCommentDal());
+        private readonly ICommnetService _commnetService;
+
+        public CommentController(ICommnetService commnetService)
+        {
+            _commnetService = commnetService;
+        }
 
         [HttpGet]
         public PartialViewResult AddComment()
@@ -24,8 +31,8 @@ namespace TravarselCoreProje.Controllers
         {
             c.DateTime = Convert.ToDateTime(DateTime.Now);
             c.State = true;
-            commentManager.TAdd(c);
-            return RedirectToAction("DestinationDetails", "DestinationController1", new { id = c.DestinationID });
+            _commnetService.TAdd(c);
+            return RedirectToAction("DestinationDetails", "Destination", new { id = c.DestinationID });
         }
     }
 }

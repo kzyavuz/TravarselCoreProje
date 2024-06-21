@@ -215,8 +215,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CatagoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("CatagoryID");
 
@@ -229,6 +229,9 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("CommentUser")
                         .HasColumnType("nvarchar(max)");
@@ -246,6 +249,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("CommentID");
+
+                    b.HasIndex("AppUserID");
 
                     b.HasIndex("DestinationID");
 
@@ -319,16 +324,16 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BackGroundImage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CatagoryID")
+                    b.Property<int>("CatagoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
@@ -343,20 +348,11 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("DestinationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details1")
+                    b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DetailsTitle1")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GuideID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -376,6 +372,8 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("DestinationID");
 
                     b.HasIndex("CatagoryID");
+
+                    b.HasIndex("GuideID");
 
                     b.ToTable("Destinations");
                 });
@@ -480,7 +478,7 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUSerID")
+                    b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
                     b.Property<int>("DestinationID")
@@ -500,7 +498,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("RezervasyonID");
 
-                    b.HasIndex("AppUSerID");
+                    b.HasIndex("AppUserID");
 
                     b.HasIndex("DestinationID");
 
@@ -652,11 +650,19 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
                 {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Concrete.Destination", "Destination")
                         .WithMany("Comments")
                         .HasForeignKey("DestinationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Destination");
                 });
@@ -664,17 +670,27 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Catagory", "Catagory")
-                        .WithMany()
-                        .HasForeignKey("CatagoryID");
+                        .WithMany("Destinations")
+                        .HasForeignKey("CatagoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Guide", "Guide")
+                        .WithMany("Destinations")
+                        .HasForeignKey("GuideID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Catagory");
+
+                    b.Navigation("Guide");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Rezarvation", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUSer")
                         .WithMany("Rezarvations")
-                        .HasForeignKey("AppUSerID")
+                        .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -742,7 +758,14 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Rezarvations");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Catagory", b =>
+                {
+                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
@@ -750,6 +773,11 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Rezarvations");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Guide", b =>
+                {
+                    b.Navigation("Destinations");
                 });
 #pragma warning restore 612, 618
         }

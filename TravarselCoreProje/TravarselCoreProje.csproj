@@ -52,10 +52,15 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Member\Data\" />
+    <Folder Include="Resources\Views\" />
+    <Folder Include="wwwroot\CatagoryImage\" />
+    <Folder Include="wwwroot\ImageGuide\" />
+    <Folder Include="wwwroot\ImageWhyUs\" />
     <Folder Include="wwwroot\PDFReport\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\PanelUser\src\scss\bootstrap-extended\.sass-cache\b161be96449978188ab92f1e37bbeda94f2952ce\buttons.scssc" />
     <None Include="wwwroot\PanelAdmin\.github\workflows\handle-new-issue-comment.yml" />
     <None Include="wwwroot\PanelAdmin\.github\workflows\handle-new-issue.yml" />
     <None Include="wwwroot\PanelAdmin\.github\workflows\issue-staler.yml" />

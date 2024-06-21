@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,19 +36,19 @@ namespace TravarselCoreProje
             });
 
 
-            services.AddDbContext<Context>();   
+            services.AddDbContext<Context>();
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<Context>().
                 AddErrorDescriber<IdentityValidator>()
                 .AddEntityFrameworkStores<Context>();
 
             services.ContainerDependencies();
+            services.CustomerValidator();
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.CustomerValidator();
             services.AddControllersWithViews().AddFluentValidation();
-
+            services.AddHttpClient();
             services.AddMvc(confing =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -55,7 +56,17 @@ namespace TravarselCoreProje
                 .Build();
                 confing.Filters.Add(new AuthorizeFilter(policy));
             });
-            services.AddMvc();
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+
+            services.AddLocalization(opt =>
+            {
+                opt.ResourcesPath = "Resources";
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/LoginController1/SignUn";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +93,10 @@ namespace TravarselCoreProje
             app.UseRouting();
 
             app.UseAuthorization();
+
+            var supportedCulture = new[] { "tr", "en", "fr", "ch", "rs", "de" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCulture[0]).AddSupportedCultures(supportedCulture).AddSupportedUICultures(supportedCulture);
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

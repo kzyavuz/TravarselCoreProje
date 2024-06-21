@@ -1,0 +1,51 @@
+﻿@model List<Annonuncement>
+
+@{
+    var colors = new List<string> {
+        "#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d",
+        "#ffcc5c", "#96ceb4", "#ff6f69", "#ffcc5c", "#88d8b0",
+        "#ffeead", "#dcedc1", "#ff6f69", "#ffcc5c", "#87bdd8"
+    }; // Renk listesi
+
+    var colorIndex = 0;
+}
+
+<div class="col-xl-4 col-lg-12">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <h4 class="card-title">Son Duyurular</h4>
+                <h6 class="card-subtitle text-muted">Başlıklar ve İçerikler</h6>
+            </div>
+            <div id="carousel-area" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <li data-target="#carousel-area" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                    }
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @foreach (var item in Model)
+                    {
+                        var bgColor = colors[colorIndex % colors.Count]; // Renkleri döngüsel olarak al
+                        colorIndex++;
+
+                        <div class="carousel-item text-center @(colorIndex == 1 ? "active" : "")" style="background-color: @bgColor; height:300px">
+                            <h1 style="color:white">@item.Title</h1>
+                            <p style="color:white;">@item.Content</p>
+                        </div>
+                    }
+                </div>
+
+                <a class="carousel-control-prev" href="#carousel-area" role="button" data-slide="prev">
+                    <span class="la la-angle-left" aria-hidden="true"></span>
+                    <span class="sr-only">Önceki</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-area" role="button" data-slide="next">
+                    <span class="la la-angle-right icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Sonraki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,17 +20,17 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(SubAbout t)
         {
-            throw new NotImplementedException();
+            _subAboutDal.Insert(t);
         }
 
         public void TDelete(SubAbout t)
         {
-            throw new NotImplementedException();
+            _subAboutDal.Delete(t);
         }
 
         public SubAbout TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _subAboutDal.GetByID(id);
         }
 
         public List<SubAbout> TGetList()
@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(SubAbout t)
         {
-            throw new NotImplementedException();
+            _subAboutDal.Update(t);
         }
     }
 }
