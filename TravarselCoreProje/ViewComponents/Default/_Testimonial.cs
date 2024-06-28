@@ -11,16 +11,16 @@ namespace TravarselCoreProje.ViewComponents.Default
 {
     public class _Testimonial: ViewComponent
     {
-        private readonly ITestimonialService _testimonialService;
+        private readonly ICommnetService _commnetService;
 
-        public _Testimonial(ITestimonialService testimonialService)
+        public _Testimonial(ICommnetService commnetService)
         {
-            _testimonialService = testimonialService;
+            _commnetService = commnetService;
         }
 
         public IViewComponentResult Invoke()
         {
-            var values = _testimonialService.TGetList();
+            var values = _commnetService.GetListCommentDestination().Where(x=>x.State == true).ToList();
             return View(values);
         }
     }

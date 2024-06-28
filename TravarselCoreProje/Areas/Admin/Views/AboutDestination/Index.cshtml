@@ -1,0 +1,43 @@
+﻿@model List<Feature>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Etkinlik Yönlendirme Alanı</h1>
+@if (Model.Count() < 1)
+{
+    <a class="btn btn-outline-success mb-3" href="/Admin/AboutDestination/Add">Ekle</a>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Başlık</th>
+            <th>İçerik</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Post1Name</td>
+                @if (item.Post1Description != null && item.Post1Description.Length > 60)
+                {
+                    <td>@item.Post1Description.Substring(0, 60) ...</td>
+
+                }
+                else
+                {
+                    <td>@item.Post1Description</td>
+                }
+                <td><a class="btn btn-outline-warning" href="/Admin/AboutDestination/Update/@item.FeatureID">Güncelle</a></td>
+                <td>
+                    <form class="" asp-controller="AboutDestination" asp-action="Delete" asp-route-id="@item.FeatureID" method="post" onsubmit="return confirm('Bu alanı silmek üzeresiniz. Silmek iştediğinize eminmisiniz?')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -20,7 +20,7 @@ namespace TravarselCoreProje.ViewComponents.MemberDashboard
 
         public IViewComponentResult Invoke()
         {
-            var values = _guideService.TGetList();
+            var values = _guideService.TGetList().Where(x => x.Status == true).OrderByDescending(x=> x.CreateGuide).Take(5).ToList();
             return View(values);
         }
     }

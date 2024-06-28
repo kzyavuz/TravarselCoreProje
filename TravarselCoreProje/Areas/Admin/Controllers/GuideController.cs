@@ -2,6 +2,7 @@
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Guide/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class GuideController : Controller
     {
         private readonly IGuideService _guideService;
@@ -26,7 +28,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
-            var values = _guideService.TGetList();
+            var values = _guideService.TGetList().OrderByDescending(x=> x.CreateGuide).ToList();
             return View(values);
         }
 
@@ -60,6 +62,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
                 s.InstagramUrl = p.InstagramUrl;
                 s.TwitterUrl = p.TwitterUrl;
                 s.Description = p.Description;
+                s.CreateGuide = DateTime.Now;
                 s.Status = true;
 
                 try
@@ -192,6 +195,20 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         public IActionResult ConvertFalse(int id)
         {
             _guideService.TConvertFalseByGuid(id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("ConvertStandOut/{id}")]
+        public IActionResult ConvertStandOut(int id)
+        {
+            _guideService.TConvertStandOutByGuid(id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("ConvertHighlight/{id}")]
+        public IActionResult ConvertHighlight(int id)
+        {
+            _guideService.TConvertHighlightByGuid(id);
             return RedirectToAction("Index");
         }
     }

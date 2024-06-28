@@ -1,0 +1,85 @@
+﻿
+@model IEnumerable<Destination>
+@{
+    ViewData["Title"] = "LastIndex";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+    int sayac = 1;
+}
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+</style>
+<!doctype html>
+<html lang="tr">
+<body>
+    <section class="w3l-about-breadcrumb text-left">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            <div class="container">
+                <h2 class="title">Etkinlikler </h2>
+                <ul class="breadcrumbs-custom-path mt-2">
+                    <li><a href="/Default/Index">Ana Sayfa</a></li>
+                    <li><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/Destination/Index">Etkinlikler</a></li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Geçmis Etkinlikler </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="grids-1 py-5">
+        <div class="grids py-lg-5 py-md-4">
+            <div class="container">
+                @if (!Model.Any() && ViewBag.Message != null)
+                {
+                    <div class="alert alert-info text-center" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>Etkinlik Adı</th>
+                                <th>Katagori Adı</th>
+                                <th>Sehir Bilgileri</th>
+                                <th>Etkinlik Kısaca Bilgi</th>
+                                <th>Kapasite</th>
+                                <th>Fiyat</th>
+                                <th>Etginlik Tarihi</th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@sayac</td>
+                                    <td>@item.DestinationName</td>
+                                    <td>@item.Catagory.CatagoryName</td>
+                                    <td>@item.District / @item.City</td>
+                                    @if (item.Description != null && item.Description.Length > 100)
+                                    {
+                                        <td>@item.Description.Substring(0, 100) ...</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td>@item.Description</td>
+                                    }
+                                    <td>@item.Capacity</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Date.ToString("dd MMM yyyy HH:ss")</td>
+                                </tr>
+                                sayac++;
+                            }
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</body>
+</html>

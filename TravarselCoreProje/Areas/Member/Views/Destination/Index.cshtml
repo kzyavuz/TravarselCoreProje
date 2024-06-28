@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    int sayac = 1;
 }
 
 <div class="row">
@@ -26,8 +27,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Sehir</th>
-                                    <th>Süre</th>
+                                    <th>Etkinlik Adı</th>
+                                    <th>İlçe/ İl</th>
                                     <th>Kapasite</th>
                                     <th>Fiyat</th>
                                     <th>Detaylar</th>
@@ -37,13 +38,14 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.DestinationID</td>
-                                        <td>@item.City</td>
-                                        <td>@item.DayNight</td>
+                                        <td>@sayac</td>
+                                        <td style="word-break:keep-all;">@item.DestinationName</td>
+                                        <td>@item.District/ @item.City</td>
                                         <td>@item.Capacity  </td>
                                         <td>@item.Price</td>
                                         <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Detaylar</a></td>
                                     </tr>
+                                    sayac++;
                                 }
                             </tbody>
                         </table>
@@ -53,3 +55,6 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

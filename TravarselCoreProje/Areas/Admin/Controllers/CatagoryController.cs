@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Catagory/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class CatagoryController : Controller
     {
         private readonly ICatagoryService _catagoryService;
@@ -33,6 +35,21 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         public IActionResult AddCatagory()
         {
             return View();
+        }
+
+
+        [Route("ConvertStandOut/{id}")]
+        public IActionResult ConvertTrue(int id)
+        {
+            _catagoryService.TConvertTrueByCatagory(id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("ConvertHighlight/{id}")]
+        public IActionResult ConvertFalse(int id)
+        {
+            _catagoryService.TConvertFalseByCatagory(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -141,7 +158,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 
             return View(model);
         }
-
+        [HttpPost]
         [Route("DeleteCatagory/{id}")]
         public IActionResult DeleteCatagory(int id)
         {

@@ -12,23 +12,44 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFGuideDal : GenericRepository<Guide>, IGuideDal
     {
-        Context context = new Context();
+        private readonly Context _context;
+
+        public EFGuideDal(Context context)
+        {
+            _context = context;
+        }
 
         public void ConvertFalseByGuid(int id)
         {
-            var values = context.Guides.Find(id);
+            var values = _context.Guides.Find(id);
             values.Status = false;
-            context.Update(values);
-            context.SaveChanges();
-            
+            values.StandOut = false;
+            _context.Update(values);
+            _context.SaveChanges();     
+        }
+
+        public void ConvertHighlightByGuid(int id)
+        {
+            var values = _context.Guides.Find(id);
+            values.StandOut = false;
+            _context.Update(values);
+            _context.SaveChanges();
+        }
+
+        public void ConvertStandOutByGuid(int id)
+        {
+            var values = _context.Guides.Find(id);
+            values.StandOut = true;
+            _context.Update(values);
+            _context.SaveChanges();
         }
 
         public void ConvertTrueByGuid(int id)
         {
-            var values = context.Guides.Find(id);
+            var values = _context.Guides.Find(id);
             values.Status = true;
-            context.Update(values);
-            context.SaveChanges();
+            _context.Update(values);
+            _context.SaveChanges();
         }
     }
 }

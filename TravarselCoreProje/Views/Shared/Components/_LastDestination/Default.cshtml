@@ -4,49 +4,61 @@
     <div class="card mb-4">
         <div class="card-header pb-2 p-3">
             <h6 class="mb-1">Etkinlikler</h6>
-            <p class="text-sm">Yayınlanan Son etkinlik detayları</p>
+            <p class="text-sm">Son eklenen etkinlikler</p>
         </div>
         <div class="card-body px-3 pt-0">
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4" style="border-style: groove">
-                        <div class="card card-blog card-plain">
+                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                        <div class="card card-blog card-plain" style="min-height: 460px;">
                             <div class="position-relative">
                                 <a class="d-block shadow-xl border-radius-xl">
                                     <img src="~/ImageDestination/@item.Image" style="width:400px; height:200px; object-fit:cover;" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
                                 </a>
                             </div>
                             <div class="card-body px-1 pb-0" style="border-style:inset">
-                                <p class="text-gradient text-dark text-sm"> @item.District / @item.City</p>
+
+                                <h5 class="font-weight-bold">
+                                    @item.DestinationName.ToUpper()
+                                </h5>
+
+                                <p class="text-gradient text-dark text-sm" style="font-size:small"> @item.Catagory.CatagoryName</p>
+
+
                                 @if (item.DayNight != null)
                                 {
-                                    <p class="text-gradient text-dark text-sm"> @item.DayNight</p>
+                                    <p class="text-gradient text-dark text-sm mb-0" style="font-size:smaller"> @item.District / @item.City</p>
 
                                 }
-                                <h5 class="font-weight-bold">
-                                    @item.DestinationName
-                                </h5>
-                                @if (item.Content.Length > 155)
+                                else
+                                {
+                                    <p class="text-gradient text-dark text-sm" style="font-size: smaller; margin-top: 28px;"> @item.District / @item.City</p>
+
+                                }
+
+                                <p class="text-gradient text-dark text-sm" style="font-size:xx-small;"> @item.DayNight</p>
+
+                                @if (item.Description != null && item.Description.Length > 60)
                                 {
                                     <p class="mb-1 text-sm">
 
-                                        @Html.Raw(item.Content.Substring(0, 155))...
+                                        @item.Description.Substring(0, 60)...
                                     </p>
                                 }
                                 else
                                 {
                                     <p class="mb-1 text-sm">
-
-                                        @Html.Raw(item.Content)
+                                        @item.Description
                                     </p>
 
                                 }
+
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-primary btn-sm mb-0">Tur Detayı</a>
+                                    <a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-primary btn-sm mb-0">Etkinlik Detayı</a>
                                     <div class="avatar-group mt-2">
-                                        <a href="javascript:;" style="width:30px;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">
-                                            <img alt="Image placeholder" style="height:30px; object-fit:cover;" src="~/ImageGuide/@item.Guide.Image">
+                                        <a href="/Guide/Index" style="width:30px;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">
+                                            <img alt="Rehber Fotoğrafı" style="height:30px; object-fit:cover;" src="~/ImageGuide/@item.Guide.Image" title="@item.Guide.Name">
                                         </a>
                                     </div>
                                 </div>

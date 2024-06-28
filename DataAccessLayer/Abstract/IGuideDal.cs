@@ -12,5 +12,9 @@ namespace DataAccessLayer.Abstract
         void ConvertTrueByGuid(int id);
 
         void ConvertFalseByGuid(int id);
+
+        void ConvertStandOutByGuid(int id);
+
+        void ConvertHighlightByGuid(int id);
     }
 }

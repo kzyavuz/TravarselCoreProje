@@ -43,9 +43,24 @@ namespace BusinessLayer.Concrete
             return _destinationdal.GetList();
         }
 
-        public List<Destination> TGetListLastDestination()
+        public List<Destination> TGetListByCatagoryDestination(int? categoryId, bool status)
         {
-            return _destinationdal.GetListLastDestination();    
+            return _destinationdal.GetListByCatagoryDestination(categoryId, status);
+        }
+
+        public List<Destination> TGetListByFilterDestinations(int? categoryId, string city, string district, DateTime? date)
+        {
+            return _destinationdal.GetListByFilterDestinations(categoryId, city, district, date);
+        }
+
+        public List<Destination> TGetListLastDestination(int sayac)
+        {
+            return _destinationdal.GetListLastDestination(sayac);    
+        }
+
+        public int TMyGetDestinationCount(bool status)
+        {
+            return _destinationdal.MyGetDestinationCount(status);
         }
 
         public void TUpdate(Destination t)

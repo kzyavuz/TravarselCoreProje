@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Blog>
+
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Sayfası - Yeşil Ayak Merkezi</title>
+    <link rel="stylesheet" href="~/Traversal-Starter/assets/css/style-liberty.css">
+</head>
+<body>
+    <section class="w3l-about-breadcrumb text-left">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            <div class="container">
+                <h2 class="title">Blog</h2>
+                <ul class="breadcrumbs-custom-path mt-2">
+                    <li><a href="/Default/Index">Ana Sayfa</a></li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Tüm Bloglar </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="grids-1 py-5">
+        <div class="grids py-lg-5 py-md-4">
+            <div class="container">
+                @if (!Model.Any() && ViewBag.Message != null)
+                {
+                    <div class="alert alert-info text-center" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    <h3 class="hny-title mb-5">Blog Yazıları</h3>
+                    <div class="row" id="blogContainer">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <div class="column">
+                                    <a href="/Blog/Post/@item.BlogId">
+                                        <img style="height:210px;width:100%; object-fit:cover;" src="~/blogImage/@item.ImagePath" alt="" class="img-fluid">
+                                    </a>
+                                    <div class="info">
+                                        <h5 class="font-weight-bold">@item.Title.ToUpper()</h5>
+                                        <p class="text-gradient text-dark text-sm" style="font-size:small">@item.SubTitle</p>
+                                        <p class="text-gradient text-dark text-sm mb-0" style="font-size:smaller">@item.Created.ToString("dd MMMM yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.TotalBlogs > Model.Count())
+                    {
+                        <div class="d-flex justify-content-end mb-4">
+                            <button class="btn btn-primary text-uppercase" id="loadMore">Daha Fazla →</button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Traversal-Starter/assets/js/bootstrap.min.js"></script>
+    <script>
+        var currentPage = 1;
+
+        document.getElementById('loadMore').addEventListener('click', function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/Blog/GetMoreBlogs?page=' + currentPage, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var newBlogs = xhr.responseText;
+                    var blogContainer = document.getElementById('blogContainer');
+                    blogContainer.innerHTML += newBlogs;
+                    currentPage++;
+
+                    // Eğer daha fazla blog yoksa butonu gizle
+                    if (newBlogs.trim() === '') {
+                        document.getElementById('loadMore').style.display = 'none';
+                    }
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

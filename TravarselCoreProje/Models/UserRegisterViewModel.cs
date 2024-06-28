@@ -8,13 +8,20 @@ namespace TravarselCoreProje.Models
 {
     public class UserRegisterViewModel
     {
+        [MinLength(3, ErrorMessage = "Adınız en az 3 karakter olmalıdır.")]
+        [MaxLength(30, ErrorMessage = "Adınız en fazla 30 karakter olmalıdır.")]
         [Required(ErrorMessage = "Lütfen adınızı giriniz.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Lütfen soy adınızı giriniz.")]
+        [MaxLength(30, ErrorMessage = "Soyadınız en fazla 30 karakter olmalıdır.")]
+        [MinLength(3, ErrorMessage = "Soyadınız en az 3 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen soyadınızı giriniz.")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Lütfen kullanıcı adınzız giriniz.")]
+        [RegularExpression(@"^[a-zA-Z0-9ğĞüÜşŞİıIöÖçÇ_]*$", ErrorMessage = "Kullanıcı adınızda yalnızca harfler, rakamlar, alt çizgi (_) kullanılabilir.")]
+        [MaxLength(30, ErrorMessage = "Kullanıcı adınız en fazla 30 karakter olmalıdır.")]
+        [MinLength(4, ErrorMessage = "Kullanıcı adınız en az 4 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen kullanıcı adınızı giriniz.")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Lütfen mail adresini giriniz.")]

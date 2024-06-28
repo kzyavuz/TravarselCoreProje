@@ -1,0 +1,50 @@
+﻿
+@model List<Rezarvation>
+
+@{
+    ViewData["Title"] = "PendingRezervation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 1;
+}
+
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+<h1 class="text-secondary mb-3">Geçmis Rezervasyon Listesi</h1>
+
+<div class="table-responsive">
+    <table class=" table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Ad Soyad</th>
+            <th>Kullanıcı Adı</th>
+            <th>Fotoğraf</th>
+            <th>Mail</th>
+            <th>Etkinlik Adı</th>
+            <th style="word-break:keep-all;">Rezervasyon Tarihi</th>
+            <th>Durumu</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td style="word-break:keep-all;">@item.AppUSer.Name @item.AppUSer.NamSurname</td>
+                <td>@item.AppUSer.UserName</td>
+                <td><img src="~/UserImages/@item.AppUSer.Image" /></td>
+                <td>@item.AppUSer.Email</td>
+                <td>@item.Destination.DestinationName</td>
+                <td>@item.Destination.Date.ToString("dd MMM yyyy HH:mm")</td>
+                <td class="text-secondary">@item.Status</td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>
+
+

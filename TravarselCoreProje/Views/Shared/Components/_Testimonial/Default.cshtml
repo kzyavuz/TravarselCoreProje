@@ -1,4 +1,4 @@
-﻿@model List<Testimonial>
+﻿@model List<Comment>
 <section class="w3l-clients" id="clients">
     <!-- /grids -->
     <div class="cusrtomer-layout py-5">
@@ -17,15 +17,23 @@
                                 <div class="testimonial">
                                     <blockquote>
                                         <span class="fa fa-quote-left" aria-hidden="true"></span>
-                                        @item.Comment
+                                        @item.AppUser.UserName.ToUpper()
                                     </blockquote>
                                     <div class="testi-des">
                                         <div class="test-img">
-                                            <img src="@item.ClientImage" class="img-fluid" alt="client-img">
+                                            @if (item.AppUser.Image != null)
+                                            {
+                                                <img src="~/UserImages/@item.AppUser.Image" class="img-fluid" alt="client-img">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/UserImages/default-profile.jpg" class="img-fluid" alt="client-img">
+
+                                            }
                                         </div>
                                         <div class="peopl align-self">
-                                            <h3>@item.Client</h3>
-                                            <p class="indentity">Example City</p>
+                                            <h3>@item.Content</h3>
+                                            <p style="text-align:end; margin-top:16px; font-size:small">@item.Destination.DestinationName.ToUpper()</p>
                                         </div>
                                     </div>
                                 </div>

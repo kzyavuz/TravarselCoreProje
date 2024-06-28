@@ -13,9 +13,9 @@
     <meta name="description" content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
     <meta name="keywords" content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>Dashboard - Chameleon Admin - Modern Bootstrap 4 WebApp & Dashboard HTML Template + UI Kit</title>
-    <link rel="apple-touch-icon" href="~/PanelUser/theme-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="theme-assets/images/ico/favicon.ico">
+    <title>Üye Paneli - YeşilAyak</title>
+    <link rel="apple-touch-icon" href="~/a.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
@@ -50,7 +50,9 @@
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="">
-                            <div id="gradient-line-chart1" class="height-250 GradientlineShadow1"></div>
+                            <div style="background-color: #262d47; height:200px">
+                                <h1 class="text-white text-center font-weight-bold font-large-3" style="position:relative; top:30%">Yeşil Ayak Üye Paneli</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,42 +62,24 @@
                     <div class="col-xl-4 col-lg-6 col-md-12">
                         <div class="card pull-up ecom-card-1 bg-white">
                             <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
-                                <div>
-                                    <i class="ft-pie-chart danger font-large-1 float-right p-1"></i>
-                                </div>
-                                <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3  ">
-                                    <div id="progress-stats-bar-chart"></div>
-                                    <div id="progress-stats-line-chart" class="progress-stats-shadow"></div>
-                                </div>
+                                <h5 class="text-muted danger position-absolute p-1">Yapılan Yorum Sayısı</h5>
+                                <h1 class="font-large-3 font-weight-bold text-danger text-center" style="position: relative; top: 40%;">@ViewBag.comment</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-12">
                         <div class="card pull-up ecom-card-1 bg-white">
                             <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted info position-absolute p-1">Activity Stats</h5>
-                                <div>
-                                    <i class="ft-activity info font-large-1 float-right p-1"></i>
-                                </div>
-                                <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
-                                    <div id="progress-stats-bar-chart1"></div>
-                                    <div id="progress-stats-line-chart1" class="progress-stats-shadow"></div>
-                                </div>
+                                <h5 class="text-muted info position-absolute p-1">Gönderilen Mesaj Sayısı</h5>
+                                <h1 class="font-large-3 font-weight-bold text-info text-center" style="position: relative; top: 40%;">@ViewBag.message</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
                         <div class="card pull-up ecom-card-1 bg-white">
                             <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted warning position-absolute p-1">Sales Stats</h5>
-                                <div>
-                                    <i class="ft-shopping-cart warning font-large-1 float-right p-1"></i>
-                                </div>
-                                <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
-                                    <div id="progress-stats-bar-chart2"></div>
-                                    <div id="progress-stats-line-chart2" class="progress-stats-shadow"></div>
-                                </div>
+                                <h5 class="text-muted warning position-absolute p-1">Katılının Etkinlik Sayısı</h5>
+                                <h1 class="font-large-3 font-weight-bold text-warning text-center" style="position: relative; top: 40%;">@ViewBag.destination</h1>
                             </div>
                         </div>
                     </div>

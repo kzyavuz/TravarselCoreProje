@@ -44,5 +44,22 @@ namespace TravarselCoreProje.Models
             };
         }
 
+        public override IdentityError DuplicateUserName(string userName)
+        {
+            return new IdentityError()
+            {
+                Code = "DuplicateUserName",
+                Description = $"Bu kullanıcı adı zaten mevcut."
+            };
+        }
+
+        public override IdentityError DuplicateEmail(string email)
+        {
+            return new IdentityError()
+            {
+                Code = "DuplicateEmail",
+                Description = $"Bu mail adresi zaten mevcut."
+            };
+        }
     }
 }

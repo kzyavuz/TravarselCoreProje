@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DTOLayer.DTOs.AnnonuncementDTOs;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Annoncement/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class AnnoncementController : Controller
     {
         private readonly IAnnouncementService _announcementService;

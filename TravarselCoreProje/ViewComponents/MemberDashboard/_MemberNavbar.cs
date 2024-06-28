@@ -21,8 +21,11 @@ namespace TravarselCoreProje.ViewComponents.MemberDashboard
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.userName = values.Name + " " + values.NamSurname;
-            ViewBag.image = values.Image;
+
+            ViewBag.image = string.IsNullOrEmpty(values.Image)
+                ? Url.Content("~/UserImages/default-profile.jpg")
+                : Url.Content($"~/UserImages/{values.Image}");
+
             return View();
         }
     }

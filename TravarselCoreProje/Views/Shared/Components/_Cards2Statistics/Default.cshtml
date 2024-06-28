@@ -5,12 +5,11 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="~/PanelAdmin/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                            <img src="~/PanelAdmin/assets/img/icons/unicons/chart-success.png" alt="Credit Card" class="rounded" />
                         </div>
                     </div>
-                    <span class="d-block mb-1">Ağustos</span>
-                    <h3 class="card-title text-nowrap mb-2">₺18.950</h3>
-                    <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                    <span class="d-block mb-1">Aktif Rezervasyon sayım</span>
+                    <h3 class="card-title text-nowrap mb-2">@ViewBag.v1</h3>
                 </div>
             </div>
         </div>
@@ -19,12 +18,11 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="~/PanelAdmin/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                            <img src="~/PanelAdmin/assets/img/icons/unicons/chart.png" alt="Credit Card" class="rounded" />
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Eylül</span>
-                    <h4 class="card-title mb-2">₺28.652</h4>
-                    <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                    <span class="fw-semibold d-block mb-1">Onay Bekleyen Rezervasyon Sayımız</span>
+                    <h4 class="card-title mb-2">@ViewBag.v2</h4>
                 </div>
             </div>
         </div>
@@ -36,12 +34,8 @@
                     <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                         <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                             <div class="card-title">
-                                <h5 class="text-nowrap mb-2">Profil Raporu</h5>
-                                <span class="badge bg-label-warning rounded-pill">2022 Yılı Kazancı</span>
-                            </div>
-                            <div class="mt-sm-auto">
-                                <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> 68.2%</small>
-                                <h3 class="mb-0">₺175.986</h3>
+                                <h5 class="text-nowrap mb-2">Alınacak Toplam Ücret</h5>
+                                <span class="badge bg-label-warning rounded-pill">@ViewBag.v3</span>
                             </div>
                         </div>
                         <div id="profileReportChart"></div>

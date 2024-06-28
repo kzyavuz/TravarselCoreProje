@@ -11,5 +11,8 @@ namespace BusinessLayer.Abstract
         void TConvertTrueByGuid(int id);
 
         void TConvertFalseByGuid(int id);
+        void TConvertStandOutByGuid(int id);
+
+        void TConvertHighlightByGuid(int id);
     }
 }

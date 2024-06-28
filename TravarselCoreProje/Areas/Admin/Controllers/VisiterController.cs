@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Visiter/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class VisiterController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

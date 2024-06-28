@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/About/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;
@@ -37,7 +39,6 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddAbout(About about)
         {
-            about.Status = true;
             _aboutService.TAdd(about);
             return RedirectToAction("Index");
         }
@@ -58,6 +59,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         [Route("DeleteAbout/{id}")]
         public IActionResult DeleteAbout(int id)
         {

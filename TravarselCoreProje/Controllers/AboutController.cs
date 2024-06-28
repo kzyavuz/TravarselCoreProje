@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace TravarselCoreProje.Controllers
 {
     [AllowAnonymous]
-
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;

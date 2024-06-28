@@ -1,20 +1,15 @@
-﻿@model List<Catagory>
-
-<header id="site-header" class="fixed-top">
-    <div class="container">
+﻿<header id="site-header" class="fixed-top">
+    <div class="mx-5">
         <nav class="navbar navbar-expand-lg stroke">
-            <div class="d-flex justify-content-center">
-                <a class="navbar-brand" href="/Default/Index/">
-                    <img src="~/Traversal-Starter/assets/images/yesilAyak_icon.png" alt="YeşilAyak logo" title="Your logo" style="height:35px;" />
+            <h1>
+                <a class="navbar-brand mr-lg-5" href="/Default/Index">
+                    Yeşil Ayak
                 </a>
-                <h2>
-                    <a class="navbar-brand mr-lg-5" href="/Default/Index/" style="color: #0a8927;">
-                        YeşilAyak
-                    </a>
-                </h2>
-            </div>
-
-            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+            </h1>
+            @*<a class="navbar-brand" href="#index.html">
+                <img src="~/UserImages/5b3470b1-20b0-4ead-aecf-d948917faae1.jpg" alt="Your logo" title="Your logo" style="height:35px;" />
+            </a>*@ 
+            <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
@@ -23,37 +18,75 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Default/Index/">Ana Sayfa</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Default/Index/">
+                            Ana Sayfa
+                            <span class="sr-only">(current)</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/About/Index/">Hakkımızda</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/DestinationController1/Index/" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            Etkinlikler<span class="fa fa-angle-down"></span>
+                            Etkinliklerimiz<span class="fa fa-angle-down"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                            <a class="dropdown-item" href="/Destination/Index/">Tüm Etkinlikler</a>
-
-                            @foreach (var item in Model)
+                            <a class="dropdown-item" href="/Destination/Index">Tüm Etkinlikler</a>
+                            @foreach (var item in Model.Catagories)
                             {
-                                <a class="dropdown-item" href="/Destination/Index/@item.CatagoryID">@item.CatagoryName</a>
-
+                                <a class="dropdown-item" href="/Destination/Index?categoryId=@item.CatagoryID">@item.CatagoryName</a>
                             }
-
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Guide/Index">Rehberlerimiz</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/Blog/Index/">Blog Sayfamız</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/Contact/Index/">İletişim</a>
                     </li>
-
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (Model.UserRoles.Contains("admin"))
+                            {
+                                <a href="~/Admin/Dashboard/Index" class="nav-link">
+                                    <span class="symbol-input100">
+                                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    </span>
+                                    Admin Profilim
+                                </a>
+                            }
+                            else if (Model.UserRoles.Contains("member"))
+                            {
+                                <a href="~/Member/Dashboard/MemberDashboard" class="nav-link">
+                                    <span class="symbol-input100">
+                                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    </span>
+                                    Profilim
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="~/Login/SignIn" class="nav-link">
+                                <span class="symbol-input100">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                </span>
+                                Giriş Yap
+                            </a>
+                        }
+                    </li>
                 </ul>
             </div>
+
             <div class="mobile-position">
                 <nav class="navigation">
                     <div class="theme-switch-wrapper">
@@ -67,28 +100,6 @@
                     </div>
                 </nav>
             </div>
-            <div class="d-flex justify-content-end ">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a href="~/Member/Dashboard/MemberDashboard" class="btn btn-outline-info" style="float: left;">
-                        <span class="symbol-input100">
-                            <i class="fa fa-user-circle" aria-hidden="true"></i>
-                        </span>
-                        Profilim
-                    </a>
-                }
-                else
-                {
-                    <a href="~/LoginController1/SignUn" class="btn btn-outline-info" style="float: left;">
-                        <span class="symbol-input100">
-                            <i class="fa fa-user-circle" aria-hidden="true"></i>
-                        </span>
-                        Giriş Yap
-                    </a>
-                }
-
-            </div>
-
         </nav>
     </div>
 </header>

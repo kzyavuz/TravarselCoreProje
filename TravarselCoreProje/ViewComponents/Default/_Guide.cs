@@ -18,7 +18,7 @@ namespace TravarselCoreProje.ViewComponents.Default
 
         public IViewComponentResult Invoke()
         {
-            var values = _guideService.TGetList();
+            var values = _guideService.TGetList().Where(x=> x.Status == true && x.StandOut == true).ToList();
             return View(values);
         }
     }

@@ -13,26 +13,35 @@
 </style>
 
 <h1>Neden Biz Alanı</h1>
-<td><a class="btn btn-outline-success" href="/Admin/WhyUs/AddWhyUs">Ekle</a></td>
+@if (Model.Count() < 3)
+{
+    <a class="btn btn-outline-success mb-3" href="/Admin/WhyUs/AddWhyUs">Ekle</a>
+}
 
-<table class="table table-striped">
-    <tr>
-        <th>Başlık</th>
-        <th>Alt Başlık</th>
-        <th>İçerik</th>
-        <th>Forğraf</th>
-        <th>Sil</th>
-        <th>Güncelle</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped">
         <tr>
-            <td>@item.Title1</td>
-            <td>@item.Title2</td>
-            <td>@item.Description</td>
-            <td><img src="~/ImageWhyUs/@item.Image" /></td>
-            <td><a class="btn btn-outline-warning" href="/Admin/WhyUs/UpdateWhyUs/@item.About2ID">Güncelle</a></td>
-            <td><a class="btn btn-outline-danger" href="/Admin/WhyUs/DeleteWhyUs/@item.About2ID">Sil</a></td>
+            <th>Başlık</th>
+            <th>Alt Başlık</th>
+            <th>İçerik</th>
+            <th>Forğraf</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title1</td>
+                <td>@item.Title2</td>
+                <td>@item.Description</td>
+                <td><img src="~/ImageWhyUs/@item.Image" /></td>
+                <td><a class="btn btn-outline-warning" href="/Admin/WhyUs/UpdateWhyUs/@item.About2ID">Güncelle</a></td>
+                <td>
+                    <form class="" asp-controller="WhyUs" asp-action="DeleteWhyUs" asp-route-id="@item.About2ID" method="post" onsubmit="return confirm('Bu alanı silmek üzeresiniz. Silmek iştediğinize eminmisiniz?')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -18,7 +18,7 @@ namespace TravarselCoreProje.ViewComponents.MemberDashboard
 
         public IViewComponentResult Invoke()
         {
-            var values = _destinationService.TGetListLastDestination();
+            var values = _destinationService.TGetListLastDestination(4);
             return View(values);
         }
     }

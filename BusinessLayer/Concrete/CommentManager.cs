@@ -45,7 +45,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Comment t)
         {
-            throw new NotImplementedException();
+            _commentDal.Update(t);
         }
 
         public List<Comment> GetListCommentDestination()
@@ -56,6 +56,26 @@ namespace BusinessLayer.Concrete
         public List<Comment> TGetListCommentDestinationAdUser(int id)
         {
             return _commentDal.GetListCommentDestinationAndUser(id);
+        }
+
+        public List<Comment> TMyGetListComment(int id)
+        {
+            return _commentDal.MyGetListComment(id);
+        }
+
+        public int TMyGetListCommentCount(int id)
+        {
+            return _commentDal.MyGetListCommentCount(id);
+        }
+
+        public void TConvertStandOutByComment(int id)
+        {
+            _commentDal.ConvertHighlightByComment(id);
+        }
+
+        public void TConvertHighlightByComment(int id)
+        {
+            _commentDal.ConvertStandOutByComment(id);
         }
     }
 }

@@ -12,6 +12,9 @@ namespace DataAccessLayer.Abstract
         List<ContactInfo> GetListContactInfoByTrue();
         List<ContactInfo> GetListContactInfoByFalse();
 
+        public List<ContactInfo> MyGetListContactInfo(int id);
+        public int MyGetListContactCount(int id);
+
         void ContactInfoChangeToFalse(int id);
     }
 }

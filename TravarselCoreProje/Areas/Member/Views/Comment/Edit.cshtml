@@ -1,0 +1,41 @@
+﻿
+@model Comment
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Yorum Güncelleme</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" asp-for="AppUserID" />
+                        <input type="hidden" asp-for="DestinationID" />
+                        <input type="hidden" asp-for="CommentID" />
+                        <label>Yorum</label>
+                        <textarea asp-for="Content" class="form-control" rows="4" cols="50" placeholder="Benim adım..."></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                        <br />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <button class="btn btn-primary">Yorumu Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

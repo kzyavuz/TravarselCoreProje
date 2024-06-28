@@ -1,0 +1,52 @@
+﻿
+@model Contact
+@{
+    ViewData["Title"] = "UpdateContact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-3" asp-action="Index" asp-controller="Contact">Geri</a>
+    <div class="card">
+        <div class="card-header bg-warning mb-3">
+            <h2 class="card-title text-white font-weight-bold">İletişim Bilgilerini Güncelleme Sayfası</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="UpdateContact" asp-controller="Contact" asp-area="Admin" method="post">
+                <input type="hidden" asp-for="ContactID" />
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Mail Adresiniz</label>
+                            <input type="text" asp-for="Mail" class="form-control" required />
+                        </div>
+                        <div class="mb-2">
+                            <label>Telefon Numaranız</label>
+                            <input type="text" asp-for="Phone" class="form-control" required />
+                        </div>
+                        <div class="mb-2">
+                            <label>Adres Bilgisi</label>
+                            <input type="text" asp-for="Adres" class="form-control" required />
+                        </div>
+                        <div class="mb-2">
+                            <label>Google Map linki</label>
+                            <input type="text" asp-for="MapLocation" class="form-control" required />
+                        </div>
+                        <div class="mb-2">
+                            <label>Kısaca Açıklama</label>
+                            <textarea id="richEditor" asp-for="Description" class="form-control" rows="8"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-warning w-100">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

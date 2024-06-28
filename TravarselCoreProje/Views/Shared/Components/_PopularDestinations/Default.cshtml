@@ -13,19 +13,48 @@
                 <div class="col-lg-6 subject-card mt-lg-0 mb-4">
                     <div class="subject-card-header p-4">
                         <a href="/Destination/DestinationDetails/@item.DestinationID" class="card_title p-lg-4d-block">
-                            <div class="row align-items-center">
+                            <div class="row align-items-center" style="min-height:230px">
                                 <div class="col-sm-5 subject-img">
-                                    <img style="height:200px; width:200px; object-fit:cover;" src="~/ImageDestination/@item.Image" class="img-fluid" alt="">
+                                    <img style="height:200px; object-fit:cover;" src="~/ImageDestination/@item.Image" class="img-fluid" alt="">
                                 </div>
                                 <div class="col-sm-7 subject-content mt-sm-0 mt-4">
-                                    <h4 class="mb-3">@item.DestinationName</h4>
-                                    <h6>@item.District / @item.City</h6>
-                                    <p>@item.DayNight</p>
+
+                                    <h5 class="font-weight-bold">
+                                        @item.DestinationName.ToUpper()
+                                    </h5>
+
+                                    <p class="text-gradient text-dark text-sm" style="font-size:small"> @item.Catagory.CatagoryName</p>
+
+                                    <p class="text-gradient text-dark text-sm mb-0" style="font-size:smaller"> @item.District / @item.City</p>
+                                    
+                                    @if (item.DayNight != null)
+                                    {
+                                        <p class="text-gradient text-dark text-sm" style="font-size:xx-small"> @item.DayNight</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-gradient text-dark text-sm" style="font-size:xx-small"> </p>
+                                    }
                                     <div class="dst-btm">
                                         <h6 class="">Baslayan Fiyatlarla</h6>
-                                        <span>@item.Price $</span>
+                                        <span>@item.Price ₺</span>
                                     </div>
-                                    <p class="sub-para">@item.Description</p>
+
+                                    @if (item.Description != null && item.Description.Length > 80)
+                                    {
+                                        <p class="mb-1 text-sm">
+
+                                            @item.Description.Substring(0, 80)...
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="mb-1 text-sm">
+                                            @item.Description
+                                        </p>
+
+                                    }
+
                                 </div>
                             </div>
                         </a>

@@ -1,0 +1,17 @@
+﻿
+@model IEnumerable<Blog>
+
+@foreach (var item in Model)
+{
+    <div class="post-preview">
+        <a href="~/Blog/Post/@item.BlogId">
+            <img style="height:100px;width:200px; object-fit:cover;" src="~/blogImage/@item.ImagePath" />
+            <h2 class="post-title">@item.Title</h2>
+            <h3 class="post-subtitle">@item.SubTitle</h3>
+        </a>
+        <p class="post-meta mb-0 text-end">
+            @item.Created.ToString("dd MMMM yyyy")'de yayınlandı
+        </p>
+    </div>
+    <hr class="my-4" style="border-top: 1px solid #000000;" />
+}

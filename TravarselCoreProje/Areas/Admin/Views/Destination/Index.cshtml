@@ -5,39 +5,53 @@
     int sayac = 1;
 }
 <style>
-    img{
-        width:50px;
-        height:50px;
-        object-fit:cover;
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
     }
 </style>
-    
+
 <h1>Etkinlikler</h1>
 <a href="/Admin/Destination/AddDestinations/" class="btn btn-outline-success mb-3">Etkinlik Ekle</a>
-<table class="table table-striped">
-    <tr>
-        <th>#</th>
-        <th>Etkinlik Adı</th>
-        <th>Etkinlik Resimi</th>
-        <th>Kapasite</th>
-        <th>Fiyat</th>
-        <th>Sitede Gör</th>
-        <th>Sil</th>
-        <th>GÜncelle</th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+
+<div class="table-responsive">
+    <table class="table table-striped">
         <tr>
-            <td>@sayac</td>
-            <td>@item.DestinationName</td>
-            <td><img src="~/ImageDestination/@item.Image" /></td>
-            <td>@item.Capacity</td>
-            <td>@item.Price</td>
-            <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
-            <td><a href="/Admin/Destination/DeleteDestinations/@item.DestinationID" class="btn btn-outline-danger">Sil</a></td>
-            <td><a href="/Admin/Destination/UpdateDestinations/@item.DestinationID" class="btn btn-outline-warning">Güncelle</a></td>
+            <th>#</th>
+            <th>Etkinlik Adı</th>
+            <th>Etkinlik Resimi</th>
+            <th>Kapasite</th>
+            <th>Fiyat</th>
+            <th>Durumu</th>
+            <th>Sitede Gör</th>
+            <th>Sil</th>
+            <th>GÜncelle</th>
         </tr>
-        sayac++;
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@sayac</td>
+                <td>@item.DestinationName</td>
+                <td><img src="~/ImageDestination/@item.Image" /></td>
+                <td>@item.Capacity</td>
+                <td>@item.Price</td>
+                @if (item.Status == true)
+                {
+                    <td><p class="text-success font-weight-bold">Aktif</p></td>
+                    <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
+
+                }
+                else
+                {
+                    <td><p class="text-danger font-weight-bold">Pasif</p></td>
+                }
+                <td><a href="/Admin/Destination/DeleteDestinations/@item.DestinationID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Admin/Destination/UpdateDestinations/@item.DestinationID" class="btn btn-outline-warning">Güncelle</a></td>
+            </tr>
+            sayac++;
+        }
+    </table>
+</div>

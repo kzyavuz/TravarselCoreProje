@@ -1,4 +1,4 @@
-﻿@model EntityLayer.Concrete.Rezarvation
+﻿@model Rezarvation
 @{
     ViewData["Title"] = "NewRezervation";
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
@@ -20,29 +20,94 @@
             <div class="card-content collapse show">
                 <div class="card-body">
                     <p class="card-text">Yeşil Ayak safasımızdaki etkinliklere rezarvasyon almak için aşağıdaki panelde ki tüm alanları doldurunuz.</p>
-                    <form method="post">
+                    <div id="resultMessage" class="alert" style="display: none;"></div>
+                    <form asp-action="NewRezervation" method="post" id="rezervationForm">
+
                         <div class="form-group">
                             @Html.Label("Kişi Sayısı")
-                            <input type="text" asp-for="MemontCount" class="form-control" />
+                            <input type="number" asp-for="MemontCount" class="form-control" min="1" max="10" id="MemontCount" />
+                            <span asp-validation-for="MemontCount" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            @Html.Label("Tarih")
-                            <input type="date" asp-for="RezarvationDate" class="form-control" />
+                            @Html.Label("Açıklama")
+                            <input type="text" asp-for="Sescription" class="form-control" maxlength="50" id="Sescription" />
+                            <span asp-validation-for="Sescription" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            @Html.Label("Eklemek istediğiniz")
-                            <input type="text" asp-for="Sescription" class="form-control" />
+                            @Html.Label("Etkinlik Seçiniz")
+                            @Html.DropDownListFor(model => model.DestinationID, (IEnumerable<SelectListItem>)ViewBag.v, "Etkinlik Seçiniz", new { @class = "form-control", @required = "required" })
+                            <span asp-validation-for="DestinationID" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            @Html.Label("Etkinlik ID")
-                            <input type="text" asp-for="DestinationID" class="form-control" />
-                        </div>
-                        <button class="btn btn-outline-success" onclick="alert('Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır.Rezervasyon onaylanma süreci için güncel rezervasyonlarım menüsünü takip etmeyi unutmayın');">Rezervasyon Yap</button>
+
+                        <button type="submit" class="btn btn-primary">Rezervasyon Yap</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script>
+    const memontCountInput = document.getElementById('MemontCount');
+
+    memontCountInput.addEventListener('keydown', function (event) {
+        // Allow: backspace, delete, tab, escape, enter, and numbers
+        if (
+            event.key === 'Backspace' ||
+            event.key === 'Delete' ||
+            event.key === 'Tab' ||
+            event.key === 'Escape' ||
+            event.key === 'Enter' ||
+            (event.key >= '0' && event.key <= '9')
+        ) {
+            return;
+        } else {
+            event.preventDefault();
+        }
+    });
+
+    memontCountInput.addEventListener('keyup', function () {
+        var value = parseInt(this.value, 10);
+        if (value < 1) this.value = 1;
+        if (value > 10) this.value = 10;
+    });
+
+    document.getElementById('Sescription').addEventListener('input', function () {
+        var value = this.value;
+        if (value.length > 50) this.value = value.substring(0, 50);
+    });
+
+    document.getElementById('rezervationForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Formun normalde submit olmasını engeller
+
+        var form = this;
+
+        $.ajax({
+            type: form.method,
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (response) {
+                var resultMessage = document.getElementById('resultMessage');
+                if (response.success) {
+                    // Formu temizle
+                    form.reset();
+                    // Başarılı mesajı göster
+                    resultMessage.className = 'alert alert-success';
+                    resultMessage.innerHTML = 'Rezervasyon başarıyla oluşturuldu!';
+                } else {
+                    // Hata mesajı göster
+                    resultMessage.className = 'alert alert-danger';
+                    resultMessage.innerHTML = 'Rezervasyon oluşturulurken bir hata oluştu: ' + response.errors.join(", ");
+                }
+                resultMessage.style.display = 'block';
+            }
+        });
+    });
+</script>

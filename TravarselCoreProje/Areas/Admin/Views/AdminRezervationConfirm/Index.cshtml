@@ -1,0 +1,62 @@
+﻿
+@model List<Rezarvation>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 1;
+}
+
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+<h1 class="text-warning mb-3">Onay Bekleyen Rezervasyon Listesi</h1>
+
+
+
+<div class="table-responsive">
+    <table class=" table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Ad Soyad</th>
+            <th>Kullanıcı Adı</th>
+            <th>Fotoğraf</th>
+            <th>Mail</th>
+            <th>Etkinlik Adı</th>
+            <th style="word-break:keep-all;">Rezervasyon Tarihi</th>
+            <th>Durumu</th>
+            <th>Onayla</th>
+            <th>İptal Et</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td style="word-break:keep-all;">@item.AppUSer.Name @item.AppUSer.NamSurname</td>
+                <td>@item.AppUSer.UserName</td>
+                <td><img src="~/UserImages/@item.AppUSer.Image" /></td>
+                <td>@item.AppUSer.Email</td>
+                <td>@item.Destination.DestinationName</td>
+                <td>@item.Destination.Date.ToString("dd MMM yyyy HH:mm")</td>
+                <td class="text-warning">@item.Status</td>
+                <td>
+                    <form class="" asp-controller="AdminRezervationConfirm" asp-action="AccessConfirm" asp-route-id="@item.RezervasyonID" method="post" onsubmit="return confirm('Rezervasyonu onaylamak iştediğinize eminmisiniz.')">
+                        <button type="submit" class="btn btn-success">Onayla</button>
+                    </form>
+                </td>
+                <td>
+                    <form class="" asp-controller="AdminRezervationConfirm" asp-action="RejectConfirm" asp-route-id="@item.RezervasyonID" method="post" onsubmit="return confirm('Rezervasyonu onaylamak iştediğinize eminmisiniz.')">
+                        <button type="submit" class="btn btn-danger">Reddet</button>
+                    </form>
+                </td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>
+

@@ -1,0 +1,78 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 1;
+}
+
+<style>
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+<h1>Kullanıcıların Listesi</h1>
+
+<a href="/Login/SignUp/" class="btn btn-success mb-3">
+    Yeni Kullanıcı Ekle
+</a>
+
+<input type="text" id="searchString" class="form-control mb-3" placeholder="Kullanıcı adı ara..." onkeyup="searchUsers()" />
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ad Soyad</th>
+                <th>Kullanıcı Adı</th>
+                <th>Fotoğraf</th>
+                <th>Mail</th>
+                <th>Düzenle</th>
+                <th>Rol</th>
+                <th>Rezervasyon</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody id="userTable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Name @item.NamSurname</td>
+                    <td>@item.UserName</td>
+                    <td><img src="~/UserImages/@item.Image" /></td>
+                    <td>@item.Email</td>
+                    <td><a href="/Admin/User/EditUser/@item.Id" class="btn btn-warning">Düzenle</a></td>
+                    <td><a href="/Admin/Role/AssignRole/@item.Id" class="btn btn-info">Rolleme</a></td>
+                    <td><a href="/Admin/User/RezarvationUser/@item.Id" class="btn btn-primary">Geçmis Rezervasyonlar</a></td>
+                    <td>
+                        <form asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" onsubmit="return confirm('Kullanıcıyı silmek iştediğinize eminmisiniz.Silinme durumunda veri kaybına yol açacaktı.')">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function searchUsers() {
+            var searchString = document.getElementById('searchString').value;
+
+            $.ajax({
+                url: '@Url.Action("SearchUsers", "User")',
+                data: { searchString: searchString },
+                success: function (result) {
+                    $('#userTable').html(result);
+                }
+            });
+        }
+    </script>
+}

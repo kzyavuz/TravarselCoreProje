@@ -1,10 +1,11 @@
-﻿@using EntityLayer.Concrete
+﻿
 @model List<Rezarvation>
 
 
 @{
     ViewData["Title"] = "MyActiveRezervation";
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    int sayac = 1;
 }
 
 
@@ -33,13 +34,15 @@
                         }
                         else
                         {
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Lokasyon</th>
+                                        <th>Etkinlik Adı</th>
+                                        <th>İlçe/ İl</th>
                                         <th>Kişi Satısı</th>
                                         <th>Rezervasyon Tarihi</th>
+                                        <th>Etkinlik Tarihi</th>
                                         <th>Durum</th>
                                     </tr>
                                 </thead>
@@ -47,12 +50,15 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.RezervasyonID</td>
-                                            <td>@item.Destination.City</td>
+                                            <td>@sayac</td>
+                                            <td>@item.Destination.DestinationName</td>
+                                            <td>@item.Destination.District/ @item.Destination.City</td>
                                             <td>@item.MemontCount</td>
-                                            <td>@item.RezarvationDate</td>
+                                            <td>@item.RezarvationDate.ToString("dd-MMM-yyyy HH:mm")</td>
+                                            <td>@item.Destination.Date.ToString("dd-MMM-yyyy HH:mm")</td>
                                             <td>@item.Status</td>
                                         </tr>
+                                        sayac++;
                                     }
                                 </tbody>
                             </table>
@@ -65,4 +71,6 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 

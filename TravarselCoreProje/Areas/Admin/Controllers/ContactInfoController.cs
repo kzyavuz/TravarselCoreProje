@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/ContactInfo/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class ContactInfoController : Controller
     {
         private readonly IContactInfoService _contactInfoService;

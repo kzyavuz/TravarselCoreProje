@@ -9,8 +9,13 @@ namespace BusinessLayer.Abstract
 {
     public interface IRezervationService: IGenericService<Rezarvation>
     {
-        List<Rezarvation> GetListRzervationByPendingReservations(int id);
-        List<Rezarvation> GetListRzervationByAcceptted(int id);
-        List<Rezarvation> GetListRzervationByPast(int id);
+        List<Rezarvation> TGetListRezervationByPendingReservations(int id);
+        List<Rezarvation> TGetListRezervationByAcceptted(int id);
+        List<Rezarvation> TGetListRezervationByPast(int id);
+        public List<Rezarvation> TGetListRezervationReject(int id);
+        public int TMyGetRezervationCount(int id);
+        public void TGetRejectConfirm(int id);
+        public void TGetAccessConfirm(int id);
+
     }
 }

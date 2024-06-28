@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _contactInfoDal = contactInfoDal;
         }
 
+        public List<ContactInfo> MyGetListContactInfo(int id)
+        {
+            return _contactInfoDal.MyGetListContactInfo(id);
+        }
+
         public void TAdd(ContactInfo t)
         {
             _contactInfoDal.Insert(t);
@@ -51,6 +56,11 @@ namespace BusinessLayer.Concrete
         public List<ContactInfo> TGetListContactInfoByTrue()
         {
             return _contactInfoDal.GetListContactInfoByTrue();
+        }
+
+        public int TMyGetListContactCount(int id)
+        {
+            return _contactInfoDal.MyGetListContactCount(id);
         }
 
         public void TUpdate(ContactInfo t)

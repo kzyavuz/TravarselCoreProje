@@ -7,31 +7,74 @@
 
 <h1>Gelen Mesajlar</h1>
 
-<table class=" table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Gönderen</th>
-        <th>Konu</th>
-        <th>Tarih</th>
-        <th>Sil</th>
-        <th>Mesajı Aç</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class=" table table-striped">
         <tr>
-            <td>@sayac</td>
-            <td>@item.ContactInfoMail</td>
-            <td>@item.MessageBody</td>
-            <td>@item.MessageDate.ToString("dd.MMM.yyyy")</td>
-            <td>
-                <form asp-controller="ContactInfo" asp-action="#" asp-route-id="@item.ContactInfoID" onsubmit="return confirm('Mesajı silmek iştediğinize eminmisiniz')">
-                    <button type="submit" class="btn btn-danger">Sil</button>
-                </form>
-            </td>
-            <td>
-                <a class="btn btn-primary" href="#">Git</a>
-            </td>
+            <th>#</th>
+            <th>Gönderen</th>
+            <th>Konu</th>
+            <th>Tarih</th>
+            <th>Sil</th>
+            <th>Mesajı Aç</th>
         </tr>
-        sayac++;
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@sayac</td>
+                <td>@item.ContactInfoMail</td>
+                @if (item.MessageBody != null && item.MessageBody.Length > 50)
+                {
+                    <td>@item.MessageBody.Substring(0, 50) ...</td>
+
+                }
+                else
+                {
+                    <td>@item.MessageBody</td>
+
+                }
+                <td>@item.MessageDate.ToString("dd.MMM.yyyy")</td>
+                <td>
+                    <form asp-controller="ContactInfo" asp-action="#" asp-route-id="@item.ContactInfoID" onsubmit="return confirm('Mesajı silmek iştediğinize eminmisiniz')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="#">Git</a>
+                </td>
+            </tr>
+            sayac++;
+        }
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="commentModalLabel">Yorum</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Yorum içeriği buraya gelecek -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery ve Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $('#commentModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var content = button.data('MessageBody'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('.modal-body').text(content); // Update the modal's content
+    });
+</script>

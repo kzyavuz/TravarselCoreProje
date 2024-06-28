@@ -9,41 +9,55 @@
 
 <h1>Rehber Listesi</h1>
 <a href="/Admin/Guide/AddGuide/" class="btn btn-outline-success mb-3">Rehber Ekle </a>
-<table class="table table-striped">
-    <tr>
-        <th>#</th>
-        <th>Görsel</th>
-        <th>Ad Soyad</th>
-        <th>Açıklama</th>
-        <th>Durum</th>
-        <th>Düzenle</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
         <tr>
-            <td>@i</td>
-            <td><img style="width:60px; height:60px; object-fit:cover; border-radius:50%;" src="~/ImageGuide/@item.Image" /></td>
-            <td>@item.Name</td>
-            <td>@item.Description</td>
-
-            @if (item.Status == true)
-            {
-                <td><a href="/Admin/Guide/ConvertTrue/@item.GuideID" class="btn btn-success">Aktif</a></td>
-            }
-            else
-            {
-                <td><a href="/Admin/Guide/ConvertFalse/@item.GuideID" class="btn btn-danger">Pasif</a></td>
-            }
-
-            <td><a href="/Admin/Guide/UpdateGuide/@item.GuideID" class="btn btn-outline-warning">Düzenle</a></td>
-
-            <td>
-                <form class="" asp-controller="Guide" asp-action="DeleteGuide" asp-route-id="@item.GuideID" method="post" onsubmit="return confirm('Rehberi silmek üzeresiniz. Bağlı olduğu etkinliklerde silinecek!!! Silmek iştediğinize eminmisiniz?')">
-                    <button type="submit" class="btn btn-danger">Sil</button>
-                </form>
-            </td>
+            <th>#</th>
+            <th>Görsel</th>
+            <th>Ad Soyad</th>
+            <th>Açıklama</th>
+            <th>Durum</th>
+            <th>Öne Çıkar</th>
+            <th>Düzenle</th>
         </tr>
-        i++;
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td><img style="width:60px; height:60px; object-fit:cover; border-radius:50%;" src="~/ImageGuide/@item.Image" /></td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
 
-</table>
+                @if (item.Status == true)
+                {
+                    <td><a href="/Admin/Guide/ConvertTrue/@item.GuideID" class="btn btn-success">Aktif</a></td>
+                }
+                else
+                {
+                    <td><a href="/Admin/Guide/ConvertFalse/@item.GuideID" class="btn btn-danger">Pasif</a></td>
+                }
+                
+                @if (item.StandOut == true)
+                {
+                    <td><a href="/Admin/Guide/ConvertStandOut/@item.GuideID" class="btn btn-success">Öne Çıkarıldı</a></td>
+                }
+                else
+                {
+                    <td><a href="/Admin/Guide/ConvertHighlight/@item.GuideID" class="btn btn-danger">Öne Çıkarılmadı</a></td>
+                }
+
+                <td><a href="/Admin/Guide/UpdateGuide/@item.GuideID" class="btn btn-outline-warning">Düzenle</a></td>
+
+                <td>
+                    <form class="" asp-controller="Guide" asp-action="DeleteGuide" asp-route-id="@item.GuideID" method="post" onsubmit="return confirm('Rehberi silmek üzeresiniz. Bağlı olduğu etkinliklerde silinecek!!! Silmek iştediğinize eminmisiniz?')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            i++;
+        }
+
+    </table>
+</div>

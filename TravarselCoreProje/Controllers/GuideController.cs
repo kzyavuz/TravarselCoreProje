@@ -20,7 +20,7 @@ namespace TravarselCoreProje.Controllers
 
         public IActionResult Index()
         {
-            var values = _guideService.TGetList();
+            var values = _guideService.TGetList().Where(x=>x.Status == true).ToList();
             return View(values);
         }
     }

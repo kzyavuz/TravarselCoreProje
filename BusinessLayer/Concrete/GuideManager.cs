@@ -28,6 +28,16 @@ namespace BusinessLayer.Concrete
             _guideDal.ConvertTrueByGuid(id);
         }
 
+        public void TConvertHighlightByGuid(int id)
+        {
+            _guideDal.ConvertStandOutByGuid(id);
+        }
+
+        public void TConvertStandOutByGuid(int id)
+        {
+            _guideDal.ConvertHighlightByGuid(id);
+        }
+
         public void TConvertTrueByGuid(int id)
         {
             _guideDal.ConvertFalseByGuid(id);

@@ -18,5 +18,9 @@ namespace EntityLayer.Concrete
 
         public List<Comment> Comments { get; set; }
 
+        public List<ContactInfo> ContactInfos { get; set; }
+
+        public List<Blog> Blogs { get; set; }
+
     }
 }

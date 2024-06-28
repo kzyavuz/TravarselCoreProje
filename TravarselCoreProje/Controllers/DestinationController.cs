@@ -9,35 +9,63 @@ using System.Threading.Tasks;
 
 namespace TravarselCoreProje.Controllers
 {
-    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly ICatagoryService _catagoryService;
 
-        public DestinationController(IDestinationService destinationService, UserManager<AppUser> userManager)
+        public DestinationController(IDestinationService destinationService, UserManager<AppUser> userManager, ICatagoryService catagoryService)
         {
             _destinationService = destinationService;
             _userManager = userManager;
+            _catagoryService = catagoryService;
         }
 
-        public IActionResult Index(int? id)
+        [AllowAnonymous]
+        public IActionResult Index(int? categoryId)
         {
 
-            if (id != null && id > 0)
-            {
-                var destinations = _destinationService.TGetList()
-                   .Where(e => e.Catagory != null && e.Catagory.CatagoryID == id && e.Status == true)
-                   .ToList();
-                return View(destinations);
+            var destinations = _destinationService.TGetListByCatagoryDestination(categoryId, true);
 
+            if (categoryId.HasValue)
+            {
+                var categoryName = _catagoryService.TGetByID(categoryId.Value);
+                ViewBag.CategoryName = categoryName.CatagoryName; 
+            }
+
+            if (!destinations.Any())
+            {
+                ViewBag.Message = "Bu kategoriye ait etkinlik bulunamamıştır.";
             }
             else
             {
-                var destinations = _destinationService.TGetList().Where(x => x.Status == true).ToList();
-                return View(destinations);
+                ViewBag.Message = null; // Eğer etkinlik varsa mesajı temizle
+            }
+            return View(destinations);
+        }
+
+        [AllowAnonymous]
+        public IActionResult LastIndex(int? categoryId)
+        {
+
+            var destinations = _destinationService.TGetListByCatagoryDestination(categoryId, false);
+
+            if (categoryId.HasValue)
+            {
+                var categoryName = _catagoryService.TGetByID(categoryId.Value);
+                ViewBag.CategoryName = categoryName.CatagoryName; 
             }
 
+            if (!destinations.Any())
+            {
+                ViewBag.Message = "Bu kategoriye ait etkinlik bulunamamıştır.";
+            }
+            else
+            {
+                ViewBag.Message = null; // Eğer etkinlik varsa mesajı temizle
+            }
+            return View(destinations);
         }
 
         //[HttpGet]
@@ -48,6 +76,25 @@ namespace TravarselCoreProje.Controllers
             ViewBag.userID = value.Id;
             var values = _destinationService.TGetDestinationsGuide(id);
             return View(values);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Destination/Search")]
+        public IActionResult Search(int? categoryId, string city, string district, DateTime? date)
+        {
+            var destinations = _destinationService.TGetListByFilterDestinations(categoryId, city, district, date);
+
+            if (!destinations.Any())
+            {
+                ViewBag.Message = "Bu kriterlere uygun etkinlik bulunamamıştır.";
+            }
+            else
+            {
+                ViewBag.Message = null;
+            }
+
+            return View("Index", destinations);
         }
     }
 }

@@ -5,6 +5,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,23 +15,26 @@ using TravarselCoreProje.Areas.Admin.Models;
 
 namespace TravarselCoreProje.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
     [Area("Admin")]
     [Route("Admin/Destination/")]
-
+    [Authorize(Policy = "AdminPolicy")]
     public class DestinationController : Controller
     {
-        private readonly IDestinationService _destinationService;
+        private readonly ICatagoryService _catagoryService; // Kategori servisi
+        private readonly IGuideService _guideService; // Rehber servisi
+        private readonly IDestinationService _destinationService; // Etkinlik servisi
 
-        public DestinationController(IDestinationService destinationService)
+        public DestinationController(ICatagoryService catagoryService, IGuideService guideService, IDestinationService destinationService)
         {
+            _catagoryService = catagoryService;
+            _guideService = guideService;
             _destinationService = destinationService;
         }
 
         [Route("Index")]
         public IActionResult Index()
         {
-            var values = _destinationService.TGetList().OrderBy(x => x.Date).ToList();
+            var values = _destinationService.TGetList().OrderByDescending(x => x.Date).ToList();
             return View(values);
         }
 
@@ -38,7 +42,23 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddDestinations()
         {
+            List<SelectListItem> values = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            {
+                Text = item.CatagoryName,
+                Value = item.CatagoryID.ToString()
+            }).ToList();
+
+            ViewBag.c = values;
+
+            List<SelectListItem> valuesGuide = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.GuideID.ToString()
+            }).ToList();
+
+            ViewBag.g = valuesGuide;
             return View();
+
         }
 
         [Route("AddDestinations")]
@@ -104,9 +124,9 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             s.Capacity = p.Capacity;
             s.Content = p.Content;
             s.Status = true;
-            s.CatagoryID = 12;
-            s.GuideID = 2;
-            s.Date = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
+            s.CatagoryID = p.CatagoryID;
+            s.GuideID = p.GuideID;
+            s.Date = p.Date;
 
             try
             {
@@ -180,6 +200,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
                 District = destination.District,
                 Description = destination.Description,
                 Capacity = destination.Capacity,
+                Status = true,
                 Content = destination.Content,
                 ImageUrl = destination.Image,
                 Image1Url = destination.Image1,

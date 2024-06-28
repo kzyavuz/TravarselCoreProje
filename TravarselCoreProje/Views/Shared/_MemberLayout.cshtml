@@ -25,6 +25,6 @@
     </div>
     @await Html.PartialAsync("/Views/MemberPartial/_Footer.cshtml")
     @await Html.PartialAsync("/Views/MemberPartial/_Script.cshtml")
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>

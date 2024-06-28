@@ -11,9 +11,15 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int FeatureID { get; set; }
+
+        [MinLength(3, ErrorMessage = "Başlık en az 3 karakter olmalıdır.")]
+        [MaxLength(30, ErrorMessage = "Başlık en fazla 30 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen başlığı giriniz.")]
         public string Post1Name { get; set; }
+
+        [MinLength(10, ErrorMessage = "İçerik en az 10 karakter olmalıdır.")]
+        [MaxLength(400, ErrorMessage = "İçerik en fazla 400 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen İçeriği giriniz.")]
         public string Post1Description { get; set; }
-        public string Post1Image { get; set; }
-        public bool Post1Status { get; set; }
     }
 }

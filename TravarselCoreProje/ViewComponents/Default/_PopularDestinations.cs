@@ -20,11 +20,7 @@ namespace TravarselCoreProje.ViewComponents.Default
 
         public IViewComponentResult Invoke()
         {
-            var values = _destinationService.TGetList()
-                .Where(e => e.Status == true)
-                .OrderBy(e => e.Date)
-                .Take(6)
-                .ToList();
+            var values = _destinationService.TGetListLastDestination(8);
             return View(values);
         }
     }

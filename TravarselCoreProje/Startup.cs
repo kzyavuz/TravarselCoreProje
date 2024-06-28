@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
@@ -37,10 +38,21 @@ namespace TravarselCoreProje
 
 
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<Context>().
-                AddErrorDescriber<IdentityValidator>()
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                // Diðer seçenekler...
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ðÐüÜþÞÝýIöÖçÇ_";
+            })
+                .AddEntityFrameworkStores<Context>()
+                .AddErrorDescriber<IdentityValidator>()
+                .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider)
                 .AddEntityFrameworkStores<Context>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policy => policy.RequireRole("admin"));
+                options.AddPolicy("MemberPolicy", policy => policy.RequireRole("member"));
+            });
 
             services.ContainerDependencies();
             services.CustomerValidator();
@@ -65,7 +77,7 @@ namespace TravarselCoreProje
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/LoginController1/SignUn";
+                options.LoginPath = "/Login/SignIn";
             });
         }
 

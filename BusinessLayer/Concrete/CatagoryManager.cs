@@ -23,6 +23,16 @@ namespace BusinessLayer.Concrete
             _catagoryDal.Insert(t);
         }
 
+        public void TConvertFalseByCatagory(int id)
+        {
+            _catagoryDal.ConvertFalseByCatagory(id);
+        }
+
+        public void TConvertTrueByCatagory(int id)
+        {
+            _catagoryDal.ConvertFalseByCatagory(id);
+        }
+
         public void TDelete(Catagory t)
         {
             _catagoryDal.Delete(t);

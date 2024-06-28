@@ -1,24 +1,100 @@
 ﻿<ul class="menu-inner py-1">
-    <!-- Dashboard -->
+
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Admin Eylem Alnı</span>
+    </li>
     <li class="menu-item">
-        <a href="/Admin/DAshboard/Index/" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Dashboard</div>
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-user-pin"></i>
+            <div data-i18n="Account Settings">Admin İşlemleri</div>
         </a>
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="/Admin/DAshboard/Index/" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/Role/Index/" class="menu-link">
+                    <i class='menu-icon bx bx-lock-open-alt'></i>
+                    <div data-i18n="Analytics">Rol İşlemleri</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/Blog/Index/" class="menu-link">
+                    <i class='menu-icon bx bx-lock-open-alt'></i>
+                    <div data-i18n="Analytics">Blog İşlemleri</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/City/Index/" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-city"></i>
+                    <div data-i18n="Analytics">Sehir Getir</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/Admin/Annoncement/Index/" class="menu-link">
+                    <i class='menu-icon bx bx-table'></i>
+                    <div data-i18n="Analytics">Duyurular</div>
+                </a>
+            </li>
+        </ul>
     </li>
 
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Kullanıcılar</span>
+    </li>
     <li class="menu-item">
-        <a href="/Admin/Role/Index/" class="menu-link">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-user-circle"></i>
-            <div data-i18n="Analytics">Rol İşlemleri</div>
+            <div data-i18n="Account Settings">Kullanıcı Bilgileri</div>
         </a>
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="/Admin/User/Index/" class="menu-link">
+                    <div data-i18n="Account">Admin</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/User/MemberList/" class="menu-link">
+                    <div data-i18n="Notifications">Üyeler</div>
+                </a>
+            </li>
+        </ul>
     </li>
 
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Rezervasyon İşlemleri</span>
+    </li>
     <li class="menu-item">
-        <a href="/Admin/User/Index/" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-circle"></i>
-            <div data-i18n="Analytics">Misafirler</div>
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-notepad"></i>
+            <div data-i18n="Account Settings">Rezervasyon Bilgileri</div>
         </a>
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="/Admin/AdminRezervationConfirm/Index/" class="menu-link">
+                    <div data-i18n="Account">Onay Bekleyen Rezervasyonlar</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/AdminRezervationConfirm/AccessRezervation/" class="menu-link">
+                    <div data-i18n="Account">Onaylanan Rezervasyonlar</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/AdminRezervationConfirm/RejectRezervation/" class="menu-link">
+                    <div data-i18n="Account">Reddedilen Rezervasyonlar</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="/Admin/AdminRezervationConfirm/PendingRezervation/" class="menu-link">
+                    <div data-i18n="Account">Geçmis Rezervasyonlar</div>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="menu-header small text-uppercase">
@@ -26,7 +102,7 @@
     </li>
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-table"></i>
+            <i class='menu-icon bx bx-table'></i>
             <div data-i18n="Account Settings">Etkinlik Bilgileri</div>
         </a>
         <ul class="menu-sub">
@@ -43,7 +119,6 @@
 
             <li class="menu-item">
                 <a href="/Admin/Guide/Index/" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-phone-call"></i>
                     <div data-i18n="Analytics">Rehberler</div>
                 </a>
             </li>
@@ -67,7 +142,6 @@
             </li>
         </ul>
     </li>
-
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -80,13 +154,17 @@
                 </a>
             </li>
             <li class="menu-item">
+                <a href="/Admin/AboutDestination/Index/" class="menu-link">
+                    <div data-i18n="Account">Etkinlik Bilgilendirme</div>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="/Admin/About/Index/" class="menu-link">
                     <div data-i18n="Account">Hakkımızda</div>
                 </a>
             </li>
         </ul>
     </li>
-
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -104,10 +182,9 @@
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">BİLDİRİM ALANI</span>
     </li>
-
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class='menu-icon bx bx-message-rounded-detail'></i>
             <div data-i18n="Account Settings">GERİ BİLDİRİM</div>
         </a>
         <ul class="menu-sub">
@@ -132,92 +209,72 @@
                 </a>
             </li>
         </ul>
-    </li> 
+    </li>
+
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">RAPOR ALANI</span>
     </li>
-
-    <li class="menu-item">
+    <li class="menu-item mb-5">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bxs-report"></i>
             <div data-i18n="Account Settings">RAPORLAR</div>
         </a>
         <ul class="menu-sub">
             <li class="menu-item">
                 <a href="/Excel/Index/" class="menu-link">
-                    <i class="menu-icon tf-icons bx bxs-report"></i>
                     <div data-i18n="Analytics">Excel Rapor</div>
                 </a>
             </li>
             <li class="menu-item">
                 <a href="/PDFReport/Index/" class="menu-link">
-                    <i class="menu-icon tf-icons bx bxs-report"></i>
                     <div data-i18n="Analytics">PDF Rapor</div>
                 </a>
             </li>
         </ul>
     </li>
 
-    <li class="menu-item">
-        <a href="/Admin/Annoncement/Index/" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-comment"></i>
-            <div data-i18n="Analytics">Duyurular</div>
-        </a>
-    </li>
 
-    <li class="menu-item">
-        <a href="/Admin/Comment/Index/" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-info-square"></i>
-            <div data-i18n="Analytics">Öne Çıkanlar</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-navigation"></i>
-            <div data-i18n="Analytics">Referanslar</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-abacus"></i>
-            <div data-i18n="Analytics">Alt Hakkında</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-restaurant"></i>
-            <div data-i18n="Analytics">Rezervasyonlar</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-mail-send"></i>
-            <div data-i18n="Analytics">Mail Listesi</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-info-square"></i>
-            <div data-i18n="Analytics">Öne Çıkanlar 2</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-key"></i>
-            <div data-i18n="Analytics">Şifre İşlemleri</div>
-        </a>
-    </li>
-    <li class="menu-item mb-5">
-        <a href="index.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-exit"></i>
-            <div data-i18n="Analytics">Çıkış Yap</div>
-        </a>
-    </li>
-    <li class="menu-item">
-        <a href="/Admin/Visiter/Index/" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-circle"></i>
-            <div data-i18n="Analytics">Api Misafir Listesi</div>
-        </a>
-    </li>
+    @*<li class="menu-item">
+            <a href="/Admin/Comment/Index/" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-square"></i>
+                <div data-i18n="Analytics">Öne Çıkanlar</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-navigation"></i>
+                <div data-i18n="Analytics">Referanslar</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-abacus"></i>
+                <div data-i18n="Analytics">Alt Hakkında</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-restaurant"></i>
+                <div data-i18n="Analytics">Rezervasyonlar</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-mail-send"></i>
+                <div data-i18n="Analytics">Mail Listesi</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-info-square"></i>
+                <div data-i18n="Analytics">Öne Çıkanlar 2</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/Admin/Visiter/Index/" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-circle"></i>
+                <div data-i18n="Analytics">Api Misafir Listesi</div>
+            </a>
+        </li>*@
 
 </ul>

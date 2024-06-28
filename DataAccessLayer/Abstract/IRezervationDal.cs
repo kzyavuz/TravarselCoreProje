@@ -9,8 +9,12 @@ namespace DataAccessLayer.Abstract
 {
     public interface IRezervationDal: IGenericDal<Rezarvation>
     {
-        List<Rezarvation> GetListRzervationByPendingReservations(int id);
-        List<Rezarvation> GetListRzervationByAcceptted(int id);
-        List<Rezarvation> GetListRzervationByPast(int id);
+        List<Rezarvation> GetListRezervationByPendingReservations(int id);
+        List<Rezarvation> GetListRezervationByAcceptted(int id);
+        List<Rezarvation> GetListRezervationByPast(int id);
+        List<Rezarvation> GetListRezervationReject(int id);
+        public int MyGetRezervationCount(int id);
+        public void GetRejectConfirm(int id);
+        public void GetAccessConfirm(int id);
     }
 }

@@ -1,4 +1,4 @@
-﻿@using EntityLayer.Concrete
+﻿
 @model List<AppUser>
 @{
     ViewData["Title"] = "Index";
@@ -11,42 +11,45 @@
         width: 50px;
         height: 50px;
         object-fit: cover;
-        border-radius:50%;
+        border-radius: 50%;
     }
 </style>
 
-<h1>Kullanıcıları Listesi</h1>
+<h1>Yöneticilerin Listesi</h1>
 
-<a href="/LoginController1/SignUp/" class="btn btn-primary mb-3">
+<a href="/Login/SignUp/" class="btn btn-success mb-3">
     Yeni Kullanıcı Ekle
 </a>
 
-<table class=" table table-striped">
-    <tr>
-        <th>#</th>
-        <th>Ad Soyad</th>
-        <th>Kullanıcı Adı</th>
-        <th>Fotoğraf</th>
-        <th>Mail</th>
-        <th>Düzenle</th>
-        <th>Sil</th>
-        <th>Yorumlar</th>
-        <th>Tur Geçmisi</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class=" table table-striped">
         <tr>
-            <td>@i</td>
-            <td>@item.Name @item.NamSurname</td>
-            <td>@item.UserName</td>
-            <td><img src="~/UserImages/@item.Image" /></td>
-            <td>@item.Email</td>
-            <td><a href="/Admin/User/EditUser/@item.Id" class="btn btn-warning">Düzenle</a></td>
-            <td><a href="/Admin/User/DeleteUser/@item.Id" class="btn btn-danger">Sil</a></td>
-            <td><a href="/Admin/User/CommentUser/@item.Id" class="btn btn-info">Bölümler</a></td>
-            <td><a href="/Admin/User/RezarvationUser/@item.Id" class="btn btn-primary">Tur Geçmisi</a></td>
+            <th>#</th>
+            <th>Ad Soyad</th>
+            <th>Kullanıcı Adı</th>
+            <th>Fotoğraf</th>
+            <th>Mail</th>
+            <th>Rol</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
         </tr>
-        i++;
-    }
-</table>
-
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>@item.Name @item.NamSurname</td>
+                <td>@item.UserName</td>
+                <td><img src="~/UserImages/@item.Image" /></td>
+                <td>@item.Email</td>
+                <td><a href="/Admin/Role/AssignRole/@item.Id" class="btn btn-info">Rolleme</a></td>
+                <td><a href="/Admin/User/EditUser/@item.Id" class="btn btn-warning">Düzenle</a></td>
+                <td>
+                    <form asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" onsubmit="return confirm('Kullanıcıyı silmek iştediğinize eminmisiniz.Silinme durumunda veri kaybına yol açacaktı.')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>

@@ -13,7 +13,7 @@
             <input type="hidden" asp-for="@Model[i].RoleID" />
             <input type="hidden" asp-for="@Model[i].RolName" />
             <input type="checkbox" asp-for="@Model[i].status" class="form-check-input" />
-            <label class="form-check-label" for="@Model[i].status">@Model[i].status</label>
+            <label class="form-check-label" for="@Model[i].RolName">@Model[i].RolName</label>
         </div>
     }
     <button class="btn btn-success">Değisiklikleri Kaydet</button>

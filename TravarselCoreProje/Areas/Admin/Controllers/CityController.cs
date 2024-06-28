@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,8 @@ using TravarselCoreProje.Models;
 namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/City/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class CityController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -20,17 +23,20 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             _destinationService = destinationService;
         }
 
+        [Route("Index")]
         public IActionResult Index()
         {   
             return View();
         }
 
+        [Route("CityList")]
         public IActionResult CityList()
         {
             var jsonCity = JsonConvert.SerializeObject(_destinationService.TGetList());
             return Json(jsonCity);
         }
 
+        [Route("AddCity")]
         [HttpPost]
         public IActionResult AddCity([FromBody] Destination p)
         {
@@ -45,6 +51,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             return Json(new { success = true, data = values });
         }
 
+        [Route("GetById/{id}")]
         public IActionResult GetById(int DestinationID)
         {
             var values = _destinationService.TGetByID(DestinationID);
@@ -56,6 +63,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             return Json(new { success = true, data = jsonValues });
         }
 
+        [Route("DeleteCity/{id}")]
         [HttpPost]
         public IActionResult DeleteCity(int DestinationID)
         {
@@ -69,6 +77,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             return Json(new { success = true, message = "Şehir başarılı bir şekilde silindi." });
         }
 
+        [Route("UpdateCity")]
         [HttpPost]
         public IActionResult UpdateCity([FromBody] Destination p)
         {

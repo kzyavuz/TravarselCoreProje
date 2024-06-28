@@ -1,4 +1,5 @@
 ﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using System;
@@ -11,14 +12,19 @@ using TravarselCoreProje.Models;
 namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/Mail/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class MailController : Controller
     {
+        [Route("Index")]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+
+        [Route("Index")]
         [HttpPost]
         public IActionResult Index(MailModel p)
         {

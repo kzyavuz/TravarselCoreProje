@@ -30,8 +30,8 @@
                         var bgColor = colors[colorIndex % colors.Count]; // Renkleri döngüsel olarak al
                         colorIndex++;
 
-                        <div class="carousel-item text-center @(colorIndex == 1 ? "active" : "")" style="background-color: @bgColor; height:300px">
-                            <h1 style="color:white">@item.Title</h1>
+                        <div class="carousel-item text-center px-5 py-2 @(colorIndex == 1 ? "active" : "")" style="background-color: @bgColor; height:300px">
+                            <h1 style="color:white">@item.Title.ToUpper()</h1>
                             <p style="color:white;">@item.Content</p>
                         </div>
                     }

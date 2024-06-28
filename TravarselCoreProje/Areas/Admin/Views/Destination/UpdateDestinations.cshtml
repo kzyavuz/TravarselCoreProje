@@ -12,7 +12,7 @@
             <h2 class="card-title text-white font-weight-bold">Etkinlik Güncelleme</h2>
         </div>
         <div class="card-body">
-            <form asp-action="UpdateDestinations" asp-controller="Destination" asp-area="Admin" enctype="multipart/form-data">
+            <form asp-action="AddDestinations" asp-controller="Destination" asp-area="Admin" enctype="multipart/form-data">
                 <input type="hidden" asp-for="DestinationID" />
                 <div class="row mb-2">
                     <div class="col-9">
@@ -51,6 +51,11 @@
                             <span asp-validation-for="Capacity" class="text-danger"></span>
                         </div>
                         <div class="mb-2">
+                            <label for="eventDateTime">Etkinlik Tarihi ve Saati</label>
+                            <input type="datetime-local" id="eventDateTime" name="Date" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
                             <label>Kısa İçerik</label>
                             <input type="text" asp-for="Description" class="form-control" />
                             <span asp-validation-for="Description" class="text-danger"></span>
@@ -62,53 +67,59 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <!-- Kapak Resmi -->
-                        <div class="border border-warning rounded p-2 mb-3">
+                        <div class="form-group mb-2">
+                            @Html.Label("Etkinlik Seçiniz")
+                            @Html.DropDownListFor(model => model.CatagoryID, (IEnumerable<SelectListItem>)ViewBag.c, "Kategori Seçiniz", new { @class = "form-control", @required = "required" })
+                            <span asp-validation-for="CatagoryID" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            @Html.Label("Etkinlik Seçiniz")
+                            @Html.DropDownListFor(model => model.GuideID, (IEnumerable<SelectListItem>)ViewBag.g, "Rehber Seçiniz", new { @class = "form-control", @required = "required" })
+                            <span asp-validation-for="GuideID" class="text-danger"></span>
+                        </div>
+
+                        <!-- Cover Image -->
+                        <div class="border border-success rounded p-2 mb-3">
                             <h6>Kapak Resmi</h6>
                             <div class="mb-2">
-                                @{
-                                    var imagePath = string.IsNullOrEmpty(Model.ImageUrl) ? Url.Content("~/ImageDestination/default_image.png") : Url.Content($"~/ImageDestination/{Model.ImageUrl}");
-                                }
-                                <img src="@imagePath" class="img-fluid rounded" id="thumbnailCover" />
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnailCover" />
                             </div>
                             <div class="mb-2">
                                 <label>Resim Seçin</label>
-                                <input type="file" asp-for="NewImageFile" class="form-control custom-file-input" data-preview="thumbnailCover" />
-                                <span asp-validation-for="NewImageFile" class="text-danger"></span>
+                                <input type="file" asp-for="Image" class="form-control custom-file-input" data-preview="thumbnailCover" required />
+                                <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <!-- İçerik Resmi 1 -->
-                        <div class="border border-warning rounded p-2 mb-3">
+                        <!-- Content Image 1 -->
+                        <div class="border border-success rounded p-2 mb-3">
                             <h6>İçerik Resmi 1</h6>
                             <div class="mb-2">
-                                @{
-                                    var imagePath1 = string.IsNullOrEmpty(Model.Image1Url) ? Url.Content("~/ImageDestination/default_image.png") : Url.Content($"~/ImageDestination/{Model.Image1Url}");
-                                }
-                                <img src="@imagePath1" class="img-fluid rounded" id="thumbnail1" />
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnail1" />
                             </div>
                             <div class="mb-2">
                                 <label>Resim Seçin</label>
-                                <input type="file" asp-for="NewImage1File" class="form-control custom-file-input" data-preview="thumbnail1" />
-                                <span asp-validation-for="NewImage1File" class="text-danger"></span>
+                                <input type="file" asp-for="Image1" class="form-control custom-file-input" data-preview="thumbnail1" required />
+                                <span asp-validation-for="Image1" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <!-- İçerik Resmi 2 -->
-                        <div class="border border-warning rounded p-2 mb-3">
+                        <!-- Content Image 2 -->
+                        <div class="border border-success rounded p-2 mb-3">
                             <h6>İçerik Resmi 2</h6>
                             <div class="mb-2">
-                                @{
-                                    var imagePath2 = string.IsNullOrEmpty(Model.Image2Url) ? Url.Content("~/ImageDestination/default_image.png") : Url.Content($"~/ImageDestination/{Model.Image2Url}");
-                                }
-                                <img src="@imagePath2" class="img-fluid rounded" id="thumbnail2" />
+                                <img src="~/ImageDestination/default_image.png" class="img-fluid rounded" id="thumbnail2" />
                             </div>
                             <div class="mb-2">
                                 <label>Resim Seçin</label>
-                                <input type="file" asp-for="NewImage2File" class="form-control custom-file-input" data-preview="thumbnail2" />
-                                <span asp-validation-for="NewImage2File" class="text-danger"></span>
+                                <input type="file" asp-for="Image2" class="form-control custom-file-input" data-preview="thumbnail2" required />
+                                <span asp-validation-for="Image2" class="text-danger"></span>
                             </div>
                         </div>
+
+                        <!-- Category and Guide Selection -->
 
                     </div>
                 </div>

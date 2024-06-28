@@ -26,6 +26,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,7 +56,7 @@
     <Folder Include="Resources\Views\" />
     <Folder Include="wwwroot\CatagoryImage\" />
     <Folder Include="wwwroot\ImageGuide\" />
-    <Folder Include="wwwroot\ImageWhyUs\" />
+    <Folder Include="wwwroot\blogImage\" />
     <Folder Include="wwwroot\PDFReport\" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Role/")]
+    [Authorize(Policy = "AdminPolicy")]
     public class RoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
@@ -85,15 +87,9 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("UserList")]
-        public IActionResult UserList()
-        {
-            var valus = _userManager.Users.ToList();
-            return View(valus);
-        }
 
         [HttpGet]
-        [Route("AssignRole")]
+        [Route("AssignRole/{id}")]
         public async Task<IActionResult> AssignRole(int id)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
@@ -114,7 +110,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         
         
         [HttpPost]
-        [Route("AssignRole")]
+        [Route("AssignRole/{id}")]
         public async Task<IActionResult> AssignRole(List<RoleAssignModel> model)
         {
             var userid = (int)TempData["UserID"];
@@ -130,7 +126,7 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
                     await _userManager.RemoveFromRoleAsync(user, item.RolName);
                 }
             }
-            return RedirectToAction("UserList");
+            return RedirectToAction("Index", "User", new { area = "Admin" });
         }
     }
 }

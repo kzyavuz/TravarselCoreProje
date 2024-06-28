@@ -1,4 +1,4 @@
-﻿@model List<Destination>
+﻿@model IEnumerable<Destination>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
@@ -13,36 +13,88 @@
                 <h2 class="title">Etkinlikler </h2>
                 <ul class="breadcrumbs-custom-path mt-2">
                     <li><a href="/Default/Index">Ana Sayfa</a></li>
-                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Etkinlikler </li>
+                    @if (@ViewBag.CategoryName == null)
+                    {
+                        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Tüm Etkinlikler </li>
+                    }
+                    else
+                    {
+                        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @ViewBag.CategoryName </li>
+
+                    }
                 </ul>
+                <a class="btn btn-info" href="/Destination/LastIndex" style=" position: absolute; right: 5%; bottom: 5%;">Geçmis Rezervasyon Tablosu</a>
             </div>
         </div>
     </section>
+
+
     <section class="grids-1 py-5">
         <div class="grids py-lg-5 py-md-4">
             <div class="container">
-                <h3 class="hny-title mb-5">Etkinliklerimiz</h3>
-                <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-lg-4 col-md-4 col-6 mb-3">
-                            <div class="column">
-                                <a href="/Destination/DestinationDetails/@item.DestinationID">
-                                    <img style="height:210px;width:360px; object-fit:cover;" src="~/ImageDestination/@item.Image" alt="" class="img-fluid">
-                                </a>
-                                <div class="info">
-                                    <h4 class="mb-3">@item.DestinationName</h4>
-                                    <h6>@item.District / @item.City</h6>
-                                    <p>@item.DayNight</p>
-                                    <div class="dst-btm">
-                                        <h6 class="">Baslayan Fiyatlarla</h6>
-                                        <span>@item.Price</span>
+                @if (!Model.Any() && ViewBag.Message != null)
+                {
+                    <div class="alert alert-info text-center" role="alert">
+                        @ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    <h3 class="hny-title mb-5">Etkinliklerimiz</h3>
+                    <div class="row">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <div class="column">
+                                    <a href="/Destination/DestinationDetails/@item.DestinationID">
+                                        <img style="height:210px;width:100%; object-fit:cover;" src="~/ImageDestination/@item.Image" alt="" class="img-fluid">
+                                    </a>
+                                    <div class="info">
+
+                                        <h5 class="font-weight-bold">
+                                            @item.DestinationName.ToUpper()
+                                        </h5>
+                                        <p class="text-gradient text-dark text-sm" style="font-size:small"> @item.Catagory.CatagoryName</p>
+
+
+                                        @if (item.DayNight != null)
+                                        {
+                                            <p class="text-gradient text-dark text-sm mb-0" style="font-size:smaller"> @item.District / @item.City</p>
+
+                                        }
+                                        else
+                                        {
+                                            <p class="text-gradient text-dark text-sm" style="font-size:smaller; margin-bottom:42px;"> @item.District / @item.City</p>
+
+                                        }
+                                        <p class="text-gradient text-dark text-sm" style="font-size:xx-small"> @item.DayNight</p>
+
+                                        <div class="dst-btm mb-3">
+                                            <h6 class="">Baslayan Fiyatlarla</h6>
+                                            <span>@item.Price</span>
+                                        </div>
+
+                                        @if (item.Description != null && item.Description.Length > 90)
+                                        {
+                                            <p class="mb-1 text-sm">
+
+                                                @item.Description.Substring(0, 90) ...
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="mb-1 text-sm">
+                                                @item.Description
+                                            </p>
+
+                                        }
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                </div>
+                        }
+                    </div>
+                }
             </div>
         </div>
     </section>

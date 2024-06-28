@@ -1,0 +1,35 @@
+﻿/* Navbar düzeltmeleri */
+.navbar .btn-outline-info {
+    margin-right: 15px;
+}
+
+/* Medya sorgusu ile küçük ekranlarda düzenlemeler */
+@media (max-width: 767px) {
+    .navbar-collapse {
+        flex-direction: column;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 10px;
+        }
+
+    .navbar .btn-outline-info {
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .theme-switch-wrapper {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .d-flex.flex-column.flex-lg-row.align-items-center {
+        align-items: flex-start !important;
+    }
+}

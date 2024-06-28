@@ -18,19 +18,19 @@ namespace BusinessLayer.Concrete
             _rezervationDal = rezervationDal;
         }
 
-        public List<Rezarvation> GetListRzervationByAcceptted(int id)
+        public List<Rezarvation> TGetListRezervationByAcceptted(int id)
         {
-            return _rezervationDal.GetListRzervationByAcceptted(id);
+            return _rezervationDal.GetListRezervationByAcceptted(id);
         }
 
-        public List<Rezarvation> GetListRzervationByPast(int id)
+        public List<Rezarvation> TGetListRezervationByPast(int id)
         {
-            return _rezervationDal.GetListRzervationByPast(id);
+            return _rezervationDal.GetListRezervationByPast(id);
         }
 
-        public List<Rezarvation> GetListRzervationByPendingReservations(int id)
+        public List<Rezarvation> TGetListRezervationByPendingReservations(int id)
         {
-            return _rezervationDal.GetListRzervationByPendingReservations(id);
+            return _rezervationDal.GetListRezervationByPendingReservations(id);
         }
 
         public void TAdd(Rezarvation t)
@@ -40,22 +40,42 @@ namespace BusinessLayer.Concrete
 
         public void TDelete(Rezarvation t)
         {
-            throw new NotImplementedException();
+            _rezervationDal.Delete(t);
+        }
+
+        public void TGetAccessConfirm(int id)
+        {
+            _rezervationDal.GetAccessConfirm(id);
         }
 
         public Rezarvation TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _rezervationDal.GetByID(id);
         }
 
         public List<Rezarvation> TGetList()
         {
-            throw new NotImplementedException();
+            return _rezervationDal.GetList();
+        }
+
+        public void TGetRejectConfirm(int id)
+        {
+            _rezervationDal.GetRejectConfirm(id);
+        }
+
+        public int TMyGetRezervationCount(int id)
+        {
+            return _rezervationDal.MyGetRezervationCount(id);
         }
 
         public void TUpdate(Rezarvation t)
         {
-            throw new NotImplementedException();
+            _rezervationDal.Update(t);
+        }
+
+        public List<Rezarvation> TGetListRezervationReject(int id)
+        {
+            return _rezervationDal.GetListRezervationReject(id);
         }
     }
 }

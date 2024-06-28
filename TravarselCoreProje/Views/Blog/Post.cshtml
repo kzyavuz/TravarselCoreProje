@@ -1,0 +1,67 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "Post";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<!doctype html>
+<html lang="tr">
+
+<body>
+    <section class="w3l-about-breadcrumb text-left">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            <div class="container d-flex justify-content-between">
+                <div class="col-6">
+                    <h2 class="title">Blog Sayfası</h2>
+                    <ul class="breadcrumbs-custom-path mt-2">
+                        <li><a href="/Default/Index">Ana Sayfa</a></li>
+                        <li><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/Blog/Index">Blog</a></li>
+                        <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @Model.Title </li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="py-5 w3l-homeblock1 text-center">
+        <div class="container mt-md-3">
+            <h3 class="blog-desc-big text-center mb-4" style="text-transform:capitalize">
+                <span>@Model.Title</span>
+                <span class="meta-value"> @(((DateTime)Model.Created).ToString("dd-MMM-yyyy")) </span>
+            </h3>
+        </div>
+    </div>
+    <section class="blog-post-main w3l-homeblock1">
+        <!--/blog-post-->
+        <div class="blog-content-inf pb-5">
+            <div class="container pb-lg-4">
+                <div class="single-post-image">
+                    <div class="post-content">
+                        <img src="/blogImage/@Model.ImagePath" style="height:500px; width:100%; object-fit:cover;" class="radius-image img-fluid mb-5" alt="" />
+                    </div>
+                </div>
+                <div class="hizala">
+                    <div class="single-post-content">
+                        @Html.Raw(Model.Content)
+
+                        <div class="author-card mt-5">
+                            <div class="row align-items-center">
+                                <div class="col-sm-3 col-6">
+                                    <div>
+                                        <img src="~/UserImages/@Model.AppUser.Image" style=" height: 150px; width: 150px; object-fit: cover;" alt="" class="rounded-circle img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 mt-sm-0 mt-3">
+                                    <h3 class="mb-3 title">@Model.AppUser.Name @Model.AppUser.NamSurname</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

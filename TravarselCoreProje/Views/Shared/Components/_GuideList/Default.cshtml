@@ -21,21 +21,28 @@
             <div id="recent-buyers" class="media-list">
                 @foreach (var item in Model)
                 {
-                    <a href="#" class="media border-0">
+                    <a href="/Guide/Index" class="media border-0">
                         <div class="media-left pr-1">
                             <span class="avatar avatar-md avatar-online" style="width:40px">
                                 <img class="media-object rounded-circle" style="height:40px; object-fit:cover;" src="~/ImageGuide/@item.Image" alt="Generic placeholder image">
-                                <i></i>
                             </span>
                         </div>
                         <div class="media-body w-100">
                             <span class="list-group-item-heading">
-                                @item.Name 
+                                @item.Name.ToUpper()
 
                             </span>
                             
                             <p class="list-group-item-text mb-0">
-                                <span class="blue-grey lighten-2 font-small-3"> @item.Description </span>
+                                @if (item.Description != null && item.Description.Length > 50)
+                                {
+                                    <span class="post">@item.Description.Substring(0, 50) </span>
+
+                                }
+                                else
+                                {
+                                    <span class="post">@item.Description</span>
+                                }
                             </p>
                         </div>
                     </a>

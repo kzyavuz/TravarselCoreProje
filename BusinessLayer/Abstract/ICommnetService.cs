@@ -12,5 +12,10 @@ namespace BusinessLayer.Abstract
         List<Comment> TGetDestionID(int id);
         List<Comment> GetListCommentDestination();
         List<Comment> TGetListCommentDestinationAdUser(int id);
+        List<Comment> TMyGetListComment(int id);
+        public int TMyGetListCommentCount(int id);
+
+        void TConvertStandOutByComment(int id);
+        void TConvertHighlightByComment(int id);
     }
 }

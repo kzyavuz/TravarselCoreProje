@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface ICatagoryService : IGenericService<Catagory>
     {
+        public void TConvertTrueByCatagory(int id);
+        public void TConvertFalseByCatagory(int id);
     }
 }

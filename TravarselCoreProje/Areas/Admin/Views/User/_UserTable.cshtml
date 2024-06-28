@@ -1,0 +1,24 @@
+﻿@model List<AppUser>
+@{
+    int i = 1;
+}
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@i</td>
+        <td>@item.Name @item.NamSurname</td>
+        <td>@item.UserName</td>
+        <td><img src="~/UserImages/@item.Image" /></td>
+        <td>@item.Email</td>
+        <td><a href="/Admin/User/EditUser/@item.Id" class="btn btn-warning">Düzenle</a></td>
+        <td><a href="/Admin/Role/AssignRole/@item.Id" class="btn btn-info">Rolleme</a></td>
+        <td><a href="/Admin/User/RezarvationUser/@item.Id" class="btn btn-primary">Geçmiş Rezervasyonlar</a></td>
+        <td>
+            <form asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id" onsubmit="return confirm('Kullanıcıyı silmek istediğinize emin misiniz? Silinme durumunda veri kaybına yol açacaktır.')">
+                <button type="submit" class="btn btn-danger">Sil</button>
+            </form>
+        </td>
+    </tr>
+    i++;
+}

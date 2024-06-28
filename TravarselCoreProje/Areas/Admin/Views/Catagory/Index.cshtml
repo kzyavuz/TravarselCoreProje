@@ -15,38 +15,41 @@
 
 <td><a href="/Admin/Catagory/AddCatagory/" class="btn btn-outline-success mb-3">Kategori Ekle</a></td>
 
-<table class="table table-striped">
-    <tr>
-        <th>#</th>
-        <th>Kategori Adı</th>
-        <th>Resim</th>
-        <th>Durumu</th>
-        <th>Sil</th>
-        <th>Güncelle</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped">
         <tr>
-            <td>@sayac</td>
-            <td>@item.CatagoryName</td>
-            <td><img src="~/CatagoryImage/@item.CatagoryImage" /></td>
-            @if (item.Status == true)
-            {
-                <td><a class="btn btn-success">Aktif</a></td>
-
-            }
-            else
-            {
-                <td><a class="btn btn-danger">Pasif</a></td>
-            }
-
-            <td>
-                <a href="/Admin/Catagory/DeleteCatagory/@item.CatagoryID" class="btn btn-outline-danger">Sil</a>
-            </td>
-
-            <td><a href="/Admin/Catagory/UpdateCatagory/@item.CatagoryID" class="btn btn-outline-warning">Güncelle</a></td>
+            <th>#</th>
+            <th>Kategori Adı</th>
+            <th>Resim</th>
+            <th>Durumu</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
         </tr>
-        sayac++;
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@sayac</td>
+                <td>@item.CatagoryName</td>
+                <td><img src="~/CatagoryImage/@item.CatagoryImage" /></td>
+                @if (item.Status == true)
+                {
+                    <td><a href="/Admin/Catagory/ConvertTrue/@item.CatagoryID" class="btn btn-success">Aktif</a></td>
 
+                }
+                else
+                {
+                    <td><a href="/Admin/Catagory/ConvertFalse/@item.CatagoryID" class="btn btn-danger">Pasif</a></td>
+                }
+
+                <td>
+                    <form asp-controller="Catagory" asp-action="DeleteCatagory" asp-route-id="@item.CatagoryID" onsubmit="return confirm('Kaegori silmek üzeresin. Silme işlemini onaylarsan etkinliklerde veri kaybına uğrayabilirsin!!! Silmek iştediğinize eminmisiniz')">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+
+                <td><a href="/Admin/Catagory/UpdateCatagory/@item.CatagoryID" class="btn btn-outline-warning">Güncelle</a></td>
+            </tr>
+            sayac++;
+        }
+    </table>
+</div>

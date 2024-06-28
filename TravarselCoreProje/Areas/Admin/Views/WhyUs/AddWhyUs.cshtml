@@ -1,0 +1,69 @@
+﻿
+@model WhyUsViewModel
+@{
+    ViewData["Title"] = "AddWhyUs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <a class="btn btn-secondary mb-1" asp-action="Index" asp-controller="WhyUs">Geri</a>
+    <div class="card">
+        <div class="card-header bg-success">
+            <h4 class="card-title text-white">Neden Biz Ekleme Sayfası</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddWhyUs" asp-controller="WhyUs" asp-area="Admin" enctype="multipart/form-data">
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <div class="mb-2">
+                            <label>Başlık</label>
+                            <input type="text" asp-for="Title1" class="form-control" />
+                            <span asp-validation-for="Title1" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Alt Başlık</label>
+                            <input type="text" asp-for="Title2" class="form-control" />
+                            <span asp-validation-for="Title2" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>İçerik</label>
+                            <textarea id="richEditor" asp-for="Description" class="form-control" rows="8"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-2">
+                            <img src="~/ImageDestination/default_image.png" class="img-fluid" id="thumbnail" />
+                        </div>
+                        <div class="mb-2">
+                            <label>Fotoğrafı</label>
+                            <input type="file" asp-for="Image" class="form-control custom-file-input" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-success w-100">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('thumbnail').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
+

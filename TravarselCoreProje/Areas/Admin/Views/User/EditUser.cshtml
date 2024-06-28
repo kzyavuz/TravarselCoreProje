@@ -1,0 +1,96 @@
+﻿@model TravarselCoreProje.Areas.Member.Models.UserEditModel
+
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+@section scripts {
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kullanıcının Profilini Güncelleme Sayfası</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <p class="card-text">Kullanıcının Profilinizi düzenlemek için gerekli alanları doldurabilirsiniz.</p>
+                    <form method="post" enctype="multipart/form-data">
+                        <label>Ad</label>
+                        <input type="text" asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                        <br />
+                        <label>Soyad</label>
+                        <input type="text" asp-for="surname" class="form-control" />
+                        <span asp-validation-for="surname" class="text-danger"></span>
+                        <br />
+                        <label>Kullanıcı Adınız</label>
+                        <input type="text" asp-for="userName" class="form-control" />
+                        <span asp-validation-for="userName" class="text-danger"></span>
+                        <br />
+                        <label>Mail adresi</label>
+                        <input type="text" asp-for="mail" class="form-control" />
+                        <span asp-validation-for="mail" class="text-danger"></span>
+                        <br />
+                        <label>Hakkımda</label>
+                        <textarea asp-for="gender" class="form-control" rows="4" cols="50" placeholder="Benim adım..."></textarea>
+                        <span asp-validation-for="gender" class="text-danger"></span>
+                        <br />
+                        <label>Telefon numarası</label>
+                        <input type="text" asp-for="phonenumber" id="phonenumber" class="form-control" />
+                        <span asp-validation-for="phonenumber" class="text-danger"></span>
+                        <br />
+                        <label>Sifre</label>
+                        <input type="password" asp-for="password" class="form-control" />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                        <br />
+                        <label>Sifre Tekrarı</label>
+                        <input type="password" asp-for="confirmpassword" class="form-control" />
+                        <span asp-validation-for="confirmpassword" class="text-danger"></span>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <br />
+                        <div class="form-group">
+                            <img id="imagePreview" src="#" alt="Resim Önizleme" style="width:100px; height: 100px; object-fit:cover;" />
+                            <br />
+                            <label>Resim Seçiniz</label>
+                            <input type="file" asp-for="imageurl" class="form-control-file" onchange="previewImage(this)" />
+                            <span asp-validation-for="imageurl" class="text-danger"></span>
+                        </div>
+
+                        <button class="btn btn-primary">Bilgileri Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('phonenumber').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+    });
+</script>

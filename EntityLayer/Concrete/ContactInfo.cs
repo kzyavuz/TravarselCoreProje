@@ -15,7 +15,11 @@ namespace EntityLayer.Concrete
         public string ContactInfoMail { get; set; }
         public string ContactInfoSubject { get; set; }
         public string MessageBody { get; set; }
+
         public DateTime MessageDate { get; set; }
         public bool MessageStatus { get; set; }
+
+        public int AppUserID { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

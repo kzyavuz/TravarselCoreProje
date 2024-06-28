@@ -11,17 +11,23 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int RezervasyonID { get; set; }
-        public string MemontCount { get; set; }
+
+        [Required(ErrorMessage = "Kişi sayısı zorunludur.")]
+        public int MemontCount { get; set; }
+
         public DateTime RezarvationDate { get; set; }
+
+        [Required(ErrorMessage = "Açıklama zorunludur.")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Açıklama 5 ile 50 karakter arasında olmalıdır.")]
         public string Sescription { get; set; }
+
         public string Status { get; set; }
 
+        [Required(ErrorMessage = "Etkinlik seçimi zorunludur.")]
         public int DestinationID { get; set; }
         public Destination Destination { get; set; }
 
         public int AppUserID { get; set; }
         public AppUser AppUSer { get; set; }
-
-
     }
 }

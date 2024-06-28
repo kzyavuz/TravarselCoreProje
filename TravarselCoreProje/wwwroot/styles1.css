@@ -1,0 +1,122 @@
+/* styles.css */
+
+/* Genel Gövde Stilleri */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+/* Başlık Stilleri */
+.masthead {
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+    .masthead::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    .masthead .container {
+        position: relative;
+        z-index: 2;
+    }
+
+.site-heading h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.site-heading small {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+/* Post Görünümü */
+.post-preview {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+    .post-preview a {
+        color: #333;
+    }
+
+        .post-preview a:hover {
+            text-decoration: none;
+        }
+
+.post-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.post-subtitle {
+    font-size: 1.25rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.post-meta {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* Buton Stilleri */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+/* Yatay Çizgi */
+hr.my-4 {
+    border-top: 1px solid #000;
+}
+
+/* Medya Sorguları */
+@media (max-width: 768px) {
+    .site-heading h1 {
+        font-size: 2.5rem;
+    }
+
+    .site-heading small {
+        font-size: 1rem;
+    }
+}

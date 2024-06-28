@@ -1,0 +1,106 @@
+﻿@model List<ContactInfo>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    int sayac = 1;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Gönderilen Mesajlar</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <p class="card-text">Göndermiş olduğunuz Mesajları burada görebilirsiniz.</p>
+                    @if (!Model.Any())
+                    {
+                        <div class="container mt-5">
+                            <h4 style="color:crimson">Mesaj bulunmamaktadır..</h4>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Başlık</th>
+                                        <th>Mesaj</th>
+                                        <th>Gönderme Zamanı</th>
+                                        <th>Mesajı Gör</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@sayac</td>
+                                            <td>@item.ContactInfoSubject</td>
+                                            @if (item.MessageBody != null && item.MessageBody.Length > 50)
+                                            {
+                                                <td style="word-break:keep-all;">@item.MessageBody.Substring(0, 50) ...</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="word-break:keep-all;">@item.MessageBody</td>
+                                            }
+                                            <td>@item.MessageDate</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal" data-content="@item.MessageBody">
+                                                    Mesajı Gör
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        sayac++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="commentModalLabel">Mesajınız</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Mesaj içeriği buraya gelecek -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $('#commentModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var content = button.data('content'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('.modal-body').text(content); // Update the modal's content
+    });
+</script>

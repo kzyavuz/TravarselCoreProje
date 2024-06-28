@@ -18,8 +18,8 @@ namespace TraversalCoreProje.ViewComponents.AdminDashboard
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.v1 = _context.Destinations.Count();
-            ViewBag.v2 = _context.Users.Count();
+            ViewBag.v1 = _context.Destinations.Where(x=> x.Status == true).Count();
+            ViewBag.v2 = _context.Destinations.Where(x=> x.Status == false).Count();
             return View();
         }
     }

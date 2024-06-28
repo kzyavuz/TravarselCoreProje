@@ -36,7 +36,11 @@
             }
             <td><a href="/About/Index/" class="btn btn-outline-primary">Git</a></td>
             <td><a href="/Admin/About/UpdateAbout/@item.AboutID" class="btn btn-outline-warning">Güncelle</a></td>
-            <td><a href="/Admin/About/DeleteAbout/@item.AboutID" class="btn btn-outline-danger">Sil</a></td>
+            <td>
+                <form asp-controller="About" asp-action="DeleteAbout" asp-route-id="@item.AboutID" onsubmit="return confirm('Hakkımızda bilgisini silmek iştediğinize eminmisiniz')">
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </form>
+            </td>
         </tr>
     }
 </table>

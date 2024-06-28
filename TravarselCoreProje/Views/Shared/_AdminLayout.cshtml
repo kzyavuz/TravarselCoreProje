@@ -27,7 +27,8 @@
 
             </aside>
             <div class="layout-page">
-                @await Html.PartialAsync("/Views/Admin/Navbar.cshtml")
+                @await Component.InvokeAsync("_AdminNavbar")
+
 
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">

@@ -11,6 +11,9 @@ namespace BusinessLayer.Abstract
     {
         List<ContactInfo> TGetListContactInfoByTrue();
         List<ContactInfo> TGetListContactInfoByFalse();
+        
+        public int TMyGetListContactCount(int id);
+        public List<ContactInfo> MyGetListContactInfo(int id);
 
         void TContactInfoChangeToFalse(int id);
     }

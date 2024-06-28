@@ -1,27 +1,42 @@
 ﻿using BusinessLayer.Abstract;
-using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using TravarselCoreProje.Models;
 
-namespace TravarselCoreProje.ViewComponents.Default
+public class _Navbar : ViewComponent
 {
-    public class _Navbar : ViewComponent
+    private readonly ICatagoryService _catagoryService;
+    private readonly UserManager<AppUser> _userManager;
+
+    public _Navbar(ICatagoryService catagoryService, UserManager<AppUser> userManager)
     {
-        private readonly ICatagoryService _catagoryService;
+        _catagoryService = catagoryService;
+        _userManager = userManager;
+    }
 
-        public _Navbar(ICatagoryService catagoryService)
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        var data = _catagoryService.TGetList();
+
+        var userRoles = new List<string>();
+        if (User.Identity.IsAuthenticated)
         {
-            _catagoryService = catagoryService;
+            var user = await _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User);
+            if (user != null)
+            {
+                userRoles = await _userManager.GetRolesAsync(user) as List<string>;
+            }
         }
 
-        public IViewComponentResult Invoke()
+        var viewModel = new NavbarViewModel
         {
-            var data = _catagoryService.TGetList();
-            return View(data);
-        }
+            Catagories = data,
+            UserRoles = userRoles
+        };
+
+        return View(viewModel);
     }
 }

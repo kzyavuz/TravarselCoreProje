@@ -11,5 +11,10 @@ namespace DataAccessLayer.Abstract
     {
         public List<Comment> GetListCommentDestination();
         public List<Comment> GetListCommentDestinationAndUser(int id);
+        public List<Comment> MyGetListComment(int id);
+        public int MyGetListCommentCount(int id);
+
+        void ConvertStandOutByComment(int id);
+        void ConvertHighlightByComment(int id);
     }
 }

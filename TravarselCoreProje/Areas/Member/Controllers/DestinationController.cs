@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace TravarselCoreProje.Areas.Member.Controllers
 {
+    [Area("Member")]
+    [Route("Member/Destination/")]
+    [Authorize(Policy = "MemberPolicy")]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -19,11 +22,10 @@ namespace TravarselCoreProje.Areas.Member.Controllers
             _destinationService = destinationService;
         }
 
-        [AllowAnonymous]
-        [Area("Member")]
+        [Route("Index")]
         public IActionResult Index()
         {
-            var values = _destinationService.TGetList();
+            var values = _destinationService.TGetList().Where(x=> x.Status == true).ToList();
             return View(values);
         }
     }
