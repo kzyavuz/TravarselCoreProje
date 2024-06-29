@@ -63,7 +63,7 @@ namespace TravarselCoreProje.Areas.Member.Controllers
 
         [Route("NewRezervation")]
         [HttpGet]
-        public IActionResult NewRezervation()
+        public IActionResult NewRezervation(int? etkinlikId)
         {
             List<SelectListItem> values = _destinationService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
             {
@@ -72,8 +72,11 @@ namespace TravarselCoreProje.Areas.Member.Controllers
             }).ToList();
 
             ViewBag.v = values;
+            ViewBag.SelectedEtkinlikId = etkinlikId ?? 0;
+
             return View();
         }
+
 
         [Route("NewRezervation")]
         [HttpPost]
@@ -104,5 +107,6 @@ namespace TravarselCoreProje.Areas.Member.Controllers
 
             return Json(new { success = false, errors = new[] { "User not found" } });
         }
+
     }
 }

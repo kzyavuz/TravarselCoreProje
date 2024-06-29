@@ -37,7 +37,8 @@
 
                         <div class="form-group">
                             @Html.Label("Etkinlik Seçiniz")
-                            @Html.DropDownListFor(model => model.DestinationID, (IEnumerable<SelectListItem>)ViewBag.v, "Etkinlik Seçiniz", new { @class = "form-control", @required = "required" })
+                            @Html.DropDownListFor(model => model.DestinationID, (IEnumerable<SelectListItem>)ViewBag.v, "Etkinlik Seçiniz",
+                                new { @class = "form-control", @required = "required", data_val = "true", data_val_required = "Etkinlik seçmek zorunludur." })
                             <span asp-validation-for="DestinationID" class="text-danger"></span>
                         </div>
 
@@ -109,5 +110,14 @@
                 resultMessage.style.display = 'block';
             }
         });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectedEtkinlikId = '@ViewBag.SelectedEtkinlikId';
+        if (selectedEtkinlikId && selectedEtkinlikId != '0') {
+            document.getElementById("DestinationID").value = selectedEtkinlikId;
+        }
     });
 </script>
