@@ -22,6 +22,7 @@
             <th>Kategori Adı</th>
             <th>Resim</th>
             <th>Durumu</th>
+            <th>Öne Çıkarma Durumu</th>
             <th>Sil</th>
             <th>Güncelle</th>
         </tr>
@@ -39,6 +40,15 @@
                 else
                 {
                     <td><a href="/Admin/Catagory/ConvertFalse/@item.CatagoryID" class="btn btn-danger">Pasif</a></td>
+                }
+                @if (item.StandOut == true)
+                {
+                    <td><a href="/Admin/Catagory/ConvertTrueStandOut/@item.CatagoryID" class="btn btn-success">Öne Çıkarıldı</a></td>
+
+                }
+                else
+                {
+                    <td><a href="/Admin/Catagory/ConvertFalseStandOut/@item.CatagoryID" class="btn btn-danger">Pasif</a></td>
                 }
 
                 <td>

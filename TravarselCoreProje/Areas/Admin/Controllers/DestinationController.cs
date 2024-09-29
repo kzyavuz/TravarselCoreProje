@@ -42,36 +42,60 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddDestinations()
         {
-            List<SelectListItem> values = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            var categories = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
             {
                 Text = item.CatagoryName,
                 Value = item.CatagoryID.ToString()
             }).ToList();
+            ViewBag.c = categories;
 
-            ViewBag.c = values;
-
-            List<SelectListItem> valuesGuide = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            var guides = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
             {
                 Text = item.Name,
                 Value = item.GuideID.ToString()
             }).ToList();
+            ViewBag.g = guides;
 
-            ViewBag.g = valuesGuide;
             return View();
-
         }
 
         [Route("AddDestinations")]
         [HttpPost]
-        public IActionResult AddDestinations(DestinationViewModel p, Destination s)
+        public IActionResult AddDestinations(DestinationViewModel p)
         {
             if (!ModelState.IsValid)
             {
-                // Model doğrulaması başarısız
+                // ViewBag verilerini yeniden ayarlayın
+                ViewBag.c = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+                {
+                    Text = item.CatagoryName,
+                    Value = item.CatagoryID.ToString()
+                }).ToList();
+
+                ViewBag.g = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.GuideID.ToString()
+                }).ToList();
+
                 return View(p);
             }
 
-            var now = DateTime.Now;
+            var s = new Destination
+            {
+                DestinationName = p.DestinationName,
+                City = p.City,
+                DayNight = p.DayNight,
+                Price = p.Price,
+                District = p.District,
+                Description = p.Description,
+                Capacity = p.Capacity,
+                Content = p.Content,
+                Status = true,
+                CatagoryID = p.CatagoryID,
+                GuideID = p.GuideID,
+                Date = p.Date
+            };
 
             if (p.Image != null)
             {
@@ -115,19 +139,6 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
                 s.Image2 = newImageName2;
             }
 
-            s.DestinationName = p.DestinationName;
-            s.City = p.City;
-            s.DayNight = p.DayNight;
-            s.Price = p.Price;
-            s.District = p.District;
-            s.Description = p.Description;
-            s.Capacity = p.Capacity;
-            s.Content = p.Content;
-            s.Status = true;
-            s.CatagoryID = p.CatagoryID;
-            s.GuideID = p.GuideID;
-            s.Date = p.Date;
-
             try
             {
                 _destinationService.TAdd(s);
@@ -136,12 +147,25 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Etkinlik eklenirken bir hata oluştu: " + ex.Message);
-            }
 
-            return View(p);
+                // ViewBag verilerini yeniden ayarlayın
+                ViewBag.c = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+                {
+                    Text = item.CatagoryName,
+                    Value = item.CatagoryID.ToString()
+                }).ToList();
+
+                ViewBag.g = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.GuideID.ToString()
+                }).ToList();
+
+                return View(p);
+            }
         }
 
-
+        [HttpPost]
         [Route("DeleteDestinations/{id}")]
         public IActionResult DeleteDestinations(int id)
         {
@@ -200,12 +224,29 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
                 District = destination.District,
                 Description = destination.Description,
                 Capacity = destination.Capacity,
+                CatagoryID = destination.CatagoryID,
+                GuideID = destination.GuideID,
                 Status = true,
+                Date = destination.Date,
                 Content = destination.Content,
                 ImageUrl = destination.Image,
                 Image1Url = destination.Image1,
                 Image2Url = destination.Image2
             };
+
+            var categories = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            {
+                Text = item.CatagoryName,
+                Value = item.CatagoryID.ToString()
+            }).ToList();
+            ViewBag.c = categories;
+
+            var guides = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
+            {
+                Text = item.Name,
+                Value = item.GuideID.ToString()
+            }).ToList();
+            ViewBag.g = guides;
 
             return View(model);
         }
@@ -214,104 +255,113 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateDestinations(DestinationViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var destination = _destinationService.TGetByID(model.DestinationID);
-                if (destination == null)
+                // ViewBag verilerini yeniden ayarlayın
+                ViewBag.c = _catagoryService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
                 {
-                    return NotFound();
-                }
+                    Text = item.CatagoryName,
+                    Value = item.CatagoryID.ToString()
+                }).ToList();
 
-                destination.DestinationName = model.DestinationName;
-                destination.City = model.City;
-                destination.DayNight = model.DayNight;
-                destination.Price = model.Price;
-                destination.District = model.District;
-                destination.Description = model.Description;
-                destination.Capacity = model.Capacity;
-                destination.Content = model.Content;
-
-                if (model.NewImageFile != null)
+                ViewBag.g = _guideService.TGetList().Where(x => x.Status == true).Select(item => new SelectListItem
                 {
-                    // Eski resim dosyasını sil
-                    if (!string.IsNullOrEmpty(destination.Image))
-                    {
-                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image);
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
+                    Text = item.Name,
+                    Value = item.GuideID.ToString()
+                }).ToList();
 
-                    // Yeni resim dosyasını yükle
-                    var extension = Path.GetExtension(model.NewImageFile.FileName);
-                    var newImageName = Guid.NewGuid() + extension;
-                    var newImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName);
-                    using (var stream = new FileStream(newImagePath, FileMode.Create))
-                    {
-                        model.NewImageFile.CopyTo(stream);
-                    }
-
-                    // Yeni resim dosyası bilgisi güncellenir
-                    destination.Image = newImageName;
-                }
-                
-
-                if (model.NewImage1File != null)
-                {
-                    // Eski resim dosyasını sil
-                    if (!string.IsNullOrEmpty(destination.Image1))
-                    {
-                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image1);
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
-
-                    // Yeni resim dosyasını yükle
-                    var extension1 = Path.GetExtension(model.NewImage1File.FileName);
-                    var newImageName1 = Guid.NewGuid() + extension1;
-                    var newImagePath1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName1);
-                    using (var stream = new FileStream(newImagePath1, FileMode.Create))
-                    {
-                        model.NewImageFile.CopyTo(stream);
-                    }
-
-                    // Yeni resim dosyası bilgisi güncellenir
-                    destination.Image1 = newImageName1;
-                }
-                
-
-                if (model.NewImage2File != null)
-                {
-                    // Eski resim dosyasını sil
-                    if (!string.IsNullOrEmpty(destination.Image2))
-                    {
-                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image2);
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
-
-                    // Yeni resim dosyasını yükle
-                    var extension2 = Path.GetExtension(model.NewImage2File.FileName);
-                    var newImageName2 = Guid.NewGuid() + extension2;
-                    var newImagePath2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName2);
-                    using (var stream = new FileStream(newImagePath2, FileMode.Create))
-                    {
-                        model.NewImage2File.CopyTo(stream);
-                    }
-
-                    // Yeni resim dosyası bilgisi güncellenir
-                    destination.Image2 = newImageName2;
-                }
-
-                _destinationService.TUpdate(destination);
-                return RedirectToAction("Index");
+                return View(model);
             }
-            return View(model);
+
+            var destination = _destinationService.TGetByID(model.DestinationID);
+            if (destination == null)
+            {
+                return NotFound();
+            }
+
+            destination.DestinationName = model.DestinationName;
+            destination.City = model.City;
+            destination.DayNight = model.DayNight;
+            destination.Price = model.Price;
+            destination.District = model.District;
+            destination.Description = model.Description;
+            destination.CatagoryID = model.CatagoryID;
+            destination.GuideID = model.GuideID;
+            destination.Capacity = model.Capacity;
+            destination.Content = model.Content;
+            destination.Date = model.Date;
+
+            if (model.NewImageFile != null)
+            {
+                if (!string.IsNullOrEmpty(destination.Image))
+                {
+                    var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                var extension = Path.GetExtension(model.NewImageFile.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var newImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName);
+
+                using (var stream = new FileStream(newImagePath, FileMode.Create))
+                {
+                    model.NewImageFile.CopyTo(stream);
+                }
+
+                destination.Image = newImageName;
+            }
+
+            if (model.NewImage1File != null)
+            {
+                if (!string.IsNullOrEmpty(destination.Image1))
+                {
+                    var oldImagePath1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image1);
+                    if (System.IO.File.Exists(oldImagePath1))
+                    {
+                        System.IO.File.Delete(oldImagePath1);
+                    }
+                }
+
+                var extension1 = Path.GetExtension(model.NewImage1File.FileName);
+                var newImageName1 = Guid.NewGuid() + extension1;
+                var newImagePath1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName1);
+
+                using (var stream = new FileStream(newImagePath1, FileMode.Create))
+                {
+                    model.NewImage1File.CopyTo(stream);
+                }
+
+                destination.Image1 = newImageName1;
+            }
+
+            if (model.NewImage2File != null)
+            {
+                if (!string.IsNullOrEmpty(destination.Image2))
+                {
+                    var oldImagePath2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", destination.Image2);
+                    if (System.IO.File.Exists(oldImagePath2))
+                    {
+                        System.IO.File.Delete(oldImagePath2);
+                    }
+                }
+
+                var extension2 = Path.GetExtension(model.NewImage2File.FileName);
+                var newImageName2 = Guid.NewGuid() + extension2;
+                var newImagePath2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageDestination/", newImageName2);
+
+                using (var stream = new FileStream(newImagePath2, FileMode.Create))
+                {
+                    model.NewImage2File.CopyTo(stream);
+                }
+
+                destination.Image2 = newImageName2;
+            }
+
+            _destinationService.TUpdate(destination);
+            return RedirectToAction("Index");
         }
     }
 }

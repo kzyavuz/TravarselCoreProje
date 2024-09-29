@@ -18,6 +18,16 @@ namespace BusinessLayer.Concrete
             _catagoryDal = catagoryDal;
         }
 
+        public void ConvertFalseStandOutByCatagory(int id)
+        {
+            _catagoryDal.ConvertTrueStandOutByCatagory(id);
+        }
+
+        public void ConvertTrueStandOutByCatagory(int id)
+        {
+            _catagoryDal.ConvertFalseStandOutByCatagory(id);
+        }
+
         public void TAdd(Catagory t)
         {
             _catagoryDal.Insert(t);
@@ -25,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public void TConvertFalseByCatagory(int id)
         {
-            _catagoryDal.ConvertFalseByCatagory(id);
+            _catagoryDal.ConvertTrueByCatagory(id);
         }
 
         public void TConvertTrueByCatagory(int id)

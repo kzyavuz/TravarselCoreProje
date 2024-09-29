@@ -11,5 +11,7 @@ namespace DataAccessLayer.Abstract
     {
         public void ConvertTrueByCatagory(int id);
         public void ConvertFalseByCatagory(int id);
+        public void ConvertTrueStandOutByCatagory(int id);
+        public void ConvertFalseStandOutByCatagory(int id);
     }
 }

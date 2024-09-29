@@ -14,6 +14,7 @@ namespace EntityLayer.Concrete
         public string CatagoryName { get; set; }
         public string CatagoryImage { get; set; }
         public bool Status { get; set; }
+        public bool StandOut { get; set; }
 
         public List<Destination> Destinations { get; set; }
     }

@@ -253,6 +253,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CatagoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("StandOut")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -430,8 +433,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("Post1Description")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
 
                     b.Property<string>("Post1Name")
                         .IsRequired()

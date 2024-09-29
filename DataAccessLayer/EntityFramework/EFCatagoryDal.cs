@@ -20,8 +20,9 @@ namespace DataAccessLayer.EntityFramework
         }
         public void ConvertFalseByCatagory(int id)
         {
-            var values = _c.Destinations.Find(id);
+            var values = _c.Catagories.Find(id);
             values.Status = false;
+            values.StandOut = false;
             _c.Update(values);
             _c.SaveChanges();
 
@@ -29,8 +30,25 @@ namespace DataAccessLayer.EntityFramework
 
         public void ConvertTrueByCatagory(int id)
         {
-            var values = _c.Destinations.Find(id);
+            var values = _c.Catagories.Find(id);
             values.Status = true;
+            _c.Update(values);
+            _c.SaveChanges();
+        }
+
+        public void ConvertTrueStandOutByCatagory(int id)
+        {
+            var values = _c.Catagories.Find(id);
+            values.StandOut = true;
+            _c.Update(values);
+            _c.SaveChanges();
+
+        }
+
+        public void ConvertFalseStandOutByCatagory(int id)
+        {
+            var values = _c.Catagories.Find(id);
+            values.StandOut = false;
             _c.Update(values);
             _c.SaveChanges();
         }

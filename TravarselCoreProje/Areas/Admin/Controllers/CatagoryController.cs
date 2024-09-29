@@ -38,17 +38,31 @@ namespace TravarselCoreProje.Areas.Admin.Controllers
         }
 
 
-        [Route("ConvertStandOut/{id}")]
+        [Route("ConvertTrue/{id}")]
         public IActionResult ConvertTrue(int id)
         {
             _catagoryService.TConvertTrueByCatagory(id);
             return RedirectToAction("Index");
         }
 
-        [Route("ConvertHighlight/{id}")]
+        [Route("ConvertFalse/{id}")]
         public IActionResult ConvertFalse(int id)
         {
             _catagoryService.TConvertFalseByCatagory(id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("ConvertTrueStandOut/{id}")]
+        public IActionResult ConvertTrueStandOut(int id)
+        {
+            _catagoryService.ConvertTrueStandOutByCatagory(id);
+            return RedirectToAction("Index");
+        }
+
+        [Route("ConvertFalseStandOut/{id}")]
+        public IActionResult ConvertFalseStandOut(int id)
+        {
+            _catagoryService.ConvertFalseStandOutByCatagory(id);
             return RedirectToAction("Index");
         }
 

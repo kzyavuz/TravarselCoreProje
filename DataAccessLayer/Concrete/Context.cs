@@ -14,7 +14,8 @@ namespace DataAccessLayer.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("server=KOZLOW\\SQLEXPRESS;database=GeziDB3; integrated security=true;");
-            optionsBuilder.UseSqlServer("server=KOZLOW\\MSSQLSERVER01;database=GeziDB1; integrated security=true;");
+            //optionsBuilder.UseSqlServer("server=77.245.159.27\\MSSQLSERVER2019;database=wellnes;user=DevletPolat;password=9*B45lf0h");
+            optionsBuilder.UseSqlServer("server=KOZLOW\\MSSQLSERVER01;database=GeziDB4; integrated security=true;");
 
         }
 

@@ -34,12 +34,14 @@
                 }
                 <td>@item.MessageDate.ToString("dd.MMM.yyyy")</td>
                 <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal" data-content="@item.MessageBody">
+                        Mesajı Gör
+                    </button>
+                </td>
+                <td>
                     <form asp-controller="ContactInfo" asp-action="#" asp-route-id="@item.ContactInfoID" onsubmit="return confirm('Mesajı silmek iştediğinize eminmisiniz')">
                         <button type="submit" class="btn btn-danger">Sil</button>
                     </form>
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="#">Git</a>
                 </td>
             </tr>
             sayac++;
@@ -51,7 +53,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="commentModalLabel">Yorum</h5>
+                <h5 class="modal-title" id="commentModalLabel">Mesaj</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -73,8 +75,9 @@
 <script>
     $('#commentModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
-        var content = button.data('MessageBody'); // Extract info from data-* attributes
+        var content = button.data('content'); // Extract info from data-* attributes
         var modal = $(this);
         modal.find('.modal-body').text(content); // Update the modal's content
     });
 </script>
+

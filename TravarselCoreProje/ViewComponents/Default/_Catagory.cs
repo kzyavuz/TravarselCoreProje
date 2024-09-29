@@ -18,7 +18,7 @@ namespace TravarselCoreProje.ViewComponents.Default
 
         public IViewComponentResult Invoke()
         {
-            var values = _catagoryService.TGetList();
+            var values = _catagoryService.TGetList().Where(x=> x.StandOut == true).ToList();
             return View(values);
         }
     }
